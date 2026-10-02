@@ -37,7 +37,7 @@ claims the public cubins retain the original full-file SHA.
 
 Native installation is validated. Container build and GPU execution remain
 uncompleted limitations: this validation process could not access the Docker
-daemon, and native acceptance/publication is the authorized scope. Single-card full scheduling and other
+daemon. Native installation and GPU execution are the validated path. Single-card full scheduling and other
 architectures are not validated. Kernel/reference Release downloads are
 pending publication; their fetch/extraction/checksum logic passed a local HTTP
 rehearsal, which is explicitly distinguished from a remote Release download.

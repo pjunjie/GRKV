@@ -81,7 +81,7 @@ reference contains 22 such calls in 22 units; fresh runs measure this statistic.
 Llama never installs that fallback. Installation, CPU and GPU validation
 statuses are reported separately. The digest-pinned Dockerfile is provided,
 but container build and GPU execution remain uncompleted limitations. Native
-acceptance and publication proceed with that limitation explicitly retained.
+validation status is reported separately from the container profile.
 
 Run `make style` and `make test` for SPDX, style/type checks and the targeted CPU
 protocol/fallback tests. Keep upstream Apache-2.0 notices. Contributions require

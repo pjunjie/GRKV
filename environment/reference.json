@@ -157,7 +157,7 @@
     "base": "nvidia/cuda:12.4.1-devel-ubuntu20.04",
     "digest": "sha256:8d577fd078ae56c37493af4454a5b700c72a7f1aeb9ff3d0adc0459fc47752a4",
     "validated": false,
-    "reason": "Docker daemon inaccessible to the validation process; container build and GPU execution remain uncompleted limitations under the authorized native acceptance scope",
+    "reason": "Docker daemon inaccessible to the validation process; container build and GPU execution remain uncompleted limitations",
     "build_validated": false,
     "gpu_execution_validated": false
   },

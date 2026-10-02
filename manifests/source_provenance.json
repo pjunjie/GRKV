@@ -1,0 +1,341 @@
+{
+  "upstream_commit": "161705a68f64df329c88a6da5f20300a89aa7542",
+  "files": [
+    {
+      "public_path": "experiments/critical_adakv_direct_grkv/press.py",
+      "source_path": "experiments/critical_adakv_direct_grkv/press.py",
+      "source_sha256": "7a2dab1bde2421255a6106120cf1cd81923ec61e348a467df9ff0822c33cc0a6",
+      "exported_sha256": "a0f50c8b81ec393d6b007481c0a26233b26e61cb10f466af61c75fccffe14f13",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "experiments/critical_adakv_direct_grkv/solver.py",
+      "source_path": "experiments/critical_adakv_direct_grkv/solver.py",
+      "source_sha256": "ab10e49df00564c14cefc1fb3b3c123e780f6285e12ccfd84bf249b5adbbeaf6",
+      "exported_sha256": "ee1eace5c5b0c97ca07a54ea6314ec42b892fe0cd82ea5e4710fc9004351f35d",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "experiments/critical_adakv_direct_grkv/key_policy.py",
+      "source_path": "experiments/critical_adakv_direct_grkv/key_policy.py",
+      "source_sha256": "caa58d3eb0758d1e23492b6fdd339daca6c6d3d3d54d24a2e60f9e72a3a5fa30",
+      "exported_sha256": "cfaebf85d325cbd83a2112e2ebc9c86018c22f40f4f4b539cc5dfaf79c769c69",
+      "transformation": "SPDX year normalization; numerical source unchanged; equivalent setattr for scoped monkeypatch typing; formatting"
+    },
+    {
+      "public_path": "experiments/critical_adakv_direct_grkv/wide_query_policy.py",
+      "source_path": "experiments/critical_adakv_direct_grkv/wide_query_policy.py",
+      "source_sha256": "0490c2c87ed64d55dbd2b9f08d25d5102c678cf78466cdfb9991489fa4318bd5",
+      "exported_sha256": "8a9097eef4c60a65472ac96d12e49991ea9233c8a612a827e4e2c00ade7dd751",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "experiments/critical_adakv_direct_grkv/triton_backend.py",
+      "source_path": "experiments/critical_adakv_direct_grkv/triton_backend.py",
+      "source_sha256": "ef72ca08c28cf667da33a235888b6843baa6e36c7bd943be11cd0cc9e3aedd46",
+      "exported_sha256": "1df6c09f1db1881a71464925c3bb05b7d50413d579f8c8572a463a7b4bcac654",
+      "transformation": "SPDX year normalization; numerical source unchanged; equivalent setattr for scoped monkeypatch typing; formatting"
+    },
+    {
+      "public_path": "experiments/critical_adakv_direct_grkv/triton_derivatives.py",
+      "source_path": "experiments/critical_adakv_direct_grkv/triton_derivatives.py",
+      "source_sha256": "0bb48c43c6a700a25093e9ffe013e5582f734e94f12de53a1cba6dd332aefa9e",
+      "exported_sha256": "251adc725241e915a11ecbd21c3906e4a05582db47ae4e25acea0ed3eeac96c6",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "experiments/critical_adakv_direct_grkv/wide_query_backend.py",
+      "source_path": "experiments/critical_adakv_direct_grkv/wide_query_backend.py",
+      "source_sha256": "e8a1220616baf0339d50b0cf7ce02fa2146d5330d9bcb0cef8fe56bee363b836",
+      "exported_sha256": "b8275788dc3a8d135842db6b18d27317aa766e8a024f8c29f0000323c08213cd",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "experiments/critical_adakv_direct_grkv/wide_query_kernel_variants.py",
+      "source_path": "experiments/critical_adakv_direct_grkv/wide_query_kernel_variants.py",
+      "source_sha256": "c3d737c091760ae85070d572309d0337bb2354773b094ed8d8f0c3530c438c32",
+      "exported_sha256": "9139ba5c8695ddd8c09b2d0dfc414d366dbdcb1a6cf37a556dceddda348fe35d",
+      "transformation": "SPDX year normalization; numerical source unchanged; equivalent setattr for scoped monkeypatch typing; formatting"
+    },
+    {
+      "public_path": "experiments/critical_adakv_direct_grkv/wide_query_split_backend.py",
+      "source_path": "experiments/critical_adakv_direct_grkv/wide_query_split_backend.py",
+      "source_sha256": "cf659fa446f06a312a9d47f57c8b6fea16294dc325f136c458298777b5e0e0a5",
+      "exported_sha256": "619babecd6e1f0ddc221ba936719491baae775b1e4f7a71d83863eff1aa92601",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "experiments/critical_adakv_grkv/press.py",
+      "source_path": "experiments/critical_adakv_grkv/press.py",
+      "source_sha256": "cc16021bdc3df32037c679f277bdb0296771ec08b87a0ab21278d98d22f1b4ae",
+      "exported_sha256": "15e780a93912ec89ead1f91f5726a8f041c71e4ca7a862faf130bcd9ee955874",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "experiments/critical_adakv_postproj_grkv/operators.py",
+      "source_path": "experiments/critical_adakv_postproj_grkv/operators.py",
+      "source_sha256": "46e58352216d604535876b0cfe086bd592da29551758524b6d90ba46ac64dc43",
+      "exported_sha256": "d11273147bff3b09a5ec86fddb03a900d74cbb6b0816b824207f5390f4a2ed7e",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "experiments/mistral_k1_tuning/policy.py",
+      "source_path": "experiments/mistral_k1_tuning/policy.py",
+      "source_sha256": "d87181a27e2a87cfd82041c31cfc6c07dad44402c0d56cb5875008002d7410b8",
+      "exported_sha256": "741cef05540398f0869fdf70072857a24bd9cbd661cbeff7854089f115279daf",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "experiments/critical_adakv_cross_model/mask_fallback.py",
+      "source_path": "experiments/critical_adakv_cross_model/mask_fallback.py",
+      "source_sha256": "ce335a80ae4ea4b00e4299601a454ac549cde224d809122866cb1eb377e6f6c1",
+      "exported_sha256": "5fe8e6d42ab485a3b1081280b54688ee49f8edc1b8ffc357741aee8e628576e3",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "evaluation/benchmarks/longbench/calculate_metrics.py",
+      "source_path": "evaluation/benchmarks/longbench/calculate_metrics.py",
+      "source_sha256": "f647cb8fe465398d5481e193ba7363c39be5d9e74e862085ffdc40271e047432",
+      "exported_sha256": "0947fb1d7a594def90b90fd74b8d00f62e0008ead25d26049999376461a07366",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "experiments/critical_adakv_history_ruler/common.py",
+      "source_path": "experiments/critical_adakv_history_ruler/common.py",
+      "source_sha256": "6aa520902b9c4ba6d3dd6188f036b4c63bf13ae5f8f8c41a125ba5e860d0238a",
+      "exported_sha256": "0bafdbd25ab9bacf7cc5e6705d5b7f2c303fd293efe8cd031aa0a621cda1877b",
+      "transformation": "AST selection of runtime symbols; numerical bodies unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "experiments/critical_adakv_behavior_v2/cache.py",
+      "source_path": "experiments/critical_adakv_behavior_v2/cache.py",
+      "source_sha256": "a7fe314510684c5e6f209cb3768947b25b405c2e42a6f0a150d5b1fbefb85116",
+      "exported_sha256": "6642e3ba4d90858187de940afafe985e5293c6960689e8029600ddf02ea4bdbd",
+      "transformation": "AST selection of runtime symbols; numerical bodies unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "experiments/critical_adakv_postproj_grkv/stable_solver.py",
+      "source_path": "experiments/critical_adakv_postproj_grkv/stable_solver.py",
+      "source_sha256": "fa88d874104c8918b5fec096f8dad29334c08c2301cfb9224f4cc9df5681a368",
+      "exported_sha256": "3a7246f177cb9f4b2c1e031a9a07fe9b5f725d41a0d09e2c2e155fc3ec1cc050",
+      "transformation": "AST selection of runtime symbols; numerical bodies unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "experiments/critical_adakv_direct_grkv/wide_query_optimized_backend.py",
+      "source_path": "experiments/critical_adakv_direct_grkv/wide_query_optimized_backend.py",
+      "source_sha256": "e4b6da2aa9a2e9f0a3b41ca8e8f8a728505f1cff7b6789f1f28eb1d9dc1bc8fc",
+      "exported_sha256": "8a6a03cb29374c46dd6df06f19fa05494666e703ef0f97f3c50a5c1dc03f34f4",
+      "transformation": "AST selection of runtime symbols; numerical bodies unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "experiments/critical_adakv_direct_grkv/run_wide_query_compatibility.py",
+      "source_path": "experiments/critical_adakv_direct_grkv/run_wide_query_compatibility.py",
+      "source_sha256": "41f1bd6e69760df1cf0cce0996ea1bad8b318c392709885286c109f831b0f82f",
+      "exported_sha256": "66a52fb24174aaae7d9355b2de92568eacb718b4559f9640c92173cbea7e8009",
+      "transformation": "AST selection of runtime symbols; numerical bodies unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "experiments/critical_adakv_direct_grkv/wide_query_worker.py",
+      "source_path": "experiments/critical_adakv_direct_grkv/wide_query_worker.py",
+      "source_sha256": "2e36836534b7481c6ebf0c963d530502ac6f27f233079e1d798d62cb3efc4130",
+      "exported_sha256": "6be6c5ff24f4bd53951f5f6e7e1ca18463e78b5e22c9b1ab692f8c00f4a81928",
+      "transformation": "AST selection of runtime symbols; numerical bodies unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "experiments/critical_adakv_direct_grkv/tune50_protocol.py",
+      "source_path": "experiments/critical_adakv_direct_grkv/tune50_protocol.py",
+      "source_sha256": "2f18f72e0c08a9e2930b6ab6d44606a8c45bb3bd1a429f1ec47a2e24f6cefa6b",
+      "exported_sha256": "ee5922038632a9895cc3ea0291a8d3380d826a7d27a76e16f12d27c9edbbbbe9",
+      "transformation": "AST selection of runtime symbols; numerical bodies unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "experiments/critical_adakv_direct_grkv/historical_query_worker.py",
+      "source_path": "experiments/critical_adakv_direct_grkv/historical_query_worker.py",
+      "source_sha256": "cba15414ed52bff41ba7ee6a5f2046f7bec92c39723dba92f220e18f7de703fb",
+      "exported_sha256": "4b5e4474be2090b98c63adc388af7c75ddef78aa9d7bc1f1dfd33723066c0eec",
+      "transformation": "AST selection of runtime symbols; numerical bodies unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "experiments/defensive_grkv_selector/fit_selector.py",
+      "source_path": "experiments/defensive_grkv_selector/fit_selector.py",
+      "source_sha256": "f88eb0c0becdadf4b639edd02126fee62ed117487bc511de7eaba620d16d187c",
+      "exported_sha256": "637c41135095b6b50d662107a7cae2da472a62dd26e7ef8b7a0a6c95c9f05e87",
+      "transformation": "AST selection of runtime symbols; numerical bodies unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "experiments/defensive_grkv_selector/reference_compat.py",
+      "source_path": "experiments/defensive_grkv_selector/reference_compat.py",
+      "source_sha256": "43396f982e32f35f16a8f5b2d667019001505edc4fc677d18f40725c03a30a5c",
+      "exported_sha256": "3d1d0a276d25dbd86f00130e64e9061c8836dcd7687de6952e1cf6be29a1fb9e",
+      "transformation": "AST selection of runtime symbols; numerical bodies unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "experiments/critical_adakv_direct_grkv/wide_query_worker_base.py",
+      "source_path": "experiments/critical_adakv_direct_grkv/wide_query_worker_base.py",
+      "source_sha256": "1b9168671b044ec41375130435e872deb70abe4462374dd9d3641eebe0c18a59",
+      "exported_sha256": "4a8e538c255395727c056d678a52865acef89c4af150a71d4244fe852d5ea085",
+      "transformation": "AST selection of runtime symbols; numerical bodies unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "experiments/critical_adakv_direct_grkv/independent_query_worker.py",
+      "source_path": "experiments/critical_adakv_direct_grkv/independent_query_worker.py",
+      "source_sha256": "7fc3eb2cbd5440a040567ded34f17f080c862f3736eff5a3fa87bf61614332a6",
+      "exported_sha256": "606092f5bac485f3fbef65e946047c3ea340514b23fc32d83d568f13f8c8c9fa",
+      "transformation": "AST selection of historical generate; omitted unreachable IndependentSinkPress and IndependentQueryPress experiment diagnostics; retained all K1 prefill/cache/generation/scoring arithmetic"
+    },
+    {
+      "public_path": "experiments/critical_adakv_direct_grkv/tune50_worker.py",
+      "source_path": "experiments/critical_adakv_direct_grkv/tune50_worker.py",
+      "source_sha256": "47306480272857097e5052a19809ea74b8599114c529a53bd0d6f5bdad981a33",
+      "exported_sha256": "7a110775efa6483d0569f50b8274da71212aeb14bc07eb8550b909d044a74023",
+      "transformation": "AST selection of runtime symbols; numerical bodies unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "kvpress/__init__.py",
+      "source_path": "kvpress/__init__.py",
+      "source_sha256": "4cad039dd99b4efc244f80b378c7e97ee810e1ac7ea23adb80b4a5212b4dd144",
+      "exported_sha256": "784afcbf08ea067fff7549576336d4c5fab8ded958e7066bd8081de7811ae2ba",
+      "transformation": "Export only the required dependency subset; retain pipeline registration and attention patch; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "kvpress/presses/snapkv_press.py",
+      "source_path": "kvpress/presses/snapkv_press.py",
+      "source_sha256": "e26efd590bededa19430429567a97bf5f3c99fa8439f91e75af300c4d3300e04",
+      "exported_sha256": "10b42adb7d7cea3f1a9fa22ef9458d141575022b7b173c1ad4415f8f68f5e9fd",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "kvpress/utils.py",
+      "source_path": "kvpress/utils.py",
+      "source_sha256": "c87a201bf28220e84d194d52f8597d5a4165b8b8ee0e28618a80823ef6846ea1",
+      "exported_sha256": "fab79b04a89343cc5ccba043e046c1f1b710a6f5c15d4151cf7ea44a18533a38",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "kvpress/presses/scorer_press.py",
+      "source_path": "kvpress/presses/scorer_press.py",
+      "source_sha256": "a5eb57a8d9defdaf1f46414fad1584e0c070643a85116d9a85f2e9321cb29728",
+      "exported_sha256": "4fae04d9d5c68141a4ed6157cb47b760f064c20dbb4971911d781ebc3dc58d4f",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "kvpress/presses/base_press.py",
+      "source_path": "kvpress/presses/base_press.py",
+      "source_sha256": "b37e5d08bce40ef90cd3dde1e9853ed7fa3fdc9996d42942a2dc6da0fd16fe1a",
+      "exported_sha256": "6ed445a799a9c17266b9a1e86c4e0622493fa81f5ab2d1fd10c7fb4b0e535117",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "kvpress/presses/defensive_grkv_press.py",
+      "source_path": "kvpress/presses/defensive_grkv_press.py",
+      "source_sha256": "f4294d094c02d8ebb5445a6238c60e8db256dfe393cc81621b3a32e087e5b796",
+      "exported_sha256": "8f66253d008ab08521d184221cce6bd97ebc4656f38b7f87c84eec40b450bb86",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "kvpress/presses/defensivekv_press.py",
+      "source_path": "kvpress/presses/defensivekv_press.py",
+      "source_sha256": "0c7a5583d3395b6532b0433fea97ad32b318062e66abcf4d5dfc2698ba930dc6",
+      "exported_sha256": "12333dc4f2e277b4127904e4dcf0ce132e0c48f5dca1b0525d74b4605cc1f30e",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "kvpress/ops/vw_norm.py",
+      "source_path": "kvpress/ops/vw_norm.py",
+      "source_sha256": "9eee6af2e26d4b37591230e581615763ad51bbbbb069421aff0b953c353d759f",
+      "exported_sha256": "a262520d8ddcea42143a9d155c3918ed5fa78293a0ed6cc8428f3cc2d3f09064",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "kvpress/presses/criticalkv_press.py",
+      "source_path": "kvpress/presses/criticalkv_press.py",
+      "source_sha256": "392b80d0de9d284f4d81ccdcb85459b10a902b731e383ca3ea3b4030d44e3e67",
+      "exported_sha256": "d9da73b0958545ffbd196e5829c865baab0fcdab2fd7eec3ac9b40e275962897",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "kvpress/presses/expected_attention_press.py",
+      "source_path": "kvpress/presses/expected_attention_press.py",
+      "source_sha256": "6fbae9ab7b976e295959a53b80d145fac3687138cd91fa8fcf0e39d48f6f6c00",
+      "exported_sha256": "880071906cb8bd66557b5c95119aca6d118c1326ffa1e3916a4546bf6561b0d6",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "kvpress/pipeline.py",
+      "source_path": "kvpress/pipeline.py",
+      "source_sha256": "6bc5d1d80419971197c439cbd367fb06ea65be8111716e44a0c555f29b4c8745",
+      "exported_sha256": "616b49bbdd6580729f2e9526600daec6e3a987592a698536e5124b2ec526b7e9",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "kvpress/presses/restorekv_press.py",
+      "source_path": "kvpress/presses/restorekv_press.py",
+      "source_sha256": "48a798cb57c597cb87c1578de134409b91197dc5834abbbd8c7ea1b2a61e18bf",
+      "exported_sha256": "1d6c0098dba920c1b45215666cc41ee12b0efc295f8b2c1af23d92e871b6c89b",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "kvpress/presses/kvzip_press.py",
+      "source_path": "kvpress/presses/kvzip_press.py",
+      "source_sha256": "3b22c296887c600aef00f47a0017b5ba19e13f1b58121a80a0989cd6937036f7",
+      "exported_sha256": "45e8bc9bb7c6602572ab9d512477798694db1fa1899873e3a500b7eda5b0404a",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "kvpress/presses/prefill_decoding_press.py",
+      "source_path": "kvpress/presses/prefill_decoding_press.py",
+      "source_sha256": "02a6d56c201c228f3f19f7a53198e86c41761b5f9d260761ed397bdbc437bb8f",
+      "exported_sha256": "a4986c70cabe3b8e02de0ad86d589d426a4ab2874cd3259636d72c9fb6093782",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "kvpress/presses/decoding_press.py",
+      "source_path": "kvpress/presses/decoding_press.py",
+      "source_sha256": "64a81cf8029b30baba68dc19a53933a15b6c861b011513f1cdb4dea8d7593be8",
+      "exported_sha256": "8d9b61303a3a73543729152d958035acc6cb50d67d434a5c6fe0d530ecde16bd",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "kvpress/presses/adakv_press.py",
+      "source_path": "kvpress/presses/adakv_press.py",
+      "source_sha256": "0e7720211743606b0fbbc43f44a88d67e7b5489869c71dfc048bc5f47ea96aed",
+      "exported_sha256": "0478ca614e82689bae152353651deef8b00e825ad1e873c77ddf347ed6656335",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "kvpress/presses/key_rerotation_press.py",
+      "source_path": "kvpress/presses/key_rerotation_press.py",
+      "source_sha256": "2617805ece32cac67e41e82e7e2524fa90cf07728661a01eb1100246c11fe73c",
+      "exported_sha256": "17f20ae913de703d20bf979db1193442ea1b511d1aa43e5093c3697472041918",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "kvpress/presses/finch_press.py",
+      "source_path": "kvpress/presses/finch_press.py",
+      "source_sha256": "2c86b9aef9ade58de78c8dca24de063544fe2c6d81ef217b739afee5442a7cf8",
+      "exported_sha256": "c0269e9ff33d1f3991e71435483f542c8ab1daaae4a0953d34c5585bf16f3e6e",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "kvpress/presses/dms_press.py",
+      "source_path": "kvpress/presses/dms_press.py",
+      "source_sha256": "284bad98b51906735fdf716c85bea7add9456296061c03b72d0bd0e5af34eaba",
+      "exported_sha256": "4cc83a837472312549d61ef50b73c8f4613a063406f551608260de71ba6200e4",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "kvpress/attention_patch.py",
+      "source_path": "kvpress/attention_patch.py",
+      "source_sha256": "a3306b8fb33e467856efda68393d7d55183841019873fecaa6157b4e7004bf8a",
+      "exported_sha256": "3bb73cb21ae1cbd177b1666ccbd1eaf2d7459f009896847922bcee717dd3ed4d",
+      "transformation": "SPDX year normalization; numerical source unchanged; isort/black formatting and typing-only annotations where required"
+    },
+    {
+      "public_path": "grkv/qualification.py",
+      "source_path": "experiments/llama_k1_historical_replay/worker.py",
+      "source_sha256": "556fc330777982977f4f3decb5162877b15d7d934d803070323037d048cf5689",
+      "exported_sha256": "52f64eb0c91bffb87c2419a7a0aa1d605e9a55568b664e235bd4e6573c3cf6ca",
+      "transformation": "AST selection of qualify and compare; numerical qualification unchanged; strict comparison now rejects fit-record differences; formatting; no private runtime/protocol imports"
+    }
+  ]
+}

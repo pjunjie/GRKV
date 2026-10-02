@@ -1,0 +1,62 @@
+[project]
+name = "grkv-k1"
+version = "0.1.0"
+description = "Frozen Q32 K1 global regression over Critical-AdaKV selection"
+requires-python = "==3.12.7"
+readme = "README.md"
+license = "Apache-2.0"
+dependencies = [
+ "torch==2.6.0+cu124", "triton==3.2.0", "transformers==5.2.0",
+ "numpy==2.5.2", "datasets==5.0.1", "pandas==2.3.3",
+ "accelerate==1.14.0", "huggingface-hub==1.28.0", "tokenizers==0.22.2",
+ "httpx[socks]==0.28.1", "safetensors==0.8.0", "sentencepiece==0.2.2", "PyYAML==6.0.3",
+]
+
+[project.optional-dependencies]
+eval = ["rouge==1.0.1", "nltk==3.10.3", "fuzzywuzzy==0.18.0", "jieba==0.42.1", "scipy==1.18.1"]
+flash-attn = ["flash-attn==2.8.3.post1"]
+
+[dependency-groups]
+dev = ["pytest==7.4.4", "black==24.10.0", "isort==5.13.2", "flake8==7.3.0", "mypy==1.19.1", "types-PyYAML==6.0.12.20250915", "ninja==1.13.0", "packaging==25.0", "setuptools==84.0.0"]
+
+[build-system]
+requires = ["hatchling==1.29.0"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["grkv", "kvpress", "experiments", "evaluation"]
+
+[tool.uv]
+no-build-isolation-package = ["flash-attn"]
+
+[[tool.uv.index]]
+name = "pytorch-cu124"
+url = "https://download.pytorch.org/whl/cu124"
+explicit = true
+
+[tool.uv.sources]
+torch = {index = "pytorch-cu124"}
+triton = {url = "https://download-r2.pytorch.org/whl/triton-3.2.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl"}
+
+[tool.black]
+line-length = 120
+target-version = ["py312"]
+
+[tool.isort]
+profile = "black"
+line_length = 120
+
+[tool.mypy]
+ignore_missing_imports = true
+allow_redefinition = true
+strict_optional = false
+disable_error_code = ["union-attr", "operator", "call-overload", "arg-type"]
+exclude = ["artifacts", "outputs", "assets", "environment"]
+
+[[tool.mypy.overrides]]
+module = "kvpress.presses.base_press"
+disable_error_code = ["attr-defined"]
+
+[[tool.mypy.overrides]]
+module = "kvpress.pipeline"
+disable_error_code = ["attr-defined", "assignment", "override"]

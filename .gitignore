@@ -1,0 +1,12 @@
+.venv/
+.env.local
+assets/
+outputs/
+artifacts/
+.cache/
+__pycache__/
+*.pyc
+.mypy_cache/
+.pytest_cache/
+reports/
+*.egg-info/

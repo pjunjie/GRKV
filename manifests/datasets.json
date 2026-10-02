@@ -1,0 +1,54 @@
+[
+  {
+    "repo_id": "simonjegou/ruler",
+    "revision": "24adceac8a0e6532936e8d721cd9e9084d2e4686",
+    "name": "ruler",
+    "files": [
+      "16384/test-00000-of-00001.parquet"
+    ],
+    "file_sha256": {
+      "16384/test-00000-of-00001.parquet": "061d1090d4fde891fa8c1fb66253c33ae50f8e68fe473a70bd162e463c240000"
+    }
+  },
+  {
+    "repo_id": "Xnhyacinth/LongBench",
+    "revision": "2e9ade51ebf45d98942056c0716234f9d5d257d5",
+    "name": "longbench",
+    "files": [
+      "lcc/test-00000-of-00001.parquet",
+      "qasper/test-00000-of-00001.parquet",
+      "hotpotqa/test-00000-of-00001.parquet",
+      "multifieldqa_en/test-00000-of-00001.parquet",
+      "samsum/test-00000-of-00001.parquet",
+      "repobench-p/test-00000-of-00001.parquet",
+      "musique/test-00000-of-00001.parquet",
+      "2wikimqa/test-00000-of-00001.parquet",
+      "multi_news/test-00000-of-00001.parquet",
+      "passage_retrieval_en/test-00000-of-00001.parquet",
+      "narrativeqa/test-00000-of-00001.parquet",
+      "passage_count/test-00000-of-00001.parquet",
+      "trec/test-00000-of-00001.parquet",
+      "gov_report/test-00000-of-00001.parquet",
+      "qmsum/test-00000-of-00001.parquet",
+      "triviaqa/test-00000-of-00001.parquet"
+    ],
+    "file_sha256": {
+      "lcc/test-00000-of-00001.parquet": "7668244d638b583c72650abe206e5d23ffefb94eba03158c6f9bc2bfc88d60a9",
+      "qasper/test-00000-of-00001.parquet": "1586e8c1f741e6dbda26acc8eefd5bc63d0c4f90e6fda6a4d57883babfe91564",
+      "hotpotqa/test-00000-of-00001.parquet": "45ca5bef8183bb31dbd0b7e5320e868a4b3f27ef85c6e5b8532ad57a5775ca2e",
+      "multifieldqa_en/test-00000-of-00001.parquet": "77d19d2a0135065341e02167624598a06649793df43aa0ce668fe7b5aa10378e",
+      "samsum/test-00000-of-00001.parquet": "bc7ba26d4ee2fffcc07801a53317f7ea7bbc951333a4f493edee5068e2ccfc98",
+      "repobench-p/test-00000-of-00001.parquet": "fedace768eddd218d8cd0e5e90c50c4cb2bbf128b95d4243085654f080bcae72",
+      "musique/test-00000-of-00001.parquet": "bfa56a6396733c0209bb613e3d83ac72238828eedd0ded82f8214e9ebf1c878f",
+      "2wikimqa/test-00000-of-00001.parquet": "3991da3c5941a57581ea3898fc58c3db8d5ba122f83fd7fb6dac832e7a6e47a5",
+      "multi_news/test-00000-of-00001.parquet": "806111d612b116197af3c02e01bc4d254ff3b0ece5b2a20127b8cb1d66369e00",
+      "passage_retrieval_en/test-00000-of-00001.parquet": "ad747553d8c8f577db306fcfada8917b8442f0143faf4061d2b4eba5442a5a2d",
+      "narrativeqa/test-00000-of-00001.parquet": "00d2faae1be9ecbdc98f51c824fcac53d4996668c23808c093eb675bb99ac711",
+      "passage_count/test-00000-of-00001.parquet": "18e2e4005339a0be4df3fe87de8ba7c0e27b600cdc98b13aa9eb1db13b0ba1e5",
+      "trec/test-00000-of-00001.parquet": "25aea4f65a8bb77678dced8f4c12227d9741b18498d2b673b5ae1b67f687c91a",
+      "gov_report/test-00000-of-00001.parquet": "1018dacb824e78790115c3aa237ff01f368953a0fd8adc2f00225d46b2512de6",
+      "qmsum/test-00000-of-00001.parquet": "11e7021d0fe14541c3e246d4f4d5946e26b16838815b81f5fb574b9aa539916d",
+      "triviaqa/test-00000-of-00001.parquet": "dc73ebe6f93b94acdaeebbb981533643c8ac7cdd14734a7bae3a098cae63b067"
+    }
+  }
+]

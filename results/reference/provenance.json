@@ -1,0 +1,58 @@
+{
+  "llama_candidate": {
+    "source": "historical_reference_only",
+    "archive": "llama_candidate.jsonl.gz",
+    "source_file_sha256_per_unit": "Included in each self-contained JSONL record",
+    "original_paths_removed": true,
+    "score_validation": "Independently rescored using freshly downloaded frozen data; zero saved-score differences",
+    "generated_in_this_release_run": false
+  },
+  "llama_critical": {
+    "source": "historical_reference_only",
+    "archive": "llama_critical.jsonl.gz",
+    "source_file_sha256_per_unit": "Included in each self-contained JSONL record",
+    "original_paths_removed": true,
+    "score_validation": "Independently rescored using freshly downloaded frozen data; zero saved-score differences",
+    "generated_in_this_release_run": false
+  },
+  "mistral_candidate": {
+    "source": "historical_reference_only",
+    "archive": "mistral_candidate.jsonl.gz",
+    "source_file_sha256_per_unit": "Included in each self-contained JSONL record",
+    "original_paths_removed": true,
+    "score_validation": "Independently rescored using freshly downloaded frozen data; zero saved-score differences",
+    "generated_in_this_release_run": false,
+    "assembly": "10191 answers from prior stages of the final candidate run and 10309 continuation answers; carry-forward source content hashes verified"
+  },
+  "mistral_critical": {
+    "source": "historical_reference_only",
+    "archive": "mistral_critical.jsonl.gz",
+    "source_file_sha256_per_unit": "Included in each self-contained JSONL record",
+    "original_paths_removed": true,
+    "score_validation": "Independently rescored using freshly downloaded frozen data; zero saved-score differences",
+    "generated_in_this_release_run": false,
+    "identity": "B0_CRITICAL from historical full analysis, not the older K1 control"
+  },
+  "evidence_summary_documents": [
+    {
+      "evidence_id": "llama_triton32_restored_analysis",
+      "source_sha256": "915dcb350b19cf325a51676b9cc8d5ac90d9346a63b4d83f5d75e129f161b5e1",
+      "published_representation": "self-contained reference archive and independent score report"
+    },
+    {
+      "evidence_id": "mistral_final_exact_mask_analysis",
+      "source_sha256": "318f20b2680a7d996f99b1e12fc0e403941ee11e9b8d922a354b6c3d57260918",
+      "published_representation": "self-contained reference archive and independent score report"
+    },
+    {
+      "evidence_id": "llama_original_full_report",
+      "source_sha256": "f9592333e7d86656ac9d9702c206e3eb9f366c5e4b196c047c9273e2bcbe2a39",
+      "published_representation": "full-precision target scores, reference records and historical statistical disclosures"
+    },
+    {
+      "evidence_id": "mistral_original_full_report",
+      "source_sha256": "62213eb77d9a2488d7889efe70ae45680e0a5677a6ceac5945b32d5cbbe43969",
+      "published_representation": "full-precision target scores, reference records and historical statistical disclosures"
+    }
+  ]
+}

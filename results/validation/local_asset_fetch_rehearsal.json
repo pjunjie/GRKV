@@ -1,0 +1,7 @@
+{
+  "source": "local HTTP rehearsal, not a GitHub Release download",
+  "kernel_download_extract_verified": true,
+  "reference_download_sha_verified": true,
+  "tampered_manifest_rejected": true,
+  "reference_assets": 4
+}

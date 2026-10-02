@@ -2,8 +2,9 @@
 
 Release preparation is in progress. Independent reference rescoring, Triton
 package matching, CPU checks and real derivative qualification have passed.
-Both-model fresh smoke and full inference are still pending; the reference
-scores below must not be mistaken for new inference results.
+Both models passed fresh clean-checkout smoke with zero text, score, fit and
+fallback differences. Full fresh inference is running; the reference scores
+below must not be mistaken for completed full-run results.
 
 K1 fits global regression over the historical Critical-AdaKV selected cache
 positions. Use `grkv.api.make_press("mistral", budget)` or
@@ -59,7 +60,7 @@ cd GRKV
 bash scripts/setup_reference.sh
 cp .env.example .env.local
 # The runner reads .env.local; keep real credentials and local paths untracked.
-uv run --no-sync python scripts/fetch_assets.py --models all --datasets all
+uv run --no-sync python scripts/fetch_assets.py --models all --datasets all --kernels historical
 uv run --no-sync python -m grkv.run --help
 ```
 
@@ -68,8 +69,9 @@ validation. It redacts private debug paths and preserves every nondebug ELF
 section; original complete-file SHA equality is explicitly false. Real Q32
 JVP/VJP outputs match the historical qualification tensor hashes. See
 [the historical kernel documentation](docs/historical_kernels.md). Kernel
-fetching and final smoke/full commands will be documented after their actual
-validation. Generation requires no reference prediction archive.
+and reference asset downloads verify size and SHA-256. See [reproduction commands](docs/reproduction.md)
+for smoke, full, resume, scoring and verification. Release downloads are pending
+publication. Generation requires no reference prediction archive.
 
 Mistral preserves successful FlashAttention2 calls and only uses explicit
 causal/per-head masking when fake-key feasibility fails. The historical

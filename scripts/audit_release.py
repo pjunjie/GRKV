@@ -9,6 +9,7 @@ import json
 import re
 import subprocess
 import tarfile
+import tomllib
 from pathlib import Path
 
 RULES = {
@@ -24,21 +25,31 @@ RULES = {
 }
 
 
-def inspect_file(path, findings, label=None):
+def inspect_stream(stream, findings, name, package_versions):
+    for line_number, line in enumerate(stream, 1):
+        for category, pattern in RULES.items():
+            if category == "private_network_address":
+                if name == "uv.lock" and line.startswith(b'version = "'):
+                    value = line.decode().split('"')[1]
+                    if value in package_versions.values():
+                        continue
+                if name == "environment/reference.json":
+                    try:
+                        field = json.loads(b"{" + line.strip().rstrip(b",") + b"}")
+                    except (ValueError, UnicodeDecodeError):
+                        field = {}
+                    if field and all(package_versions.get(k) == v for k, v in field.items()):
+                        continue
+            if pattern.search(line):
+                findings.append(dict(file=name, line=line_number, category=category))
+
+
+def inspect_file(path, findings, label=None, package_versions=None):
     name = label or path.name
     if path.is_symlink():
         findings.append(dict(file=name, category="symlink_requires_review"))
         return
-    stream = gzip.open(path, "rb") if path.suffix == ".gz" and not path.name.endswith(".tar.gz") else path.open("rb")
-    with stream:
-        # JSONL and source lines keep scanner memory bounded, including large evidence assets.
-        for line_number, line in enumerate(stream, 1):
-            for category, pattern in RULES.items():
-                # Four-component public package versions can resemble private IPv4 addresses.
-                if name == "uv.lock" and category == "private_network_address" and line.startswith(b'version = "'):
-                    continue
-                if pattern.search(line):
-                    findings.append(dict(file=name, line=line_number, category=category))
+    package_versions = package_versions or {}
     if path.name.endswith((".tar.gz", ".tar.xz", ".tar")):
         with tarfile.open(path) as archive:
             for member in archive:
@@ -46,6 +57,16 @@ def inspect_file(path, findings, label=None):
                     findings.append(dict(file=name, category="archive_owner_metadata"))
                 if member.issym() or member.islnk():
                     findings.append(dict(file=name, category="archive_link"))
+                for category, pattern in RULES.items():
+                    if pattern.search(member.name.encode()):
+                        findings.append(dict(file=name, category=category))
+                if member.isfile():
+                    with archive.extractfile(member) as stream:
+                        inspect_stream(stream, findings, name + "/" + member.name, package_versions)
+    else:
+        stream = gzip.open(path, "rb") if path.suffix == ".gz" else path.open("rb")
+        with stream:
+            inspect_stream(stream, findings, name, package_versions)
 
 
 def main():
@@ -56,8 +77,10 @@ def main():
     args = parser.parse_args()
     files = subprocess.check_output(["git", "ls-files", "-z"], cwd=args.root).decode().split("\0")
     findings: list[dict] = []
+    lock = tomllib.loads((args.root / "uv.lock").read_text())
+    package_versions = {p["name"]: p["version"] for p in lock["package"]}
     for name in filter(None, files):
-        inspect_file(args.root / name, findings, name)
+        inspect_file(args.root / name, findings, name, package_versions)
     for path in args.artifact:
         inspect_file(path, findings, path.name)
     args.output.parent.mkdir(parents=True, exist_ok=True)

@@ -1,0 +1,53 @@
+{
+  "profile": "historical-executable-sm86",
+  "runtime": {
+    "software": {
+      "torch": "2.6.0+cu124",
+      "triton": "3.2.0",
+      "transformers": "5.2.0",
+      "flash-attn": "2.8.3.post1"
+    },
+    "python": "3.12.7",
+    "torch_cuda": "12.4",
+    "gpu": "NVIDIA RTX A6000",
+    "capability": [
+      8,
+      6
+    ],
+    "triton_compiler_sha256": "ea8d8a4744679bb406b914485b1743669eb685f24949cd210f8fb72c103d2e46",
+    "libtriton_sha256": "403d2951140c327f3bdd811b619ab36d1836f9efb4439c71785ea933129c1495",
+    "imported_triton_package_verified": true
+  },
+  "qualification": {
+    "actual_binary_checks": [
+      {
+        "rows": 128,
+        "kind": "jvp",
+        "cubin_sha256": "a95bc3cf598ae2b83b82d78b53a67e5e9b184e6ef3433984c0d93f91774ba5c1",
+        "historical_cubin_sha256": "df2ff825ab436b57318c50bb266593d3625aac93b870f60011a90d57bb8acae1",
+        "original_cubin_bytes_identical": false,
+        "executable_sections_identical": true,
+        "checked_before_launch": true,
+        "shared_bytes": 81920,
+        "arch": 86
+      },
+      {
+        "rows": 128,
+        "kind": "vjp",
+        "cubin_sha256": "09e970025e87d60198db2e4d9545c64cb7e9035d6ef69de389c34e76a524a890",
+        "historical_cubin_sha256": "fc7d86adf5b41b7903c70c31a360c1960dd1b643af47a41255300179c1fc8a04",
+        "original_cubin_bytes_identical": false,
+        "executable_sections_identical": true,
+        "checked_before_launch": true,
+        "shared_bytes": 65536,
+        "arch": 86
+      }
+    ],
+    "jvp_sha256": "9eebb078ddbff05e2dac88f0fc693050d2c0841823c25174dcc51abead6c38cb",
+    "vjp_sha256": "4696b4ed5bfab59a41230ca7c32dd11e28db4085b345c53fb70dd9a74cd6f0ce",
+    "jvp_norm": 36.20057678222656,
+    "vjp_norm": 36.13179016113281
+  },
+  "original_cubin_bytes_identical": false,
+  "gpu_qualification_passed": true
+}

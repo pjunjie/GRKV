@@ -87,3 +87,97 @@ def test_same_scores_do_not_prove_text_or_layer_identity():
     assert result["exact"] is False
     assert result["fit_mismatch_layers"] == [0]
     assert "fit_record" in result["reasons"]
+
+
+def test_frozen_input_hash_rejects_changed_question():
+    from experiments.critical_adakv_direct_grkv.run_wide_query_compatibility import group_digest
+    from experiments.critical_adakv_direct_grkv.tune50_worker import load_group
+    from experiments.critical_adakv_history_ruler.common import text_sha
+
+    group = [dict(context="context", question="original", _id="id")]
+    item = dict(
+        benchmark="longbench",
+        task="task",
+        context_sha256=text_sha("context"),
+        dataset_rows_sha256=group_digest(group),
+        rows=[dict(original_row_id=0, context_sha256=text_sha("context"), example_id="id", ab="A")],
+    )
+    assert load_group(item, {("longbench", "task"): group}) == group
+    group[0]["question"] = "changed"
+    with pytest.raises(AssertionError):
+        load_group(item, {("longbench", "task"): group})
+
+
+def test_tampered_kernel_is_rejected_before_cuda_launch(tmp_path, monkeypatch):
+    from experiments.critical_adakv_direct_grkv.wide_query_split_backend import VARIANT
+    from experiments.critical_adakv_history_ruler.common import write
+    from grkv.backend import HistoricalExecutableBackend
+
+    monkeypatch.setenv("TRITON_CACHE_DIR", str(tmp_path))
+    (tmp_path / "kernel.cubin").write_bytes(b"changed")
+    write(
+        tmp_path / "manifest.json",
+        dict(
+            status="complete",
+            variant=VARIANT,
+            target=dict(backend="cuda", arch=86, warp_size=32),
+            kernels=[dict(query=32, kind="jvp", cubin=dict(path="kernel.cubin", sha256="0" * 64))],
+        ),
+    )
+    with pytest.raises(ValueError, match="Published cubin hash mismatch"):
+        HistoricalExecutableBackend(tmp_path / "manifest.json", tmp_path)
+
+
+def test_resume_rejects_changed_asset_identity(tmp_path, monkeypatch):
+    import json
+
+    from experiments.critical_adakv_history_ruler.common import sha, write
+    from grkv import run
+
+    monkeypatch.setattr(run, "ROOT", tmp_path)
+    monkeypatch.setattr(run, "code_identity", lambda: {})
+    monkeypatch.setattr(run, "asset_identity", lambda model: {"model": "new"})
+    for name in [
+        "manifests/units.jsonl",
+        "manifests/models.json",
+        "manifests/datasets.json",
+        "uv.lock",
+        "kernels/manifest.json",
+    ]:
+        p = tmp_path / name
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text("")
+    config = dict(model="llama", budgets=[10, 20])
+    configuration = tmp_path / "config.json"
+    configuration.write_text(json.dumps(config))
+    identity = dict(
+        config=config,
+        stage="full",
+        code_hashes={},
+        units_sha256=sha(tmp_path / "manifests/units.jsonl"),
+        models_manifest_sha256=sha(tmp_path / "manifests/models.json"),
+        datasets_manifest_sha256=sha(tmp_path / "manifests/datasets.json"),
+        lock_sha256=sha(tmp_path / "uv.lock"),
+        kernel_manifest_sha256=sha(tmp_path / "kernels/manifest.json"),
+        kernel_profile="historical-executable-sm86",
+        asset_hashes={"model": "old"},
+    )
+    output = tmp_path / "output"
+    write(output / "registration.json", dict(identity=identity))
+    monkeypatch.setattr(
+        "sys.argv",
+        [
+            "grkv.run",
+            "--config",
+            str(configuration),
+            "--stage",
+            "full",
+            "--resume",
+            "--output",
+            str(output),
+            "--kernel-root",
+            str(tmp_path / "kernels"),
+        ],
+    )
+    with pytest.raises(ValueError, match="Resume requires identical"):
+        run.main()

@@ -1,0 +1,15 @@
+{
+  "published": false,
+  "release_tag": "v0.1.0-k1",
+  "artifact": {
+    "name": "grkv-k1-sm86-kernels.tar.gz",
+    "bytes": 805245,
+    "sha256": "d4536018fef59495df40da9d44f730637bf7e874b2b8503f5cb5c46cc7ad334d",
+    "url": "https://github.com/pjunjie/GRKV/releases/download/v0.1.0-k1/grkv-k1-sm86-kernels.tar.gz",
+    "profile": "historical-executable-sm86",
+    "original_cubin_bytes_identical": false,
+    "executable_sections_identical": true,
+    "archive_layout": "kernel manifest and cubins at archive root",
+    "manifest_sha256": "9283f22948d79196b431199867911567d844a668d835191fb627edc0ca138f6e"
+  }
+}

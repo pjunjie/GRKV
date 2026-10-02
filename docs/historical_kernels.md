@@ -3,8 +3,9 @@
 The historical backend targets CUDA SM86 with warp size 32. JVP uses
 `(BR=32, BS=64, num_warps=4)`; VJP uses `(64, 32, 8)`; both use one stage.
 LLVM priming, reduction order, explicit `tf32x3`, FP32 fitting and BF16 writes
-are retained. Every real launch checks architecture, shared memory, signature,
-alignment and public cubin SHA before CUDA creates handles.
+are retained. Every first kernel load checks architecture, shared memory, signature,
+alignment and public cubin SHA before CUDA creates handles; subsequent calls
+must reuse that verified compiled object.
 
 The original 18 cubins contain private build paths in nonallocated debug
 sections. They cannot be published unchanged. The local release preview

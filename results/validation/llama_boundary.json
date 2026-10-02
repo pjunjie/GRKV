@@ -1,0 +1,47 @@
+{
+  "model": "llama",
+  "runtime": {
+    "software": {
+      "torch": "2.6.0+cu124",
+      "triton": "3.2.0",
+      "transformers": "5.2.0",
+      "flash-attn": "2.8.3.post1"
+    },
+    "python": "3.12.7",
+    "torch_cuda": "12.4",
+    "gpu": "NVIDIA RTX A6000",
+    "capability": [
+      8,
+      6
+    ],
+    "triton_compiler_sha256": "ea8d8a4744679bb406b914485b1743669eb685f24949cd210f8fb72c103d2e46",
+    "libtriton_sha256": "403d2951140c327f3bdd811b619ab36d1836f9efb4439c71785ea933129c1495",
+    "imported_triton_package_verified": true
+  },
+  "short_context_passed": true,
+  "shared_context_isolation_passed": true,
+  "checks": [
+    {
+      "budget": 10,
+      "context_tokens": 32,
+      "predictions": [
+        "I don't have any information about a specific meeting. Can",
+        "However, I don't think we had a meeting previously.",
+        "I don't have any information about a specific meeting. Can"
+      ],
+      "cache_restoration_exact": true,
+      "repeated_answer_exact": true
+    },
+    {
+      "budget": 20,
+      "context_tokens": 32,
+      "predictions": [
+        "I don't have any information about a specific meeting. Can",
+        "However, I don't think we had a meeting previously.",
+        "I don't have any information about a specific meeting. Can"
+      ],
+      "cache_restoration_exact": true,
+      "repeated_answer_exact": true
+    }
+  ]
+}

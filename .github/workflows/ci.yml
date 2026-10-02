@@ -1,0 +1,26 @@
+name: CPU validation
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  cpu:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@6b9c6063abd6010835644d4c2e1bef4cf5cd0fca
+        with:
+          version: 0.9.24
+          python-version: 3.12.7
+      - run: uv sync --frozen --extra eval
+      - run: make style && make test
+      - run: uv run --no-sync python -c "import grkv.api, grkv.run, grkv.score"
+      - run: uv run --no-sync python scripts/audit_release.py
+      - name: Scan all reachable history with Gitleaks 8.24.3
+        shell: bash
+        run: |
+          curl -fLsS -o /tmp/gitleaks.tar.gz https://github.com/gitleaks/gitleaks/releases/download/v8.24.3/gitleaks_8.24.3_linux_x64.tar.gz
+          echo '9991e0b2903da4c8f6122b5c3186448b927a5da4deef1fe45271c3793f4ee29c  /tmp/gitleaks.tar.gz' | sha256sum -c -
+          tar -xzf /tmp/gitleaks.tar.gz -C /tmp gitleaks
+          /tmp/gitleaks git . --log-opts=--all --redact=100

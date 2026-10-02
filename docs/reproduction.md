@@ -14,6 +14,8 @@ available locally. Set `CUDA_HOME` to that installation before setup.
 ```bash
 git clone https://github.com/pjunjie/GRKV.git
 cd GRKV
+# Replace xxxxxx with your local CUDA 12.4.131 toolkit directory.
+export CUDA_HOME=xxxxxx
 bash scripts/setup_reference.sh
 cp .env.example .env.local
 ```
@@ -111,6 +113,21 @@ model-specific protocol. Give new baseline runs distinct `--output` directories.
 The published baseline scores are historical references independently rescored
 here; no claim is made that these baselines were regenerated in this release.
 The older Mistral K1 control is not a Critical-AdaKV baseline.
+
+The full fresh inference evidence is exported separately after acceptance:
+
+```bash
+uv run --no-sync python scripts/fetch_assets.py --fresh-evidence all
+uv run --no-sync python -m grkv.score --input artifacts/fresh/fresh_mistral_candidate.jsonl.gz --output outputs/rescore/fresh_mistral.json
+uv run --no-sync python -m grkv.score --input artifacts/fresh/fresh_llama_candidate.jsonl.gz --output outputs/rescore/fresh_llama.json
+```
+
+Downloading this evidence does not perform new inference on your machine.
+Its records retain the original new-generation registration and per-output
+content hashes. `scripts/export_fresh_evidence.py` exports only completed full
+candidate runs that pass strict verification, then independently rescores the
+export itself. It excludes worker logs, caches and machine paths. Full evidence
+downloads become available only after full validation and publication.
 
 Run `make style` and `make test` for the targeted CPU checks. CI installs without
 FlashAttention or GPU qualification, imports the public APIs, validates CPU

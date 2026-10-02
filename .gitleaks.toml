@@ -11,11 +11,18 @@ description = "Verified LongBench task/context SHA-256 identifiers; large-file s
 condition = "AND"
 paths = ['''(?:manifests/units\.jsonl|(?:llama|mistral)_(?:candidate|critical)\.jsonl(?:\.gz)?)$''']
 regexTarget = "match"
-regexes = ['''context_key"\s*:\s*"(?:2wikimqa|gov_report|hotpotqa|lcc|multifieldqa_en|multi_news|musique|narrativeqa|passage_count|passage_retrieval_en|qasper|qmsum|repobench-p|samsum|trec|triviaqa)/[a-f0-9]{16,64}''']
+regexes = ['''context_key"\s*:\s*"(?:2wikimqa|gov_report|hotpotqa|lcc|multifieldqa_en|multi_news|musique|narrativeqa|passage_count|passage_retrieval_en|qasper|qmsum|repobench-p|samsum|trec|triviaqa)/[a-f0-9]{8,64}''']
 
 [[rules.allowlists]]
 description = "Verified Triton package inventory contains file SHA-256 values"
 condition = "AND"
 paths = ['''environment/triton_package\.json$''']
+regexTarget = "secret"
+regexes = ['''^[a-f0-9]{64}$''']
+
+[[rules.allowlists]]
+description = "Run registrations bind verified source, model and dataset content hashes"
+condition = "AND"
+paths = ['''results/(?:validation|fresh)/.+/registration\.json$''']
 regexTarget = "secret"
 regexes = ['''^[a-f0-9]{64}$''']

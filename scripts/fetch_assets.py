@@ -59,6 +59,15 @@ def fetch_references():
     print("Verified all four historical reference archives", flush=True)
 
 
+def fetch_fresh_evidence():
+    records = read(ROOT / "results/fresh/artifacts.json")["assets"]
+    if len(records) != 2 or any(record["prediction_source"] != "fresh_public_checkout" for record in records):
+        raise ValueError("Full fresh evidence has not been finalized")
+    for record in records:
+        fetch_release_asset(record, ROOT / "artifacts/fresh")
+    print("Verified both complete fresh inference evidence archives; these are not new local generation", flush=True)
+
+
 def fetch_models(names):
     manifest = read(ROOT / "manifests/models.json")
     for name in names:
@@ -118,6 +127,7 @@ def main():
     parser.add_argument("--datasets", choices=["all", "none"], default="none")
     parser.add_argument("--kernels", choices=["historical", "none"], default="none")
     parser.add_argument("--references", choices=["all", "none"], default="none")
+    parser.add_argument("--fresh-evidence", choices=["all", "none"], default="none")
     args = parser.parse_args()
     begin = perf_counter()
     if args.models != "none":
@@ -128,6 +138,8 @@ def main():
         fetch_kernels()
     if args.references == "all":
         fetch_references()
+    if args.fresh_evidence == "all":
+        fetch_fresh_evidence()
     write(
         asset_root() / "download_receipt.json",
         dict(
@@ -137,6 +149,7 @@ def main():
             datasets=args.datasets,
             kernels=args.kernels,
             references=args.references,
+            fresh_evidence=args.fresh_evidence,
         ),
     )
 

@@ -35,9 +35,9 @@ binary SHA, shared memory and architecture before first loading a kernel;
 subsequent calls must reuse that same verified compiled object. No report
 claims the public cubins retain the original full-file SHA.
 
-Native installation is validated. The pinned container has not been built or
-executed because Docker access and rootless subordinate UID/GID ranges are
-unavailable on the validation host. Single-card full scheduling and other
+Native installation is validated. Container build and GPU execution remain
+uncompleted limitations: this validation process could not access the Docker
+daemon, and native acceptance/publication is the authorized scope. Single-card full scheduling and other
 architectures are not validated. Kernel/reference Release downloads are
 pending publication; their fetch/extraction/checksum logic passed a local HTTP
 rehearsal, which is explicitly distinguished from a remote Release download.
@@ -54,4 +54,5 @@ The original Llama `all_four_pass=false` means all four gains must be at least
 0.5 points. The release's positive-gain check is a separate field. Historical
 full results had previously been exposed; the remaining 50% was held out only
 from that tuning round. Comparisons remain descriptive, and the historical
-Llama LongBench/20% paired interval crosses zero. Exact output reproduction,+positive point gains and statistical significance are distinct statements.
+Llama LongBench/20% paired interval crosses zero. Exact output reproduction,
+positive point gains and statistical significance are distinct statements.

@@ -57,6 +57,8 @@ Ubuntu 20.04 host, so the reference setup builds the pinned public source.
 ```bash
 git clone https://github.com/pjunjie/GRKV.git
 cd GRKV
+# Replace xxxxxx with your local CUDA 12.4.131 toolkit directory.
+export CUDA_HOME=xxxxxx
 bash scripts/setup_reference.sh
 cp .env.example .env.local
 # The runner reads .env.local; keep real credentials and local paths untracked.
@@ -78,8 +80,8 @@ causal/per-head masking when fake-key feasibility fails. The historical
 reference contains 22 such calls in 22 units; fresh runs measure this statistic.
 Llama never installs that fallback. Installation, CPU and GPU validation
 statuses are reported separately. The digest-pinned Dockerfile is provided,
-but container execution remains unvalidated because this host does not allow
-Docker access and has no rootless subordinate UID/GID range.
+but container build and GPU execution remain uncompleted limitations. Native
+acceptance and publication proceed with that limitation explicitly retained.
 
 Run `make style` and `make test` for SPDX, style/type checks and the targeted CPU
 protocol/fallback tests. Keep upstream Apache-2.0 notices. Contributions require

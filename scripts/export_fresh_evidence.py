@@ -65,6 +65,7 @@ def export(run, model, source_commit, destination):
     stream_hash = hashlib.sha256()
     seconds = peak_allocated = peak_reserved = 0.0
     fallback_calls = fallback_units = answers = 0
+    kernel_checks: dict[tuple[int, str], dict] = {}
     with partial.open("wb") as raw:
         with gzip.GzipFile(filename="", fileobj=raw, mode="wb", mtime=0) as zipped:
             for file in files:
@@ -81,6 +82,11 @@ def export(run, model, source_commit, destination):
                 ):
                     raise ValueError("Context provenance or source identity differs")
                 record["source_output_sha256"] = sha(file)
+                for check in record["actual_binary_checks"]:
+                    key = (check["rows"], check["kind"])
+                    if key in kernel_checks and kernel_checks[key] != check:
+                        raise ValueError("Kernel qualification differs between contexts")
+                    kernel_checks[key] = check
                 encoded = (
                     json.dumps(record, ensure_ascii=False, separators=(",", ":"), allow_nan=False) + "\n"
                 ).encode()
@@ -129,6 +135,8 @@ def export(run, model, source_commit, destination):
         peak_scope="Maximum of measured per-unit CUDA allocator peaks; excludes non-PyTorch device allocations",
         runtimes=[p["runtime"] for p in jobs],
         derivative_qualifications=[p["qualification"] for p in jobs],
+        qualified_and_inference_loaded_kernel_variants=[kernel_checks[k] for k in sorted(kernel_checks)],
+        kernel_record_scope="Cumulative first-load checks include derivative qualification; not a CUDA call count",
         original_cubin_bytes_identical=False,
     )
     report = ROOT / "results/fresh" / model

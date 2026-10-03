@@ -6,7 +6,33 @@
 set -euo pipefail
 if [[ "$#" -eq 2 && "$1" == "--query-gpu=driver_version" && "$2" == "--format=csv,noheader" ]]; then
     if [[ -n "${CUDA_VISIBLE_DEVICES:-}" && "$CUDA_VISIBLE_DEVICES" != *,* ]]; then
-        exec /usr/bin/nvidia-smi -i "$CUDA_VISIBLE_DEVICES" "$@"
+        selected="$CUDA_VISIBLE_DEVICES"
+        # UUID lookup can enumerate an unavailable unrelated card. Resolve the
+        # selected card through driver metadata and verify its actual UUID.
+        if [[ "$selected" == GPU-* ]]; then
+            for information in /proc/driver/nvidia/gpus/*/information; do
+                [[ -r "$information" ]] || continue
+                uuid=""
+                minor=""
+                while IFS=: read -r field value; do
+                    value="${value//[[:space:]]/}"
+                    case "$field" in
+                        "GPU UUID") uuid="$value" ;;
+                        "Device Minor") minor="$value" ;;
+                    esac
+                done < "$information"
+                if [[ "$uuid" == "$selected" && "$minor" =~ ^[0-9]+$ ]]; then
+                    actual=$(/usr/bin/nvidia-smi -i "$minor" --query-gpu=uuid --format=csv,noheader)
+                    if [[ "${actual//[[:space:]]/}" != "$selected" ]]; then
+                        echo "Selected GPU metadata and actual NVIDIA device differ." >&2
+                        exit 1
+                    fi
+                    selected="$minor"
+                    break
+                fi
+            done
+        fi
+        exec /usr/bin/nvidia-smi -i "$selected" "$@"
     fi
 fi
 exec /usr/bin/nvidia-smi "$@"

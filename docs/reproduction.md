@@ -134,3 +134,10 @@ FlashAttention or GPU qualification, imports the public APIs, validates CPU
 protocol/fallback behavior and scans source/history. GPU evidence is recorded
 separately. Manifest download links describe Release assets and are usable only
 after those assets are actually published.
+On a host with an unavailable unrelated GPU, the optional
+`scripts/isolated_gpu_tools/nvidia-smi` wrapper scopes only the existing
+driver-version query to each worker's `CUDA_VISIBLE_DEVICES` selection. Add
+`$PWD/scripts/isolated_gpu_tools` to `PATH` and select healthy devices using
+`--gpus`. The wrapper invokes the real system `nvidia-smi -i` command and
+preserves the required driver check; it does not supply a replacement value.
+All other queries retain their original behavior.

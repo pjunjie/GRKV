@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# SPDX-FileCopyrightText: Copyright (c) 1993-2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+# Scope the driver's existing version query to the worker's selected device.
+# All other queries keep their normal behavior; no driver value is substituted.
+set -euo pipefail
+if [[ "$#" -eq 2 && "$1" == "--query-gpu=driver_version" && "$2" == "--format=csv,noheader" ]]; then
+    if [[ -n "${CUDA_VISIBLE_DEVICES:-}" && "$CUDA_VISIBLE_DEVICES" != *,* ]]; then
+        exec /usr/bin/nvidia-smi -i "$CUDA_VISIBLE_DEVICES" "$@"
+    fi
+fi
+exec /usr/bin/nvidia-smi "$@"

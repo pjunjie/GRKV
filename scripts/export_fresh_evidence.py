@@ -113,6 +113,30 @@ def export(run, model, source_commit, destination):
     starts = [datetime.fromisoformat(p["started_at"]) for p in jobs]
     finishes = [datetime.fromisoformat(p["finished_at"]) for p in jobs]
     worker_seconds = [(b - a).total_seconds() for a, b in zip(starts, finishes)]
+    prior_attempts = []
+    history = run / "recovery" / "attempts.json"
+    if history.exists():
+        for attempt in read(history)["attempts"]:
+            if attempt["status"] != "failed" or not re.fullmatch(r"[A-Za-z_]+", attempt["error"]):
+                raise ValueError("Unexpected prior worker attempt status/error")
+            if attempt["finish_time_source"] != "failed_job_state_file_mtime":
+                raise ValueError("Prior failure timing must disclose its measurement source")
+            begin = datetime.fromisoformat(attempt["started_at"])
+            end = datetime.fromisoformat(attempt["finished_at"])
+            if end < begin:
+                raise ValueError("Prior worker attempt timing is invalid")
+            prior_attempts.append(
+                dict(
+                    status="failed",
+                    error=attempt["error"],
+                    started_at=begin.isoformat(),
+                    finished_at=end.isoformat(),
+                    finish_time_source="failed_job_state_file_mtime",
+                    elapsed_seconds=(end - begin).total_seconds(),
+                )
+            )
+            starts.append(begin)
+            finishes.append(end)
     resources = dict(
         model=model,
         generation_checkout_commit=source_commit,
@@ -120,9 +144,11 @@ def export(run, model, source_commit, destination):
         context_budget_units=len(files),
         answers=answers,
         gpu_workers=len(jobs),
+        gpu_worker_attempts=len(jobs) + len(prior_attempts),
         worker_elapsed_seconds=worker_seconds,
+        prior_failed_worker_attempts=prior_attempts,
         wall_seconds=(max(finishes) - min(starts)).total_seconds(),
-        gpu_worker_hours=sum(worker_seconds) / 3600,
+        gpu_worker_hours=(sum(worker_seconds) + sum(p["elapsed_seconds"] for p in prior_attempts)) / 3600,
         sum_generation_seconds=seconds,
         peak_allocated_mib=peak_allocated,
         peak_reserved_mib=peak_reserved,
@@ -130,7 +156,9 @@ def export(run, model, source_commit, destination):
         exact_mask_fallback_units=fallback_units,
         formal_performance_benchmark=False,
         timing_scope=(
-            "Worker elapsed time includes model loading and qualification; per-unit timing excludes preprocessing"
+            "Worker time includes model loading, qualification, resumed-context reads and disclosed failed attempts; "
+            "per-unit timing counts successful unique generation and excludes preprocessing. "
+            "gpu_workers counts successful worker processes, not physical cards or peak concurrency"
         ),
         peak_scope="Maximum of measured per-unit CUDA allocator peaks; excludes non-PyTorch device allocations",
         runtimes=[p["runtime"] for p in jobs],

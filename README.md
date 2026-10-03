@@ -204,11 +204,14 @@ For questions about GRKV or reproduction, please [open an issue](https://github.
 If you use GRKV in your research, please cite our paper:
 
 ```bibtex
-@article{peng2026grkv,
-  title={GRKV: Global Regression for Training-Free KV Cache Compression in Long-Context LLMs},
-  author={Peng, Junjie and Wu, You and Wu, Haoyi and Han, Jialong and Xie, Xiaohua and Tu, Kewei and Lai, Jianhuang},
-  journal={arXiv preprint arXiv:2605.31105},
-  year={2026}
+@misc{peng2026grkvglobalregressiontrainingfree,
+      title={{GRKV: Global Regression for Training-Free KV Cache Compression in Long-Context LLMs}},
+      author={Junjie Peng and You Wu and Haoyi Wu and Jialong Han and Xiaohua Xie and Kewei Tu and Jianhuang Lai},
+      year={2026},
+      eprint={2605.31105},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2605.31105},
 }
 ```
 
@@ -217,3 +220,27 @@ If you use GRKV in your research, please cite our paper:
 ## Acknowledgments
 
 We thank the authors of [kvpress](https://github.com/NVIDIA/kvpress), Critical-AdaKV, [Triton](https://github.com/triton-lang/triton), [FlashAttention](https://github.com/Dao-AILab/flash-attention), LongBench and RULER. This repository retains the upstream Apache-2.0 license and copyright notices. Model, dataset and dependency licenses remain with their respective upstream projects; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+## KV Cache Merging Methods
+
+Selected related work on KV cache merging, covering token merging, merging across layers, and multimodal inference. The table follows the year, venue, title, paper and code format of [Transformer-based Long Document Modeling](https://github.com/pjunjie/Transformer-based-Long-Document-Modeling), with a method column for easier lookup. Years refer to the listed publication; entries marked arXiv link to preprints.
+
+| Year | Venue | Method | Title | Paper | Code |
+|---|---|---|---|---|---|
+| 2024 | ICML | CaM | CaM: Cache Merging for Memory-efficient LLMs Inference | [Paper](https://proceedings.mlr.press/v235/zhang24n.html) | [Code](https://github.com/zyxxmu/cam) |
+| 2024 | ICML | DMC (continued pretraining) | Dynamic Memory Compression: Retrofitting LLMs for Accelerated Inference | [Paper](https://proceedings.mlr.press/v235/nawrot24a.html) | — |
+| 2024 | NeurIPS | MiniCache (cross-layer) | MiniCache: KV Cache Compression in Depth Dimension for Large Language Models | [Paper](https://proceedings.neurips.cc/paper_files/paper/2024/hash/fd0705710bf01b88a60a3d479ea341d9-Abstract-Conference.html) | — |
+| 2024 | Findings of EMNLP | LOOK-M (multimodal) | LOOK-M: Look-Once Optimization in KV Cache for Efficient Multimodal Long-Context Inference | [Paper](https://aclanthology.org/2024.findings-emnlp.235/) | [Code](https://github.com/SUSTechBruce/LOOK-M) |
+| 2024 | arXiv | KVMerger | Model Tells You Where to Merge: Adaptive KV Cache Merging for LLMs on Long-Context Tasks | [Paper](https://arxiv.org/abs/2407.08454) | — |
+| 2024 | arXiv | EMS | EMS: Adaptive Evict-then-Merge Strategy for Head-wise KV Cache Compression Based on Global-Local Importance | [Paper](https://arxiv.org/abs/2412.08521) | — |
+| 2025 | ICLR | D2O | D2O: Dynamic Discriminative Operations for Efficient Long-Context Inference of Large Language Models | [Paper](https://proceedings.iclr.cc/paper_files/paper/2025/hash/d862f7f5445255090de13b825b880d59-Abstract-Conference.html) | [Code](https://github.com/AIoT-MLSys-Lab/d2o) |
+| 2025 | [ICASSP](https://jhc.sjtu.edu.cn/~bjiang/) | WeightedKV | WeightedKV: Attention Scores Weighted Key-Value Cache Merging for Large Language Models | [Paper](https://arxiv.org/abs/2503.01330) | — |
+| 2025 | NeurIPS | AsymKV | Homogeneous Keys, Heterogeneous Values: Exploiting Local KV Cache Asymmetry for Long-Context LLMs | [Paper](https://papers.nips.cc/paper_files/paper/2025/hash/750b0f9fccafad88e0da366315e03d1a-Abstract-Conference.html) | [Code](https://github.com/the-scale-lab/Asymkv) |
+| 2025 | arXiv | ZSMerge (formerly ZeroMerge) | ZSMerge: Zero-Shot KV Cache Compression for Memory-Efficient Long-Context LLMs | [Paper](https://arxiv.org/abs/2503.10714) | [Code](https://github.com/SusCom-Lab/ZSMerge) |
+| 2026 | AAAI | KeepKV | KeepKV: Achieving Periodic Lossless KV Cache Compression for Efficient LLM Inference | [Paper](https://ojs.aaai.org/index.php/AAAI/article/view/40611) | [Code](https://github.com/kkvcache/KeepKV) |
+| 2026 | TMLR | LightKV (multimodal) | Make Your LVLM KV Cache More Lightweight | [Paper](https://openreview.net/forum?id=n77IeySrQl) | [Code](https://github.com/howtoosee/LightKV) |
+| 2026 | [EMNLP](https://ai4gc.org/blog/flowmm-emnlp-2026) | FlowMM (multimodal) | FlowMM: Cross-Modal Information Flow Guided KV Cache Merging for Efficient Multimodal Context Inference | [Paper](https://arxiv.org/abs/2511.05534) | — |
+| 2026 | arXiv | KVSlimmer | KVSlimmer: Theoretical Insights and Practical Optimizations for Asymmetric KV Merging | [Paper](https://arxiv.org/abs/2603.00907) | [Code](https://github.com/lianjunl13-sudo/KVSlimmer) |
+| 2026 | arXiv | SelKV | SelKV: Selective KV Cache Merging with Per-Token Merge-or-Drop and Attention Compensation | [Paper](https://arxiv.org/abs/2607.16213) | — |
+
+Code links point to author-maintained implementations. — means no accessible author-maintained implementation was verified in the linked sources. AsymKV here refers to the merging method in *Homogeneous Keys, Heterogeneous Values*. GRKV's reproduced measurements are reported in [Reproduced Results](#reproduced-results).

@@ -1,0 +1,33 @@
+{
+  "source": "earlier_full_reproduction_not_current_release_generation",
+  "context_budget_units": 19630,
+  "answers": 20500,
+  "full_coverage_passed": true,
+  "raw_source_hashes_verified": true,
+  "self_contained_archive_matches_raw_sources": true,
+  "independently_rescored_against_fresh_frozen_data": true,
+  "independent_score_receipt": "results/reference/mistral_candidate.json",
+  "comparison_scope": "Final guard=0.0 outputs versus their self-contained frozen archive; older K1 is a different control",
+  "prediction_mismatches": null,
+  "score_mismatches": null,
+  "fit_mismatch_layers": null,
+  "exact_mask_fallback_calls": 22,
+  "carried_answers": 10191,
+  "continuation_answers": 10309,
+  "generated_in_current_release_run": false,
+  "independently_rescored_full_cells": {
+    "longbench_10": 37.25866730842248,
+    "longbench_20": 40.03113888818442,
+    "ruler16k_10": 27.098717948717947,
+    "ruler16k_20": 51.82897435897436
+  },
+  "target_scores_reproduced": true,
+  "target_tolerance": 1e-08,
+  "gains_against_historical_critical": {
+    "longbench_10": 2.2497992308408783,
+    "longbench_20": 1.2237613633995892,
+    "ruler16k_10": 0.27769230769230546,
+    "ruler16k_20": 3.5646153846153865
+  },
+  "all_four_point_gains_positive": true
+}

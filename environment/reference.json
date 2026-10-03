@@ -1,5 +1,5 @@
 {
-  "status": "native_reference_validated_through_smoke_full_pending",
+  "status": "native_mistral_full_and_llama_partial_validated_with_earlier_llama_full_evidence",
   "python": "3.12.7",
   "os": "Ubuntu 20.04.6 LTS",
   "architecture": "x86_64",
@@ -151,7 +151,16 @@
       "mistral": 80.20639049010228
     },
     "estimation_method": "Mean time of 60 smoke context/budget units multiplied by 19630; not a full-run measurement",
-    "peak_memory": "pending full-run measurement"
+    "peak_memory": "Measured Mistral full-run allocator peaks in results/fresh/mistral/resources.json; no minimum hardware guarantee",
+    "mistral_full_new_inference": {
+      "gpu_workers": 4,
+      "wall_seconds": 50823.817745,
+      "gpu_worker_hours": 55.890589005555555,
+      "sum_generation_seconds": 199362.9464316757,
+      "peak_allocated_mib": 36438.68212890625,
+      "peak_reserved_mib": 42400.0,
+      "formal_performance_benchmark": false
+    }
   },
   "container": {
     "base": "nvidia/cuda:12.4.1-devel-ubuntu20.04",
@@ -178,5 +187,33 @@
     "tests_passed": 17,
     "imports_passed": true,
     "style_types_spdx_passed": true
+  },
+  "inference_acceptance": {
+    "full_inference_requirement_satisfied_by_existing_full_evidence": true,
+    "earlier_full_answers_per_model": 20500,
+    "current_clean_checkout_full_mistral_answers": 20500,
+    "current_clean_checkout_partial_llama_answers": 17711,
+    "current_clean_checkout_missing_llama_answers": 2789,
+    "current_two_model_fresh_full_completed": false,
+    "current_generated_answers_total": 38211,
+    "current_observed_outputs_strictly_match_final_references": true,
+    "remaining_new_gpu_inference_skipped": true,
+    "reason": "Host GPU/driver failures prevent reliable new process initialization; earlier full evidence is independently checked and distinctly labeled",
+    "full_targets_source": {
+      "llama": "Earlier full Triton 3.2.0 reproduction",
+      "mistral": "Current naturally completed clean-checkout full inference"
+    },
+    "original_cubin_bytes_identical": false,
+    "container_build_validated": false,
+    "container_gpu_execution_validated": false,
+    "new_remote_gpu_smoke_performed": false
+  },
+  "gpu_validation_limits": {
+    "current_llama_full_new_generation_completed": false,
+    "new_remote_gpu_smoke_performed": false,
+    "baseline_gpu_entry_smoke_performed": false,
+    "baseline_full_regeneration_performed": false,
+    "single_card_full_validated": false,
+    "other_gpu_architectures_validated": false
   }
 }

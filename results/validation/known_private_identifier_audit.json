@@ -1,0 +1,9 @@
+{
+  "tracked_files_checked": 158,
+  "actual_artifacts_checked": 7,
+  "streams_checked": 183,
+  "known_private_pattern_count": 1,
+  "pattern_values_published": false,
+  "findings": [],
+  "scope": "Tracked public source, four historical and two current-generation prediction archives, and actual kernel members; local account/host/proxy values never published"
+}

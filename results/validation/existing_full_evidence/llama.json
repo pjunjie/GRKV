@@ -1,0 +1,33 @@
+{
+  "source": "earlier_full_reproduction_not_current_release_generation",
+  "context_budget_units": 19630,
+  "answers": 20500,
+  "full_coverage_passed": true,
+  "raw_source_hashes_verified": true,
+  "self_contained_archive_matches_raw_sources": true,
+  "independently_rescored_against_fresh_frozen_data": true,
+  "independent_score_receipt": "results/reference/llama_candidate.json",
+  "comparison_scope": "Restored Triton 3.2.0 outputs versus original K1 checkpoints",
+  "prediction_mismatches": 0,
+  "score_mismatches": 0,
+  "fit_mismatch_layers": 0,
+  "exact_mask_fallback_calls": 0,
+  "carried_answers": null,
+  "continuation_answers": null,
+  "generated_in_current_release_run": false,
+  "independently_rescored_full_cells": {
+    "longbench_10": 38.72373303962639,
+    "longbench_20": 43.32925730367326,
+    "ruler16k_10": 45.46487179487179,
+    "ruler16k_20": 66.65769230769232
+  },
+  "target_scores_reproduced": true,
+  "target_tolerance": 1e-08,
+  "gains_against_historical_critical": {
+    "longbench_10": 1.0519293451892509,
+    "longbench_20": 0.18854370432602963,
+    "ruler16k_10": 0.5987179487179475,
+    "ruler16k_20": 0.34487179487180697
+  },
+  "all_four_point_gains_positive": true
+}

@@ -1,8 +1,41 @@
 {
   "published": false,
-  "status": "full_generation_in_progress",
+  "status": "mistral_full_and_llama_observed_partial_generation_validated",
   "release_tag": "v0.1.0-k1",
   "generation_requires_reference": false,
   "downloaded_evidence_is_new_local_generation": false,
-  "assets": []
+  "current_generated_answers_total": 38211,
+  "current_two_model_fresh_full_completed": false,
+  "full_inference_acceptance": "Current Mistral full plus separately verified earlier Llama full reproduction",
+  "assets": [
+    {
+      "name": "fresh_mistral_candidate.jsonl.gz",
+      "bytes": 259988128,
+      "sha256": "d5cb276c995da79c47345e17f6bb9c9d3df4845a41c60df83e5a0bc7f43f5494",
+      "decompressed_stream_sha256": "edb04182a04e994ef29b628c6e70a7f3046c057aca3a4e05d7ee68cb23f320cd",
+      "url": "https://github.com/pjunjie/GRKV/releases/download/v0.1.0-k1/fresh_mistral_candidate.jsonl.gz",
+      "prediction_source": "fresh_public_checkout",
+      "generation_checkout_commit": "246d124b5c1de0ed2a6cc14714261b5f1f75604d",
+      "registration_sha256": "7962b875bdd56f1a7f343a38428fa5ea569568d446a10a3afd0e25c4c38b3cf6",
+      "context_budget_units": 19630,
+      "answers": 20500
+    },
+    {
+      "name": "fresh_llama_candidate_partial.jsonl.gz",
+      "bytes": 225661861,
+      "sha256": "7f94bb8359440885102c2fee3fae6547e8acbbf5d1768696aa8325d71f438320",
+      "decompressed_stream_sha256": "740bef40f063f68950446ec4d5e7f32a844a6f9efb80d3ff9a46b0dd423d7e6a",
+      "url": "https://github.com/pjunjie/GRKV/releases/download/v0.1.0-k1/fresh_llama_candidate_partial.jsonl.gz",
+      "prediction_source": "fresh_public_checkout",
+      "generation_checkout_commit": "246d124b5c1de0ed2a6cc14714261b5f1f75604d",
+      "registration_sha256": "a67c5fb75c638ce8d24823b86b06cbcd42bd09a5a5915ac9273a0cfdb4cdc74f",
+      "context_budget_units": 16841,
+      "answers": 17711,
+      "missing_context_budget_units": 2789,
+      "missing_answers": 2789,
+      "full_coverage_passed": false,
+      "full_benchmark_result": false,
+      "scope": "Only current generated answers; no missing answers are filled from references"
+    }
+  ]
 }

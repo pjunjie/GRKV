@@ -1,17 +1,20 @@
 # GRKV: frozen Q32 K1 reproduction
 
-Release preparation is in progress. Independent reference rescoring, Triton
-package matching, CPU checks and real derivative qualification have passed.
-Both models passed fresh clean-checkout smoke with zero text, score, fit and
-fallback differences. Full fresh inference is running; the reference scores
-below must not be mistaken for completed full-run results.
+Native acceptance uses a newly generated, complete Mistral run (20,500 answers)
+and the separately audited earlier complete Llama Triton 3.2.0 reproduction
+(20,500 answers). All eight full-precision targets are independently verified.
+The current clean-checkout Llama run generated 17,711 answers, all with zero
+strict differences; 2,789 answers remain missing after host GPU/driver failures.
+Current new generation totals 38,211 answers, not a complete two-model new run.
+See [the evidence and scope](docs/results.md). Container build and GPU execution
+remain uncompleted limitations.
 
 K1 fits global regression over the historical Critical-AdaKV selected cache
 positions. Use `grkv.api.make_press("mistral", budget)` or
 `grkv.api.make_press("llama", budget)` for the frozen candidates. Mistral uses
 guard 0.0 and Llama uses guard 0.1. Full parameters are in `configs/`.
 
-| Benchmark / KV retained | Mistral historical Critical-AdaKV | Mistral K1 reference | Gain | Llama historical Critical-AdaKV | Llama K1 reference | Gain |
+| Benchmark / KV retained | Mistral historical Critical-AdaKV | Mistral K1 current full | Gain | Llama historical Critical-AdaKV | Llama K1 earlier full reproduction | Gain |
 |---|---:|---:|---:|---:|---:|---:|
 | LongBench / 10% | 35.0089 | 37.2587 | +2.2498 | 37.6718 | 38.7237 | +1.0519 |
 | LongBench / 20% | 38.8074 | 40.0311 | +1.2238 | 43.1407 | 43.3293 | +0.1885 |
@@ -45,9 +48,9 @@ Transformers 5.2.0, FlashAttention 2.8.3.post1 built with CUDA 12.4.131,
 Triton 3.2.0 from the exact public PyTorch wheel, BF16 model/cache and FP32 fits.
 Hardware is NVIDIA RTX A6000, SM86, with driver 555.52.04. Compiler tiles and
 all 315 historical Triton package hashes are verified. Other hardware and
-single-card full scheduling have not yet been validated. Smoke peak memory
-and full GPU hours will be recorded from fresh runs rather than estimated from
-reference prediction files.
+single-card full scheduling have not yet been validated. Measured Mistral full-run peaks and GPU hours are recorded in
+[the results](docs/results.md). The current Llama subset is not a full-run
+performance measurement.
 
 Install uv 0.9.24 from its [public release](https://github.com/astral-sh/uv/releases/tag/0.9.24),
 make CUDA 12.4.131 available and set `CUDA_HOME` to that toolkit locally. The
@@ -66,8 +69,8 @@ uv run --no-sync python scripts/fetch_assets.py --models all --datasets all --ke
 uv run --no-sync python -m grkv.run --help
 ```
 
-The runnable local kernel preview and its separate public hashes are under
-validation. It redacts private debug paths and preserves every nondebug ELF
+The public historical executable kernels have separate public hashes.
+They redact private debug paths and preserves every nondebug ELF
 section; original complete-file SHA equality is explicitly false. Real Q32
 JVP/VJP outputs match the historical qualification tensor hashes. See
 [the historical kernel documentation](docs/historical_kernels.md). Kernel
@@ -77,7 +80,8 @@ publication. Generation requires no reference prediction archive.
 
 Mistral preserves successful FlashAttention2 calls and only uses explicit
 causal/per-head masking when fake-key feasibility fails. The historical
-reference contains 22 such calls in 22 units; fresh runs measure this statistic.
+reference contains 22 such calls in 22 units; the current Mistral full run
+independently measured 22 calls in 22 units, with zero fallback differences.
 Llama never installs that fallback. Installation, CPU and GPU validation
 statuses are reported separately. The digest-pinned Dockerfile is provided,
 but container build and GPU execution remain uncompleted limitations. Native

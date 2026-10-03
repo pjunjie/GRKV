@@ -1,0 +1,20 @@
+{
+  "full_inference_requirement_satisfied_by_existing_full_evidence": true,
+  "earlier_full_answers_per_model": 20500,
+  "current_clean_checkout_full_mistral_answers": 20500,
+  "current_clean_checkout_partial_llama_answers": 17711,
+  "current_clean_checkout_missing_llama_answers": 2789,
+  "current_two_model_fresh_full_completed": false,
+  "current_generated_answers_total": 38211,
+  "current_observed_outputs_strictly_match_final_references": true,
+  "remaining_new_gpu_inference_skipped": true,
+  "reason": "Host GPU/driver failures prevent reliable new process initialization; earlier full evidence is independently checked and distinctly labeled",
+  "full_targets_source": {
+    "llama": "Earlier full Triton 3.2.0 reproduction",
+    "mistral": "Current naturally completed clean-checkout full inference"
+  },
+  "original_cubin_bytes_identical": false,
+  "container_build_validated": false,
+  "container_gpu_execution_validated": false,
+  "new_remote_gpu_smoke_performed": false
+}

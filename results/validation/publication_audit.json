@@ -1,0 +1,45 @@
+{
+  "scope": "Tracked working tree, all reachable Git history, decompressed JSONL and actual kernel archive members",
+  "gitleaks_version": "8.24.3",
+  "gitleaks_findings": 0,
+  "custom_privacy_findings": 0,
+  "artifacts": [
+    {
+      "name": "grkv-k1-sm86-kernels.tar.gz",
+      "sha256": "d4536018fef59495df40da9d44f730637bf7e874b2b8503f5cb5c46cc7ad334d",
+      "bytes": 805245
+    },
+    {
+      "name": "llama_candidate.jsonl.gz",
+      "sha256": "64a6ce9c4411cb09f62f03aca9844592012dea5a84009bc8b68365d910d15408",
+      "bytes": 234571101
+    },
+    {
+      "name": "llama_critical.jsonl.gz",
+      "sha256": "76f515ea297080e3ce1e0c522e4f9a2bb2859b81bba79f37b9a77de20eb5f7b9",
+      "bytes": 52976137
+    },
+    {
+      "name": "mistral_candidate.jsonl.gz",
+      "sha256": "e652654ebce3186e680175c2dcd9040e6011f0129c04824d665734b3ae3ff13c",
+      "bytes": 232295738
+    },
+    {
+      "name": "mistral_critical.jsonl.gz",
+      "sha256": "22ac17d50e6de5317691ec94cf67b70f6b25c57343d7f30e0869f3e233a35288",
+      "bytes": 6231888
+    },
+    {
+      "name": "fresh_mistral_candidate.jsonl.gz",
+      "sha256": "d5cb276c995da79c47345e17f6bb9c9d3df4845a41c60df83e5a0bc7f43f5494",
+      "bytes": 259988128
+    },
+    {
+      "name": "fresh_llama_candidate_partial.jsonl.gz",
+      "sha256": "7f94bb8359440885102c2fee3fae6547e8acbbf5d1768696aa8325d71f438320",
+      "bytes": 225661861
+    }
+  ],
+  "container_layers_scanned": false,
+  "container_limitation": "Container build and GPU execution remain uncompleted; no image layers were produced"
+}

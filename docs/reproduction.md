@@ -60,9 +60,10 @@ uv run --no-sync python scripts/run_boundary_smoke.py --model llama --gpu 0 --ou
 
 Choose free GPU IDs. Each worker sees one device. The supplied validation uses
 four workers per model; the runner accepts a different unique list. Single-card
-full scheduling has not been validated. Smoke measured context/budget units
-suggested approximately 64 Llama and 80 Mistral GPU hours for full inference;
-these are estimates, not full-run timings or minimum hardware guarantees.
+full scheduling has not been validated. Actual Mistral full-run GPU hours and memory peaks are in `results/fresh/mistral/resources.json`.
+The current Llama run is incomplete. Earlier smoke-based estimates remain
+labeled estimates in `environment/reference.json`; they are not timings of a
+completed current Llama full run or minimum hardware guarantees.
 
 ```bash
 uv run --no-sync python -m grkv.run --config configs/mistral_k1_g000.yaml --stage full --fresh --gpus 0,1,2,3
@@ -114,20 +115,29 @@ The published baseline scores are historical references independently rescored
 here; no claim is made that these baselines were regenerated in this release.
 The older Mistral K1 control is not a Critical-AdaKV baseline.
 
-The full fresh inference evidence is exported separately after acceptance:
+The Release contains current Mistral full evidence and current Llama partial
+evidence separately. The accepted Llama full score comes from the independently
+verified earlier full reproduction archive under `artifacts/reference/`.
 
 ```bash
 uv run --no-sync python scripts/fetch_assets.py --fresh-evidence all
 uv run --no-sync python -m grkv.score --input artifacts/fresh/fresh_mistral_candidate.jsonl.gz --output outputs/rescore/fresh_mistral.json
-uv run --no-sync python -m grkv.score --input artifacts/fresh/fresh_llama_candidate.jsonl.gz --output outputs/rescore/fresh_llama.json
+uv run --no-sync python scripts/rescore_partial_evidence.py --input artifacts/fresh/fresh_llama_candidate_partial.jsonl.gz --output outputs/rescore/fresh_llama_partial.json
 ```
 
+The partial scorer checks only the explicitly observed units against the missing
+unit ledger. It reports `full_coverage_passed=false` and `full_benchmark_result=false`.
+The ordinary full scorer rejects incomplete coverage. Do not join partial and
+reference predictions and label the combination a new inference run.
+
 Downloading this evidence does not perform new inference on your machine.
-Its records retain the original new-generation registration and per-output
-content hashes. `scripts/export_fresh_evidence.py` exports only completed full
-candidate runs that pass strict verification, then independently rescores the
-export itself. It excludes worker logs, caches and machine paths. Full evidence
-downloads become available only after full validation and publication.
+Records retain their new-generation registration and per-output content hashes.
+`scripts/export_fresh_evidence.py` exports only completed, strictly verified full
+candidate runs. `scripts/verify_partial_results.py` and
+`scripts/export_partial_evidence.py` verify and export genuinely generated
+incomplete runs with explicit coverage and missing-unit records. Both exporters
+independently rescore their archives and exclude worker logs, caches and machine
+paths. Current evidence downloads become available after validation and publication.
 
 Run `make style` and `make test` for the targeted CPU checks. CI installs without
 FlashAttention or GPU qualification, imports the public APIs, validates CPU

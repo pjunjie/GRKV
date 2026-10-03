@@ -1,0 +1,12 @@
+{
+  "name": "fresh_mistral_candidate.jsonl.gz",
+  "bytes": 259988128,
+  "sha256": "d5cb276c995da79c47345e17f6bb9c9d3df4845a41c60df83e5a0bc7f43f5494",
+  "decompressed_stream_sha256": "edb04182a04e994ef29b628c6e70a7f3046c057aca3a4e05d7ee68cb23f320cd",
+  "url": "https://github.com/pjunjie/GRKV/releases/download/v0.1.0-k1/fresh_mistral_candidate.jsonl.gz",
+  "prediction_source": "fresh_public_checkout",
+  "generation_checkout_commit": "246d124b5c1de0ed2a6cc14714261b5f1f75604d",
+  "registration_sha256": "7962b875bdd56f1a7f343a38428fa5ea569568d446a10a3afd0e25c4c38b3cf6",
+  "context_budget_units": 19630,
+  "answers": 20500
+}

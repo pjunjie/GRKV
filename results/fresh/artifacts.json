@@ -1,5 +1,5 @@
 {
-  "published": false,
+  "published": true,
   "status": "mistral_full_and_llama_observed_partial_generation_validated",
   "release_tag": "v0.1.0-k1",
   "generation_requires_reference": false,

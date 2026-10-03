@@ -1,5 +1,5 @@
 {
-  "published": false,
+  "published": true,
   "release_tag": "v0.1.0-k1",
   "artifact": {
     "name": "grkv-k1-sm86-kernels.tar.gz",

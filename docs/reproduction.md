@@ -137,13 +137,12 @@ candidate runs. `scripts/verify_partial_results.py` and
 `scripts/export_partial_evidence.py` verify and export genuinely generated
 incomplete runs with explicit coverage and missing-unit records. Both exporters
 independently rescore their archives and exclude worker logs, caches and machine
-paths. Current evidence downloads become available after validation and publication.
+paths. Current full/partial evidence downloads are available in the published `v0.1.0-k1` Release and passed remote size/SHA verification.
 
 Run `make style` and `make test` for the targeted CPU checks. CI installs without
 FlashAttention or GPU qualification, imports the public APIs, validates CPU
 protocol/fallback behavior and scans source/history. GPU evidence is recorded
-separately. Manifest download links describe Release assets and are usable only
-after those assets are actually published.
+separately. Manifest download links point to public Release assets fetched and checked from a new remote clone.
 On a host with an unavailable unrelated GPU, the optional
 `scripts/isolated_gpu_tools/nvidia-smi` wrapper scopes only the existing
 driver-version query to each worker's `CUDA_VISIBLE_DEVICES` selection. Add

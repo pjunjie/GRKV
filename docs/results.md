@@ -82,9 +82,15 @@ claims the public cubins retain the original full-file SHA.
 Native installation is validated. Container build and GPU execution remain
 uncompleted limitations: this validation process could not access the Docker
 daemon. Native installation and GPU execution are the validated path. Single-card full scheduling and other
-architectures are not validated. Kernel/reference Release downloads are
-pending publication; their fetch/extraction/checksum logic passed a local HTTP
-rehearsal, which is explicitly distinguished from a remote Release download.
+architectures are not validated. A new remote clone of `v0.1.0-k1` installed the locked CPU environment without
+FlashAttention, passed 17 tests and style/type/SPDX checks, downloaded all seven
+evidence/kernel archives and SHA256SUMS from the public GitHub Release, and
+verified every size/SHA plus actual downloaded member privacy. It independently
+rescored all 82,000 historical answers and all 38,211 current-generation
+evidence answers, retaining Llama's incomplete coverage. No new remote GPU
+smoke was launched. The verified uv cache and previously freshly downloaded
+model/data assets were reused and are disclosed in
+`results/validation/remote_checkout/summary.json`.
 
 The historical Critical-AdaKV baseline columns are independently rescored
 historical results, not new baseline generation. The older Mistral K1 control

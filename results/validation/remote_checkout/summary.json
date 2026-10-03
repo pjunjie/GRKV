@@ -1,0 +1,80 @@
+{
+  "checked_at": "2026-10-03T08:50:46.209833+00:00",
+  "repository": "https://github.com/pjunjie/GRKV",
+  "release": "https://github.com/pjunjie/GRKV/releases/tag/v0.1.0-k1",
+  "tag": "v0.1.0-k1",
+  "tag_commit": "34da00c3ea1f2f1eedfac52900e1af5c0070d05a",
+  "remote_clone_verified": true,
+  "locked_cpu_install_passed": true,
+  "remote_flash_attention_installed": false,
+  "style_types_spdx_passed": true,
+  "targeted_cpu_tests_passed": 17,
+  "new_remote_gpu_smoke_performed": false,
+  "independently_rescored_historical_answers": 82000,
+  "independently_rescored_downloaded_current_answers": 38211,
+  "downloaded_current_mistral_full_answers": 20500,
+  "downloaded_current_llama_partial_answers": 17711,
+  "current_two_model_fresh_full_completed": false,
+  "missing_current_llama_answers": 2789,
+  "public_release_downloads": [
+    {
+      "name": "grkv-k1-sm86-kernels.tar.gz",
+      "url": "https://github.com/pjunjie/GRKV/releases/download/v0.1.0-k1/grkv-k1-sm86-kernels.tar.gz",
+      "sha256": "d4536018fef59495df40da9d44f730637bf7e874b2b8503f5cb5c46cc7ad334d",
+      "bytes": 805245
+    },
+    {
+      "name": "llama_candidate.jsonl.gz",
+      "url": "https://github.com/pjunjie/GRKV/releases/download/v0.1.0-k1/llama_candidate.jsonl.gz",
+      "sha256": "64a6ce9c4411cb09f62f03aca9844592012dea5a84009bc8b68365d910d15408",
+      "bytes": 234571101
+    },
+    {
+      "name": "llama_critical.jsonl.gz",
+      "url": "https://github.com/pjunjie/GRKV/releases/download/v0.1.0-k1/llama_critical.jsonl.gz",
+      "sha256": "76f515ea297080e3ce1e0c522e4f9a2bb2859b81bba79f37b9a77de20eb5f7b9",
+      "bytes": 52976137
+    },
+    {
+      "name": "mistral_candidate.jsonl.gz",
+      "url": "https://github.com/pjunjie/GRKV/releases/download/v0.1.0-k1/mistral_candidate.jsonl.gz",
+      "sha256": "e652654ebce3186e680175c2dcd9040e6011f0129c04824d665734b3ae3ff13c",
+      "bytes": 232295738
+    },
+    {
+      "name": "mistral_critical.jsonl.gz",
+      "url": "https://github.com/pjunjie/GRKV/releases/download/v0.1.0-k1/mistral_critical.jsonl.gz",
+      "sha256": "22ac17d50e6de5317691ec94cf67b70f6b25c57343d7f30e0869f3e233a35288",
+      "bytes": 6231888
+    },
+    {
+      "name": "fresh_mistral_candidate.jsonl.gz",
+      "url": "https://github.com/pjunjie/GRKV/releases/download/v0.1.0-k1/fresh_mistral_candidate.jsonl.gz",
+      "sha256": "d5cb276c995da79c47345e17f6bb9c9d3df4845a41c60df83e5a0bc7f43f5494",
+      "bytes": 259988128
+    },
+    {
+      "name": "fresh_llama_candidate_partial.jsonl.gz",
+      "url": "https://github.com/pjunjie/GRKV/releases/download/v0.1.0-k1/fresh_llama_candidate_partial.jsonl.gz",
+      "sha256": "7f94bb8359440885102c2fee3fae6547e8acbbf5d1768696aa8325d71f438320",
+      "bytes": 225661861
+    },
+    {
+      "name": "SHA256SUMS",
+      "url": "https://github.com/pjunjie/GRKV/releases/download/v0.1.0-k1/SHA256SUMS",
+      "sha256": "c1cb4dc84453717bba5c0e951f98e8cbf1696ea6494a332f1f8fc4a0857aeb69",
+      "bytes": 664
+    }
+  ],
+  "actual_downloaded_artifacts_privacy_findings": 0,
+  "install_cache_scope": "New remote checkout and CPU environment reused the verified fresh uv cache; no historical experiment environment",
+  "model_dataset_scope": "Reused revision/SHA-verified sources downloaded during initial empty-cache native acceptance; not downloaded again",
+  "native_gpu_validation_scope": "Earlier clean-checkout native source installation and two-model smoke; current Mistral full and Llama observed subset",
+  "container_build_validated": false,
+  "container_gpu_execution_validated": false,
+  "baseline_gpu_entry_smoke_performed": false,
+  "baseline_full_regeneration_performed": false,
+  "single_card_full_validated": false,
+  "other_gpu_architectures_validated": false,
+  "original_cubin_bytes_identical": false
+}

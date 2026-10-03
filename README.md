@@ -75,8 +75,8 @@ section; original complete-file SHA equality is explicitly false. Real Q32
 JVP/VJP outputs match the historical qualification tensor hashes. See
 [the historical kernel documentation](docs/historical_kernels.md). Kernel
 and reference asset downloads verify size and SHA-256. See [reproduction commands](docs/reproduction.md)
-for smoke, full, resume, scoring and verification. Release downloads are pending
-publication. Generation requires no reference prediction archive.
+for smoke, full, resume, scoring and verification. All seven evidence/kernel archives and SHA256SUMS were downloaded from the public
+[v0.1.0-k1 Release](https://github.com/pjunjie/GRKV/releases/tag/v0.1.0-k1) and verified from a new remote checkout. Generation requires no reference prediction archive.
 
 Mistral preserves successful FlashAttention2 calls and only uses explicit
 causal/per-head masking when fake-key feasibility fails. The historical

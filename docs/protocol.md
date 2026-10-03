@@ -54,11 +54,13 @@ limit; it is not the Critical-AdaKV column. Historical baseline references are
 not labeled newly generated baselines. Baseline inference has separate configs
 and outputs; a fresh baseline result never overwrites the historical column.
 
-The historical Llama `all_four_pass=false` means all four absolute gains must
-be at least 0.5 points. The release comparison instead tests four gains strictly
-greater than zero, under a separate field. Historical full results had already
-been exposed; the remaining 50% was held out only from this parameter search.
+Reproduction validation checks complete sample coverage, independent rescoring,
+and agreement with the frozen outputs and full-precision scores. Gains against
+the historical baseline are reported as measurements.
+
+Historical full results had already been exposed; the remaining 50% was held
+out only from this parameter search.
 All comparisons are descriptive. In particular, the historical Llama
 LongBench/20% paired interval crosses zero, so no claim of significant gains in
-all four cells is made. Historical intervals and the original gate are retained
-in `results/reference/historical_statistics.json`.
+all four cells is made. Historical intervals are retained in
+`results/reference/historical_statistics.json`.

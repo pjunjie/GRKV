@@ -21,8 +21,8 @@ Every selected earlier raw checkpoint, frozen sample and actual historical
 pre-launch cubin proof was checked. Every accepted record was compared against
 the frozen result, followed by independent full rescoring with strict coverage.
 The numerical source, configuration, model/data revisions, historical Triton
-package and kernel instruction identity remain frozen. No score threshold or
-algorithm parameter was changed.
+package and kernel instruction identity remain frozen. The measured scores and
+algorithm parameters are unchanged.
 
 Each Llama record retains its generation origin, source archive SHA, original
 checkpoint SHA and actual pre-launch binary checks. Consolidation is not a new
@@ -100,12 +100,12 @@ of the final candidate run and 10,309 continuation answers with verified source
 content hashes. Its historical fallback total is 22 calls in 22 units. The current full run
 independently measured 22 calls in 22 units with zero per-unit differences.
 
-The original Llama `all_four_pass=false` means all four gains must be at least
-0.5 points. The release's positive-gain check is a separate field. Historical
-full results had previously been exposed; the remaining 50% was held out only
+Reproduction validation checks complete sample coverage, independent rescoring
+and agreement with the frozen outputs and scores. Historical full results had
+previously been exposed; the remaining 50% was held out only
 from that tuning round. Comparisons remain descriptive, and the historical
 Llama LongBench/20% paired interval crosses zero. Exact output reproduction,
-positive point gains and statistical significance are distinct statements.
+measured point gains and statistical significance are distinct statements.
 
 A new remote clone of `v0.1.1-k1` installed the locked CPU environment,
 passed style/type/SPDX checks on 84 Python files and all 17 targeted

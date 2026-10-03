@@ -28,6 +28,5 @@
     "longbench_20": 1.2237613633995892,
     "ruler16k_10": 0.27769230769230546,
     "ruler16k_20": 3.5646153846153865
-  },
-  "all_four_point_gains_positive": true
+  }
 }

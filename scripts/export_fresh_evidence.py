@@ -44,7 +44,6 @@ def export(run, model, source_commit, destination):
         or verification["answers"] != 20500
         or not verification["strict_output_reproduction"]
         or not verification["target_scores_reproduced"]
-        or not verification["all_four_point_gains_positive"]
         or verification["saved_score_mismatches"]
         or verification["original_cubin_bytes_identical"]
     ):

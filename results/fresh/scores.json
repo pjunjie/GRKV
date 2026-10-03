@@ -16,7 +16,6 @@
     "full_coverage_passed": true,
     "target_scores_reproduced": true,
     "strict_output_reproduction": true,
-    "all_four_point_gains_positive": true,
     "source": "current_clean_checkout_full_new_generation"
   },
   "llama": {
@@ -36,7 +35,6 @@
       "ruler16k_10": 0.5987179487179475,
       "ruler16k_20": 0.34487179487180697
     },
-    "all_four_point_gains_positive": true,
     "source": "earlier_full_Triton_3.2.0_reproduction_independently_rescored",
     "current_generated_answers": 17711,
     "current_missing_answers": 2789,

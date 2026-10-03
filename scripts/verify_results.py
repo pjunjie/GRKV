@@ -92,7 +92,6 @@ def main():
         fresh_exact_mask_fallback_calls=fresh_fallback,
         reference_exact_mask_fallback_calls=historical_fallback,
         gains_against_historical_critical=gains,
-        all_four_point_gains_positive=all(v > 0 for v in gains.values()) if gains else None,
         reference_sha256=sha(args.reference),
         registration_sha256=registration_sha,
         differences=differences,

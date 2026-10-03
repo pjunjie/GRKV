@@ -139,7 +139,6 @@
   "fresh_exact_mask_fallback_calls": 0,
   "reference_exact_mask_fallback_calls": 0,
   "gains_against_historical_critical": null,
-  "all_four_point_gains_positive": null,
   "reference_sha256": "64a6ce9c4411cb09f62f03aca9844592012dea5a84009bc8b68365d910d15408",
   "registration_sha256": "19eeb62bd1efadd48aa9ff342540ba060020ce5775e6dccf30f38bd2316dce67",
   "differences": []

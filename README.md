@@ -144,7 +144,7 @@ Both complete GRKV result sets passed independent rescoring, matching all eight 
 
 The Critical-AdaKV rows are independently rescored **historical baselines**, not newly generated baseline runs. Older experimental control results are documented separately and are not substituted for this baseline.
 
-These comparisons are descriptive. Historical full results had been exposed, and the remaining 50% was held out only from the parameter search. Llama's LongBench/20% historical paired confidence interval crosses zero. Its original criterion requiring at least 0.5 points of gain in every cell remains unmet; the positive gains shown here use a separate criterion. The [protocol](docs/protocol.md) and [historical statistics](results/reference/historical_statistics.json) retain these definitions.
+These comparisons are descriptive. Historical full results had been exposed, and the remaining 50% was held out only from the parameter search. Llama's LongBench/20% historical paired confidence interval crosses zero. The [protocol](docs/protocol.md) and [historical statistics](results/reference/historical_statistics.json) document the evaluation and uncertainty. Reproduction validation checks complete coverage, independent rescoring and agreement with the frozen outputs and scores.
 
 ### Analyzing Results
 

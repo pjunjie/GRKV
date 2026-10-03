@@ -5,7 +5,6 @@
   "accepted_candidate_answers_total": 41000,
   "two_model_full_acceptance_passed": true,
   "all_eight_full_precision_targets_reproduced": true,
-  "all_eight_point_gains_against_historical_critical_positive": true,
   "independent_rescoring": true,
   "strict_output_reproduction": true,
   "all_answers_generated_in_current_checkout": false,

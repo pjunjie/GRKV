@@ -31,7 +31,10 @@ checkout. The primary full-result manifest and verification are under
 `results/validated/`; the assembly entry point is
 `scripts/consolidate_llama_results.py`. The source-run archives and earlier
 audit receipts remain available with their original identities. The existing
-tag and history were preserved when adding the consolidated release.
+Git tags and history are preserved. All eight evidence and kernel archives
+are now published together in the [unified release](release.md), with unchanged
+contents and SHA-256 hashes. Operational download manifests use that release;
+earlier audit receipts retain their actual historical URLs and checkout scope.
 
 Historical Critical-AdaKV columns are separately rescored historical baselines.
 Baseline constructors passed CPU checks; a new baseline GPU-entry smoke and a
@@ -82,7 +85,8 @@ claims the public cubins retain the original full-file SHA.
 Native installation is validated. Container build and GPU execution remain
 uncompleted limitations: this validation process could not access the Docker
 daemon. Native installation and GPU execution are the validated path. Single-card full scheduling and other
-architectures are not validated. A new remote clone of `v0.1.0-k1` installed the locked CPU environment without
+architectures are not validated. The earlier remote checkout of the initial
+publication installed the locked CPU environment without
 FlashAttention, passed 17 tests and style/type/SPDX checks, downloaded all seven
 evidence/kernel archives and SHA256SUMS from the public GitHub Release, and
 verified every size/SHA plus actual downloaded member privacy. It independently
@@ -107,12 +111,13 @@ from that tuning round. Comparisons remain descriptive, and the historical
 Llama LongBench/20% paired interval crosses zero. Exact output reproduction,
 measured point gains and statistical significance are distinct statements.
 
-A new remote clone of `v0.1.1-k1` installed the locked CPU environment,
+The earlier remote checkout of the consolidated Llama publication installed
+the locked CPU environment,
 passed style/type/SPDX checks on 84 Python files and all 17 targeted
 tests, and downloaded the consolidated Llama archive and checksum list
 from the public Release. Independent full rescoring and strict
 per-question comparison of all 20,500 downloaded answers passed.
 Generation origins and pre-launch binary proofs were checked for every
-record. Unchanged v0.1.0-k1 assets retain their verified size/SHA
+record. The unchanged initial-publication assets retain their verified size/SHA
 identities and earlier public-download audit. No new GPU task was
 launched. See `results/validated/remote_checkout/summary.json`.

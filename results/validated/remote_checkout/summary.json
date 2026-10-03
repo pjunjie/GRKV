@@ -58,5 +58,14 @@
     "bytes": 234571101,
     "sha256": "64a6ce9c4411cb09f62f03aca9844592012dea5a84009bc8b68365d910d15408",
     "url": "https://github.com/pjunjie/GRKV/releases/download/v0.1.0-k1/llama_candidate.jsonl.gz"
-  }
+  },
+  "historical_publication_record": true,
+  "original_release_urls_are_historical": true,
+  "current_release": "https://github.com/pjunjie/GRKV/releases/tag/v0.2.0",
+  "current_download_manifests": [
+    "manifests/kernels.json",
+    "results/reference/artifacts.json",
+    "results/fresh/artifacts.json",
+    "results/validated/artifacts.json"
+  ]
 }

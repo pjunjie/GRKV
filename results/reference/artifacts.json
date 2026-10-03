@@ -1,31 +1,31 @@
 {
   "published": true,
-  "release_tag": "v0.1.0-k1",
+  "release_tag": "v0.2.0",
   "generation_requires_reference": false,
   "assets": [
     {
       "name": "llama_candidate.jsonl.gz",
       "bytes": 234571101,
       "sha256": "64a6ce9c4411cb09f62f03aca9844592012dea5a84009bc8b68365d910d15408",
-      "url": "https://github.com/pjunjie/GRKV/releases/download/v0.1.0-k1/llama_candidate.jsonl.gz"
+      "url": "https://github.com/pjunjie/GRKV/releases/download/v0.2.0/llama_candidate.jsonl.gz"
     },
     {
       "name": "llama_critical.jsonl.gz",
       "bytes": 52976137,
       "sha256": "76f515ea297080e3ce1e0c522e4f9a2bb2859b81bba79f37b9a77de20eb5f7b9",
-      "url": "https://github.com/pjunjie/GRKV/releases/download/v0.1.0-k1/llama_critical.jsonl.gz"
+      "url": "https://github.com/pjunjie/GRKV/releases/download/v0.2.0/llama_critical.jsonl.gz"
     },
     {
       "name": "mistral_candidate.jsonl.gz",
       "bytes": 232295738,
       "sha256": "e652654ebce3186e680175c2dcd9040e6011f0129c04824d665734b3ae3ff13c",
-      "url": "https://github.com/pjunjie/GRKV/releases/download/v0.1.0-k1/mistral_candidate.jsonl.gz"
+      "url": "https://github.com/pjunjie/GRKV/releases/download/v0.2.0/mistral_candidate.jsonl.gz"
     },
     {
       "name": "mistral_critical.jsonl.gz",
       "bytes": 6231888,
       "sha256": "22ac17d50e6de5317691ec94cf67b70f6b25c57343d7f30e0869f3e233a35288",
-      "url": "https://github.com/pjunjie/GRKV/releases/download/v0.1.0-k1/mistral_critical.jsonl.gz"
+      "url": "https://github.com/pjunjie/GRKV/releases/download/v0.2.0/mistral_critical.jsonl.gz"
     }
   ]
 }

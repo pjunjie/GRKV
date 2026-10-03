@@ -76,5 +76,14 @@
   "baseline_full_regeneration_performed": false,
   "single_card_full_validated": false,
   "other_gpu_architectures_validated": false,
-  "original_cubin_bytes_identical": false
+  "original_cubin_bytes_identical": false,
+  "historical_publication_record": true,
+  "original_release_urls_are_historical": true,
+  "current_release": "https://github.com/pjunjie/GRKV/releases/tag/v0.2.0",
+  "current_download_manifests": [
+    "manifests/kernels.json",
+    "results/reference/artifacts.json",
+    "results/fresh/artifacts.json",
+    "results/validated/artifacts.json"
+  ]
 }

@@ -218,7 +218,7 @@ def main():
     parser.add_argument("--prior-proofs", type=Path, required=True)
     parser.add_argument("--kernel-root", type=Path, default=Path("artifacts/kernels"))
     parser.add_argument("--destination", type=Path, default=Path("artifacts/validated"))
-    parser.add_argument("--release-tag", default="v0.1.1-k1")
+    parser.add_argument("--release-tag", default="v0.2.0")
     args = parser.parse_args()
     consolidate(
         args.current,

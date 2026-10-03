@@ -178,7 +178,7 @@ def export(run, model, source_commit, destination):
         bytes=archive.stat().st_size,
         sha256=sha(archive),
         decompressed_stream_sha256=stream_hash.hexdigest(),
-        url=f"https://github.com/pjunjie/GRKV/releases/download/v0.1.0-k1/{archive.name}",
+        url=f"https://github.com/pjunjie/GRKV/releases/download/v0.2.0/{archive.name}",
         prediction_source="fresh_public_checkout",
         generation_checkout_commit=source_commit,
         registration_sha256=registration_sha,

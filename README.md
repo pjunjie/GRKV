@@ -6,7 +6,7 @@
 
 This repository contains the implementation of **GRKV**, a training-free method for KV cache compression introduced in our [paper](https://arxiv.org/abs/2605.31105). It is built on [NVIDIA's kvpress](https://github.com/NVIDIA/kvpress) and provides the code, default configurations, fixed environment and evaluation tools needed to reproduce GRKV on **Llama-3.1-8B-Instruct** and **Mistral-7B-Instruct-v0.3**.
 
-Full prediction evidence, sample indices and checksums are available in the [evaluation manifest](results/validated/artifacts.json) and [GitHub Releases](https://github.com/pjunjie/GRKV/releases).
+Full prediction evidence, sample indices and checksums are available in the [evaluation manifest](results/validated/artifacts.json) and [the unified GRKV release](https://github.com/pjunjie/GRKV/releases/tag/v0.2.0).
 
 ## Overview
 

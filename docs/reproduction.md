@@ -126,9 +126,10 @@ uv run --no-sync python -m grkv.score --input artifacts/validated/validated_llam
 
 Both archives have full frozen coverage: 20,500 answers in 19,630 context/budget
 units each. The download manifest lists exact asset URLs, sizes and hashes;
-the immutable source assets remain in `v0.1.0-k1`, while the consolidated Llama
-archive is in `v0.1.1-k1`. The latter Release's `SHA256SUMS` covers all eight
-archives, including the unchanged source assets.
+all eight evidence and kernel archives are available together in the unified
+[GRKV release](https://github.com/pjunjie/GRKV/releases/tag/v0.2.0). Its
+`SHA256SUMS` covers every archive. Archive contents, sizes and hashes are
+unchanged by this consolidation. See the [asset guide](release.md).
 
 Downloading this evidence does not perform new inference on your machine.
 Llama's full accepted result consolidates current generated records with the
@@ -151,8 +152,10 @@ candidate runs. `scripts/verify_partial_results.py` and
 `scripts/export_partial_evidence.py` verify and export genuinely generated
 incomplete runs with explicit coverage and missing-unit records. Both exporters
 independently rescore their archives and exclude worker logs, caches and machine
-paths. The unchanged source-run downloads in `v0.1.0-k1` passed remote size/SHA
-verification; their audit receipts retain that original scope.
+paths. The source-run archives previously passed remote size/SHA verification;
+their audit receipts retain the original checkout, URLs and validation scope.
+Those URLs describe earlier publications; use the current download manifests
+and unified release for downloads.
 
 Run `make style` and `make test` for the targeted CPU checks. CI installs without
 FlashAttention or GPU qualification, imports the public APIs, validates CPU

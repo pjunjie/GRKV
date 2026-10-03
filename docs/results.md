@@ -106,3 +106,13 @@ full results had previously been exposed; the remaining 50% was held out only
 from that tuning round. Comparisons remain descriptive, and the historical
 Llama LongBench/20% paired interval crosses zero. Exact output reproduction,
 positive point gains and statistical significance are distinct statements.
+
+A new remote clone of `v0.1.1-k1` installed the locked CPU environment,
+passed style/type/SPDX checks on 84 Python files and all 17 targeted
+tests, and downloaded the consolidated Llama archive and checksum list
+from the public Release. Independent full rescoring and strict
+per-question comparison of all 20,500 downloaded answers passed.
+Generation origins and pre-launch binary proofs were checked for every
+record. Unchanged v0.1.0-k1 assets retain their verified size/SHA
+identities and earlier public-download audit. No new GPU task was
+launched. See `results/validated/remote_checkout/summary.json`.

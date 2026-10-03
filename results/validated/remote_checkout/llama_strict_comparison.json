@@ -1,0 +1,19 @@
+{
+  "answers": 20500,
+  "context_budget_units": 19630,
+  "coverage_passed": true,
+  "strict_output_reproduction": true,
+  "prediction_mismatches": 0,
+  "score_mismatches": 0,
+  "fit_mismatch_layers": 0,
+  "layout_mismatch_units": 0,
+  "source_answer_counts": {
+    "current_public_checkout": 17711,
+    "earlier_triton32_historical_kernels": 2789
+  },
+  "source_context_budget_unit_counts": {
+    "current_public_checkout": 16841,
+    "earlier_triton32_historical_kernels": 2789
+  },
+  "per_unit_generation_origin_and_actual_binary_proofs_verified": true
+}

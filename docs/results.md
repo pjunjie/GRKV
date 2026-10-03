@@ -1,44 +1,44 @@
 # Validation status and historical evidence
 
-Native full-inference acceptance passed using explicitly separate sources.
-Mistral newly generated all 19,630 context/budget units and 20,500 answers from
-clean checkout `246d124b5c1de0ed2a6cc14714261b5f1f75604d`. Complete row coverage,
-independent rescoring, all four full-precision targets within 1e-8 and four
-positive point gains passed, with zero text, per-answer score, fit-layer, layout
-and exact-mask fallback differences against the final reference.
+Native full-inference acceptance is complete: each model covers all 19,630
+context/budget units and 20,500 answers. Both full result sets were independently
+rescored from prediction text and freshly obtained frozen data. All eight
+complete-precision targets match within 1e-8, and all eight point gains over the
+historical Critical-AdaKV baselines are positive. Text, per-answer scores,
+fit-layer records and layout have zero strict differences.
 
-Llama's earlier genuine Triton 3.2.0 recovery experiment already generated all
-19,630 units and 20,500 answers. The audit rechecked every raw checkpoint SHA,
-frozen sample identity, actual historical pre-launch binary proof, exported
-record and original K1 comparison. Prediction, per-answer score and fit-layer
-differences are zero. These earlier full outputs were independently rescored
-against freshly downloaded frozen data and reproduce all four complete-precision
-targets within 1e-8. They remain earlier reproduction evidence, not current
-clean-checkout generation. The earlier Mistral complete evidence was also
-traced and independently rescored. See `results/validation/existing_full_evidence/`.
+| Model | Accepted answers | Context/budget units | Accepted generation source |
+|---|---:|---:|---|
+| Mistral | 20,500 | 19,630 | Current complete clean-checkout inference |
+| Llama | 20,500 | 19,630 | Verified consolidation of current and earlier Triton 3.2.0 / historical-kernel inference |
 
-The current Llama attempt contains 16,841 units and 17,711 genuinely new answers.
-Every observed answer was independently rescored and strictly compared: zero
-text, score, fit-layer, layout and fallback differences. Its 2,789 missing units
-and answers are explicitly listed in `results/fresh_partial/llama/verification.json`.
-No prediction is filled from references. This subset does not reproduce a full
-benchmark score or establish current full coverage. Host GPU/driver faults
-prevented reliable new CUDA initialization; no additional GPU jobs were submitted
-after the scope change. Existing Mistral workers were allowed to finish naturally.
+Mistral generated the complete set from clean checkout
+`246d124b5c1de0ed2a6cc14714261b5f1f75604d`. Its exact-mask fallback total is
+22 calls in 22 units, independently measured and identical to the final
+reference. The consolidated Llama set selects current generated outputs where
+available and the corresponding genuine earlier experiment outputs otherwise.
+Every selected earlier raw checkpoint, frozen sample and actual historical
+pre-launch cubin proof was checked. Every accepted record was compared against
+the frozen result, followed by independent full rescoring with strict coverage.
+The numerical source, configuration, model/data revisions, historical Triton
+package and kernel instruction identity remain frozen. No score threshold or
+algorithm parameter was changed.
 
-| Model | Current new answers | Missing answers | Current coverage | Accepted full-score source |
-|---|---:|---:|---|---|
-| Mistral | 20,500 | 0 | Full | Current clean-checkout inference |
-| Llama | 17,711 | 2,789 | Observed subset | Earlier full Triton 3.2.0 reproduction |
+Each Llama record retains its generation origin, source archive SHA, original
+checkpoint SHA and actual pre-launch binary checks. Consolidation is not a new
+inference run; it does not label earlier outputs as generated in the current
+checkout. The primary full-result manifest and verification are under
+`results/validated/`; the assembly entry point is
+`scripts/consolidate_llama_results.py`. The source-run archives and earlier
+audit receipts remain available with their original identities. The existing
+tag and history were preserved when adding the consolidated release.
 
-The two current-generation archives have separate names and manifests; the
-Llama archive is explicitly suffixed `_partial`. Exported predictions were
-independently rescored again. Downloading any archive is not new local inference.
-The current generated total is 38,211, not 41,000. Historical Critical-AdaKV
-columns are separately rescored historical baselines, not regenerated baselines.
-The baseline constructors passed CPU checks; a new baseline GPU-entry smoke
-and a new remote-checkout GPU smoke were not executed. Earlier clean-checkout
-GPU smoke and numerical qualification below passed before the host fault.
+Historical Critical-AdaKV columns are separately rescored historical baselines.
+Baseline constructors passed CPU checks; a new baseline GPU-entry smoke and a
+new remote-checkout GPU smoke were not executed. Earlier clean-checkout GPU
+smoke and numerical qualification passed before the host fault. No additional
+GPU jobs were submitted after that scope change; existing Mistral workers
+finished naturally.
 
 The current Mistral full run used 4 successful workers,
 55.891 worker GPU hours and 14.118 wall hours.
@@ -46,8 +46,8 @@ Its measured peak allocated/reserved CUDA memory was 35.585/41.406 GiB. These ar
 excluding non-PyTorch device allocations. Worker time includes model loading
 and qualification; per-unit generation time excludes preprocessing. These
 are run resource measurements, not a formal performance benchmark or minimum
-hardware guarantee. The current Llama attempt is incomplete; no completed
-full-run timing is inferred from it. See `results/fresh/mistral/resources.json`.
+hardware guarantee. No single completed-run timing is inferred from Llama's
+consolidated evidence. See `results/fresh/mistral/resources.json`.
 
 All four historical prediction assets have been independently rescored against
 freshly obtained, revision-pinned data: 82,000 answers, complete task/row
@@ -86,8 +86,8 @@ architectures are not validated. A new remote clone of `v0.1.0-k1` installed the
 FlashAttention, passed 17 tests and style/type/SPDX checks, downloaded all seven
 evidence/kernel archives and SHA256SUMS from the public GitHub Release, and
 verified every size/SHA plus actual downloaded member privacy. It independently
-rescored all 82,000 historical answers and all 38,211 current-generation
-evidence answers, retaining Llama's incomplete coverage. No new remote GPU
+rescored all 82,000 historical answers and all 38,211 source-run answers. Those
+receipts retain their original source-run scope. No new remote GPU
 smoke was launched. The verified uv cache and previously freshly downloaded
 model/data assets were reused and are disclosed in
 `results/validation/remote_checkout/summary.json`.

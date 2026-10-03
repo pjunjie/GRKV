@@ -70,6 +70,17 @@ def fetch_fresh_evidence():
     )
 
 
+def fetch_validated_evidence():
+    manifest = read(ROOT / "results/validated/artifacts.json")
+    if not manifest["two_model_full_acceptance_passed"] or len(manifest["assets"]) != 2:
+        raise ValueError("Complete accepted two-model evidence has not been finalized")
+    for record in manifest["assets"]:
+        if record["answers"] != 20500:
+            raise ValueError("Accepted evidence must have complete frozen answer coverage")
+        fetch_release_asset(record, ROOT / "artifacts/validated")
+    print("Verified complete accepted candidate evidence; per-unit generation origins are retained", flush=True)
+
+
 def fetch_models(names):
     manifest = read(ROOT / "manifests/models.json")
     for name in names:
@@ -130,6 +141,7 @@ def main():
     parser.add_argument("--kernels", choices=["historical", "none"], default="none")
     parser.add_argument("--references", choices=["all", "none"], default="none")
     parser.add_argument("--fresh-evidence", choices=["all", "none"], default="none")
+    parser.add_argument("--validated-evidence", choices=["all", "none"], default="none")
     args = parser.parse_args()
     begin = perf_counter()
     if args.models != "none":
@@ -142,6 +154,8 @@ def main():
         fetch_references()
     if args.fresh_evidence == "all":
         fetch_fresh_evidence()
+    if args.validated_evidence == "all":
+        fetch_validated_evidence()
     write(
         asset_root() / "download_receipt.json",
         dict(
@@ -152,6 +166,7 @@ def main():
             kernels=args.kernels,
             references=args.references,
             fresh_evidence=args.fresh_evidence,
+            validated_evidence=args.validated_evidence,
         ),
     )
 

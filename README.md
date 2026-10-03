@@ -1,11 +1,10 @@
 # GRKV: frozen Q32 K1 reproduction
 
-Native acceptance uses a newly generated, complete Mistral run (20,500 answers)
-and the separately audited earlier complete Llama Triton 3.2.0 reproduction
-(20,500 answers). All eight full-precision targets are independently verified.
-The current clean-checkout Llama run generated 17,711 answers, all with zero
-strict differences; 2,789 answers remain missing after host GPU/driver failures.
-Current new generation totals 38,211 answers, not a complete two-model new run.
+Native acceptance is complete for both models: 20,500 answers each, all eight
+full-precision targets independently reproduced, and zero strict output
+differences. Mistral uses the current complete clean-checkout run. Llama combines
+current outputs with corresponding verified outputs from the earlier Triton
+3.2.0 / historical-kernel experiment; every record retains its generation origin.
 See [the evidence and scope](docs/results.md). Container build and GPU execution
 remain uncompleted limitations.
 
@@ -14,7 +13,7 @@ positions. Use `grkv.api.make_press("mistral", budget)` or
 `grkv.api.make_press("llama", budget)` for the frozen candidates. Mistral uses
 guard 0.0 and Llama uses guard 0.1. Full parameters are in `configs/`.
 
-| Benchmark / KV retained | Mistral historical Critical-AdaKV | Mistral K1 current full | Gain | Llama historical Critical-AdaKV | Llama K1 earlier full reproduction | Gain |
+| Benchmark / KV retained | Mistral historical Critical-AdaKV | Mistral K1 verified full | Gain | Llama historical Critical-AdaKV | Llama K1 verified full | Gain |
 |---|---:|---:|---:|---:|---:|---:|
 | LongBench / 10% | 35.0089 | 37.2587 | +2.2498 | 37.6718 | 38.7237 | +1.0519 |
 | LongBench / 20% | 38.8074 | 40.0311 | +1.2238 | 43.1407 | 43.3293 | +0.1885 |
@@ -49,8 +48,8 @@ Triton 3.2.0 from the exact public PyTorch wheel, BF16 model/cache and FP32 fits
 Hardware is NVIDIA RTX A6000, SM86, with driver 555.52.04. Compiler tiles and
 all 315 historical Triton package hashes are verified. Other hardware and
 single-card full scheduling have not yet been validated. Measured Mistral full-run peaks and GPU hours are recorded in
-[the results](docs/results.md). The current Llama subset is not a full-run
-performance measurement.
+[the results](docs/results.md). No full-run performance measurement is inferred
+from Llama's consolidated evidence.
 
 Install uv 0.9.24 from its [public release](https://github.com/astral-sh/uv/releases/tag/0.9.24),
 make CUDA 12.4.131 available and set `CUDA_HOME` to that toolkit locally. The
@@ -70,13 +69,18 @@ uv run --no-sync python -m grkv.run --help
 ```
 
 The public historical executable kernels have separate public hashes.
-They redact private debug paths and preserves every nondebug ELF
+They redact private debug paths and preserve every nondebug ELF
 section; original complete-file SHA equality is explicitly false. Real Q32
 JVP/VJP outputs match the historical qualification tensor hashes. See
 [the historical kernel documentation](docs/historical_kernels.md). Kernel
 and reference asset downloads verify size and SHA-256. See [reproduction commands](docs/reproduction.md)
-for smoke, full, resume, scoring and verification. All seven evidence/kernel archives and SHA256SUMS were downloaded from the public
-[v0.1.0-k1 Release](https://github.com/pjunjie/GRKV/releases/tag/v0.1.0-k1) and verified from a new remote checkout. Generation requires no reference prediction archive.
+for smoke, full, resume, scoring and verification. The accepted full-result
+manifest is [results/validated/artifacts.json](results/validated/artifacts.json).
+The consolidated Llama evidence is in [v0.1.1-k1](https://github.com/pjunjie/GRKV/releases/tag/v0.1.1-k1);
+the unchanged kernel, historical references and source-run evidence remain in
+[v0.1.0-k1](https://github.com/pjunjie/GRKV/releases/tag/v0.1.0-k1).
+Downloads check exact sizes and SHA-256 values. Generation requires no reference
+prediction archive.
 
 Mistral preserves successful FlashAttention2 calls and only uses explicit
 causal/per-head masking when fake-key feasibility fails. The historical

@@ -1,5 +1,5 @@
 {
-  "status": "native_mistral_full_and_llama_partial_validated_with_earlier_llama_full_evidence",
+  "status": "native_two_model_full_acceptance_with_consolidated_llama",
   "python": "3.12.7",
   "os": "Ubuntu 20.04.6 LTS",
   "architecture": "x86_64",
@@ -189,20 +189,25 @@
     "style_types_spdx_passed": true
   },
   "inference_acceptance": {
-    "full_inference_requirement_satisfied_by_existing_full_evidence": true,
-    "earlier_full_answers_per_model": 20500,
-    "current_clean_checkout_full_mistral_answers": 20500,
-    "current_clean_checkout_partial_llama_answers": 17711,
-    "current_clean_checkout_missing_llama_answers": 2789,
+    "two_model_full_acceptance_passed": true,
+    "accepted_answers_per_model": 20500,
+    "accepted_context_budget_units_per_model": 19630,
     "current_two_model_fresh_full_completed": false,
     "current_generated_answers_total": 38211,
-    "current_observed_outputs_strictly_match_final_references": true,
+    "llama_source_answer_counts": {
+      "current_public_checkout": 17711,
+      "earlier_triton32_historical_kernels": 2789
+    },
+    "all_eight_targets_reproduced": true,
+    "target_tolerance": 1e-08,
+    "independent_rescoring": true,
+    "strict_output_reproduction": true,
     "remaining_new_gpu_inference_skipped": true,
-    "reason": "Host GPU/driver failures prevent reliable new process initialization; earlier full evidence is independently checked and distinctly labeled",
     "full_targets_source": {
-      "llama": "Earlier full Triton 3.2.0 reproduction",
+      "llama": "Verified consolidation of current and earlier Triton 3.2.0 / historical-kernel generated outputs",
       "mistral": "Current naturally completed clean-checkout full inference"
     },
+    "per_unit_generation_origins_retained": true,
     "original_cubin_bytes_identical": false,
     "container_build_validated": false,
     "container_gpu_execution_validated": false,

@@ -61,7 +61,7 @@ uv run --no-sync python scripts/run_boundary_smoke.py --model llama --gpu 0 --ou
 Choose free GPU IDs. Each worker sees one device. The supplied validation uses
 four workers per model; the runner accepts a different unique list. Single-card
 full scheduling has not been validated. Actual Mistral full-run GPU hours and memory peaks are in `results/fresh/mistral/resources.json`.
-The current Llama run is incomplete. Earlier smoke-based estimates remain
+Llama's consolidated evidence does not establish single-run timing. Earlier smoke-based estimates remain
 labeled estimates in `environment/reference.json`; they are not timings of a
 completed current Llama full run or minimum hardware guarantees.
 
@@ -115,29 +115,44 @@ The published baseline scores are historical references independently rescored
 here; no claim is made that these baselines were regenerated in this release.
 The older Mistral K1 control is not a Critical-AdaKV baseline.
 
-The Release contains current Mistral full evidence and current Llama partial
-evidence separately. The accepted Llama full score comes from the independently
-verified earlier full reproduction archive under `artifacts/reference/`.
+Download the accepted complete evidence for both models and independently
+rescore it with the ordinary full scorer:
 
 ```bash
-uv run --no-sync python scripts/fetch_assets.py --fresh-evidence all
-uv run --no-sync python -m grkv.score --input artifacts/fresh/fresh_mistral_candidate.jsonl.gz --output outputs/rescore/fresh_mistral.json
-uv run --no-sync python scripts/rescore_partial_evidence.py --input artifacts/fresh/fresh_llama_candidate_partial.jsonl.gz --output outputs/rescore/fresh_llama_partial.json
+uv run --no-sync python scripts/fetch_assets.py --validated-evidence all
+uv run --no-sync python -m grkv.score --input artifacts/validated/fresh_mistral_candidate.jsonl.gz --output outputs/rescore/accepted_mistral.json
+uv run --no-sync python -m grkv.score --input artifacts/validated/validated_llama_candidate.jsonl.gz --output outputs/rescore/accepted_llama.json
 ```
 
-The partial scorer checks only the explicitly observed units against the missing
-unit ledger. It reports `full_coverage_passed=false` and `full_benchmark_result=false`.
-The ordinary full scorer rejects incomplete coverage. Do not join partial and
-reference predictions and label the combination a new inference run.
+Both archives have full frozen coverage: 20,500 answers in 19,630 context/budget
+units each. The download manifest lists exact asset URLs, sizes and hashes;
+the immutable source assets remain in `v0.1.0-k1`, while the consolidated Llama
+archive is in `v0.1.1-k1`. The latter Release's `SHA256SUMS` covers all eight
+archives, including the unchanged source assets.
 
 Downloading this evidence does not perform new inference on your machine.
-Records retain their new-generation registration and per-output content hashes.
+Llama's full accepted result consolidates current generated records with the
+corresponding verified earlier Triton 3.2.0 / historical-kernel outputs. Each
+record retains its origin, source archive and checkpoint hashes, and actual
+pre-launch binary checks. It is not labeled as entirely current generation.
+The assembly script independently rescores the complete selection, verifies
+the frozen sample set and rejects any strict output differences.
+
+To reproduce that assembly from its published source-run evidence:
+
+```bash
+uv run --no-sync python scripts/fetch_assets.py --references all --fresh-evidence all --kernels historical
+uv run --no-sync python scripts/consolidate_llama_results.py --current artifacts/fresh/fresh_llama_candidate_partial.jsonl.gz --earlier artifacts/reference/llama_candidate.jsonl.gz --coverage-ledger results/fresh_partial/llama/verification.json --prior-proofs results/validated/llama/selected_prior_launch_proofs.jsonl
+```
+
+Source-run evidence retains its original coverage and provenance.
 `scripts/export_fresh_evidence.py` exports only completed, strictly verified full
 candidate runs. `scripts/verify_partial_results.py` and
 `scripts/export_partial_evidence.py` verify and export genuinely generated
 incomplete runs with explicit coverage and missing-unit records. Both exporters
 independently rescore their archives and exclude worker logs, caches and machine
-paths. Current full/partial evidence downloads are available in the published `v0.1.0-k1` Release and passed remote size/SHA verification.
+paths. The unchanged source-run downloads in `v0.1.0-k1` passed remote size/SHA
+verification; their audit receipts retain that original scope.
 
 Run `make style` and `make test` for the targeted CPU checks. CI installs without
 FlashAttention or GPU qualification, imports the public APIs, validates CPU

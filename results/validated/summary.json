@@ -1,0 +1,60 @@
+{
+  "release_tag": "v0.1.1-k1",
+  "status": "two_model_complete_native_acceptance",
+  "accepted_candidate_answers_total": 41000,
+  "two_model_full_acceptance_passed": true,
+  "all_eight_full_precision_targets_reproduced": true,
+  "all_eight_point_gains_against_historical_critical_positive": true,
+  "independent_rescoring": true,
+  "strict_output_reproduction": true,
+  "all_answers_generated_in_current_checkout": false,
+  "generation_requires_reference": false,
+  "downloaded_evidence_is_new_local_generation": false,
+  "sources": "Current complete Mistral; Llama consolidated from verified current and earlier generated runs",
+  "per_unit_llama_generation_origins_retained": true,
+  "original_cubin_bytes_identical": false,
+  "models": {
+    "mistral": {
+      "answers": 20500,
+      "context_budget_units": 19630,
+      "source": "Current clean-checkout full inference",
+      "verification": "results/fresh/mistral/verification.json",
+      "cells": {
+        "longbench_10": 37.25866730842248,
+        "longbench_20": 40.03113888818442,
+        "ruler16k_10": 27.098717948717947,
+        "ruler16k_20": 51.82897435897436
+      },
+      "exact_mask_fallback_calls": 22,
+      "exact_mask_fallback_units": 22
+    },
+    "llama": {
+      "answers": 20500,
+      "context_budget_units": 19630,
+      "source": "Verified consolidated generation",
+      "verification": "results/validated/llama/verification.json",
+      "cells": {
+        "longbench_10": 38.72373303962639,
+        "longbench_20": 43.32925730367326,
+        "ruler16k_10": 45.46487179487179,
+        "ruler16k_20": 66.65769230769232
+      },
+      "source_answer_counts": {
+        "current_public_checkout": 17711,
+        "earlier_triton32_historical_kernels": 2789
+      },
+      "source_context_budget_unit_counts": {
+        "current_public_checkout": 16841,
+        "earlier_triton32_historical_kernels": 2789
+      }
+    }
+  },
+  "remaining_validation_limits": {
+    "container_build_validated": false,
+    "container_gpu_execution_validated": false,
+    "new_remote_gpu_smoke_performed": false,
+    "baseline_full_regeneration_performed": false,
+    "single_card_full_validated": false,
+    "other_gpu_architectures_validated": false
+  }
+}

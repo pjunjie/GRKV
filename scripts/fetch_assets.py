@@ -62,10 +62,12 @@ def fetch_references():
 def fetch_fresh_evidence():
     records = read(ROOT / "results/fresh/artifacts.json")["assets"]
     if len(records) != 2 or any(record["prediction_source"] != "fresh_public_checkout" for record in records):
-        raise ValueError("Full fresh evidence has not been finalized")
+        raise ValueError("Current generated evidence manifests have not been finalized")
     for record in records:
         fetch_release_asset(record, ROOT / "artifacts/fresh")
-    print("Verified both complete fresh inference evidence archives; these are not new local generation", flush=True)
+    print(
+        "Verified current generated evidence archives; coverage is recorded separately in their manifests", flush=True
+    )
 
 
 def fetch_models(names):

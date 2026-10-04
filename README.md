@@ -220,6 +220,18 @@ Code links point to author-maintained implementations. — means no accessible a
 
 ## Compensating for Compression Error
 
-Related research also studies how to preserve information from tokens removed during KV cache compression. [GRKV](https://arxiv.org/abs/2605.31105) uses global regression to distribute this information across the retained keys and values, matching full-cache attention outputs while keeping the model weights frozen. [MomentKV](https://arxiv.org/abs/2606.01563) summarizes evicted states with compact moment statistics and uses them to estimate the missing attention contribution.
+Related work studies how to preserve full-context behavior under a smaller KV cache budget. [GRKV](https://arxiv.org/abs/2605.31105) uses global regression to distribute information from evicted tokens across retained keys and values while keeping model weights frozen. [Attention Matching](https://arxiv.org/abs/2602.16284) fits compact KV states and per-token attention biases to preserve attention outputs and attention mass.
 
-[PatchKV](https://arxiv.org/abs/2609.39329) computes context-specific updates to MLP output-projection weights by matching activations under full and compressed caches. These methods explore complementary representations for compression-error compensation: retained KV states, attention-side statistics and model weights.
+Complementary approaches use summaries of evicted states, auxiliary-model attention, value reconstruction, learned compact caches or context-specific weight updates. The table summarizes their compensation mechanisms; years refer to the initial preprint publication.
+
+| Year | Method | Compensation mechanism | Paper |
+|---|---|---|---|
+| 2026 | **GRKV** | Fits global regression updates to retained keys and values against full-cache attention outputs, redistributing evicted information with model weights frozen. | [Paper](https://arxiv.org/abs/2605.31105) |
+| 2026 | Attention Matching (AM) | Selects compact keys, fits attention-mass biases and refits values to reconstruct full-cache attention outputs. | [Paper](https://arxiv.org/abs/2602.16284) |
+| 2026 | MomentKV | Maintains compact moments of evicted states and applies a first-order approximation to their missing attention contribution. | [Paper](https://arxiv.org/abs/2606.01563) |
+| 2026 | PatchKV | Fits context-specific MLP output-projection updates by matching activations under full and compressed caches. | [Paper](https://arxiv.org/abs/2609.39329) |
+| 2025 | SmallKV | Uses an auxiliary small model's attention to track globally important tokens and approximate the larger model's attention on marginal tokens. | [Paper](https://arxiv.org/abs/2508.02751) |
+| 2026 | VECTOR | Uses an offline-calibrated regression map to reconstruct values from retained keys, allocating tokens to retention, approximation or eviction. | [Paper](https://arxiv.org/abs/2605.23258) |
+| 2026 | SelKV | Combines selective merge-or-drop routing with a decoding-time logit bias from prefill statistics to compensate for merging-induced attention-mass changes. | [Paper](https://arxiv.org/abs/2607.16213) |
+| 2026 | ARC-KV | Trains a key-anchor indexer, then merges keys and fits attention-mass biases and compact values for each context. | [Paper](https://arxiv.org/abs/2609.36835) |
+| 2025 | Cartridges | Trains compact KV states offline through self-study context distillation, using synthetic conversations to preserve corpus information. | [Paper](https://arxiv.org/abs/2506.06266) |

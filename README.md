@@ -220,18 +220,19 @@ Code links point to author-maintained implementations. — means no accessible a
 
 ## Compensating for Compression Error
 
-Related work studies how to preserve full-context behavior under a smaller KV cache budget. [GRKV](https://arxiv.org/abs/2605.31105) uses global regression to distribute information from evicted tokens across retained keys and values while keeping model weights frozen. [Attention Matching](https://arxiv.org/abs/2602.16284) fits compact KV states and per-token attention biases to preserve attention outputs and attention mass.
+Related work studies how to preserve full-context behavior under a smaller KV cache budget. [Attention Matching](https://proceedings.mlr.press/v306/zweiger26a.html) fits compact KV states and per-token attention biases to preserve attention outputs and attention mass.
 
-Complementary approaches use summaries of evicted states, auxiliary-model attention, value reconstruction, learned compact caches or context-specific weight updates. The table summarizes their compensation mechanisms; years refer to the initial preprint publication.
+Complementary approaches use summaries of evicted states, auxiliary-model attention, value reconstruction, learned compact caches or context-specific weight updates. Years refer to publication in the listed venue; arXiv entries use their preprint year.
 
-| Year | Method | Compensation mechanism | Paper |
-|---|---|---|---|
-| 2026 | **GRKV** | Fits global regression updates to retained keys and values against full-cache attention outputs, redistributing evicted information with model weights frozen. | [Paper](https://arxiv.org/abs/2605.31105) |
-| 2026 | Attention Matching (AM) | Selects compact keys, fits attention-mass biases and refits values to reconstruct full-cache attention outputs. | [Paper](https://arxiv.org/abs/2602.16284) |
-| 2026 | MomentKV | Maintains compact moments of evicted states and applies a first-order approximation to their missing attention contribution. | [Paper](https://arxiv.org/abs/2606.01563) |
-| 2026 | PatchKV | Fits context-specific MLP output-projection updates by matching activations under full and compressed caches. | [Paper](https://arxiv.org/abs/2609.39329) |
-| 2025 | SmallKV | Uses an auxiliary small model's attention to track globally important tokens and approximate the larger model's attention on marginal tokens. | [Paper](https://arxiv.org/abs/2508.02751) |
-| 2026 | VECTOR | Uses an offline-calibrated regression map to reconstruct values from retained keys, allocating tokens to retention, approximation or eviction. | [Paper](https://arxiv.org/abs/2605.23258) |
-| 2026 | SelKV | Combines selective merge-or-drop routing with a decoding-time logit bias from prefill statistics to compensate for merging-induced attention-mass changes. | [Paper](https://arxiv.org/abs/2607.16213) |
-| 2026 | ARC-KV | Trains a key-anchor indexer, then merges keys and fits attention-mass biases and compact values for each context. | [Paper](https://arxiv.org/abs/2609.36835) |
-| 2025 | Cartridges | Trains compact KV states offline through self-study context distillation, using synthetic conversations to preserve corpus information. | [Paper](https://arxiv.org/abs/2506.06266) |
+| Year | Venue | Method | Title | Paper | Code |
+|---|---|---|---|---|---|
+| 2025 | NeurIPS | SmallKV | SmallKV: Small Model Assisted Compensation of KV Cache Compression for Efficient LLM Inference | [Paper](https://proceedings.neurips.cc/paper_files/paper/2025/hash/45790132b9f91b5787232e1cbe0712fc-Abstract-Conference.html) | — |
+| 2026 | ICLR | Cartridges | Cartridges: Lightweight and general-purpose long context representations via self-study | [Paper](https://proceedings.iclr.cc/paper_files/paper/2026/hash/4681359a7b1e94571598ad1adda35e6e-Abstract-Conference.html) | [Code](https://github.com/HazyResearch/cartridges) |
+| 2026 | ICML | Attention Matching (AM) | Fast KV Compaction via Attention Matching | [Paper](https://proceedings.mlr.press/v306/zweiger26a.html) | [Code](https://github.com/adamzweiger/compaction) |
+| 2026 | [COLM](https://skylanding.github.io/) | MomentKV | MomentKV: Closing the Directional Gap in KV Cache Eviction for Long-Context Inference | [Paper](https://arxiv.org/abs/2606.01563) | — |
+| 2026 | NeurIPS | PatchKV | PatchKV: Weight-Space Compensation of KV Cache | [Paper](https://arxiv.org/abs/2609.39329) | [Code](https://github.com/cusasak/PatchKV) |
+| 2026 | arXiv | VECTOR | A Simple Plug-in for Improving Eviction-Based KV Cache Compression | [Paper](https://arxiv.org/abs/2605.23258) | — |
+| 2026 | arXiv | SelKV | SelKV: Selective KV Cache Merging with Per-Token Merge-or-Drop and Attention Compensation | [Paper](https://arxiv.org/abs/2607.16213) | — |
+| 2026 | arXiv | ARC-KV | ARC-KV: Amortizing Anchor Search for Reconstruction-Based KV Cache Compaction | [Paper](https://arxiv.org/abs/2609.36835) | — |
+
+Code links point to author-maintained implementations. — means no accessible author-maintained implementation was verified in the linked sources.

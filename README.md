@@ -168,33 +168,6 @@ uv run --no-sync python scripts/verify_results.py --run outputs/llama/full --mod
 
 For smoke verification, add `--stage smoke` and use the corresponding smoke output directory. Full-precision scores, per-task results and generation provenance are available under [results/](results/).
 
-## Efficiency and Validation
-
-The complete Mistral run measured the following resources on RTX A6000 GPUs:
-
-| Measurement | Observed value |
-|---|---:|
-| Successful GPU workers | 4 |
-| Wall time | 14.118 hours |
-| Total GPU worker time | 55.891 hours |
-| Peak allocated / reserved CUDA memory | 35.585 / 41.406 GiB |
-
-These figures describe the completed Mistral inference run. Worker time includes model loading and qualification; memory values cover PyTorch allocator measurements and exclude other device allocations. See [the Mistral resource record](results/fresh/mistral/resources.json).
-
-Native installation, two-model GPU smoke, GPU derivative checks, strict output checks and independent rescoring passed. The remote CPU checkout also passed style/type/SPDX checks and 17 targeted tests; [remote acceptance](results/validated/remote_checkout/summary.json) records its scope. Run `make style` and `make test` for these CPU development checks.
-
-Mistral uses FlashAttention2 normally and falls back to explicit causal/per-head masking only when fake-key feasibility fails. The complete run independently measured **22 fallback calls in 22 units**, matching the reference. Llama does not enable this fallback.
-
-The public kernel assets redact private debug paths while preserving every nondebug ELF section, including GPU instruction bytes. Numerical qualification and full output comparisons are reported separately. The complete original binary files are not byte-identical: `original_cubin_bytes_identical=false`. Instructions, manifests and separate public hashes are in [the kernel documentation](docs/historical_kernels.md).
-
-## TODO
-
-- [x] Publish the default GRKV implementation, configurations and locked environment.
-- [x] Verify complete two-model results and provide independently rescorable evidence.
-- [x] Validate public downloads and installation from a remote checkout.
-- [ ] Complete Docker container build and GPU acceptance. The [Dockerfile](environment/Dockerfile) is provided; container validation remains incomplete.
-- [ ] Validate single-card full evaluation and additional GPU architectures.
-
 ## Contact
 
 For questions about GRKV or reproduction, please [open an issue](https://github.com/pjunjie/GRKV/issues) in this repository. Contributions require DCO sign-off; see [CONTRIBUTING.md](CONTRIBUTING.md) for the contribution guidelines.
@@ -244,3 +217,9 @@ Selected related work on KV cache merging, covering token merging, merging acros
 | 2026 | arXiv | SelKV | SelKV: Selective KV Cache Merging with Per-Token Merge-or-Drop and Attention Compensation | [Paper](https://arxiv.org/abs/2607.16213) | — |
 
 Code links point to author-maintained implementations. — means no accessible author-maintained implementation was verified in the linked sources. AsymKV here refers to the merging method in *Homogeneous Keys, Heterogeneous Values*. GRKV's reproduced measurements are reported in [Reproduced Results](#reproduced-results).
+
+## Compensating for Compression Error
+
+Related research also studies how to preserve information from tokens removed during KV cache compression. [GRKV](https://arxiv.org/abs/2605.31105) uses global regression to distribute this information across the retained keys and values, matching full-cache attention outputs while keeping the model weights frozen. [MomentKV](https://arxiv.org/abs/2606.01563) summarizes evicted states with compact moment statistics and uses them to estimate the missing attention contribution.
+
+[PatchKV](https://arxiv.org/abs/2609.39329) computes context-specific updates to MLP output-projection weights by matching activations under full and compressed caches. These methods explore complementary representations for compression-error compensation: retained KV states, attention-side statistics and model weights.

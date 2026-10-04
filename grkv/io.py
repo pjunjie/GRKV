@@ -8,6 +8,8 @@ import re
 from datetime import datetime, timezone
 from pathlib import Path
 
+import torch
+
 
 def timestamp():
     return datetime.now(timezone.utc).isoformat()
@@ -55,3 +57,17 @@ def sample_score(task, prediction, answers):
     if not matches:
         raise ValueError("RULER reference list is empty")
     return max(matches) if task.split("_")[0] == "qa" else sum(matches) / len(matches)
+
+
+def tensor_sha(tensor):
+    return hashlib.sha256(tensor.detach().cpu().contiguous().view(torch.uint8).numpy().tobytes()).hexdigest()
+
+
+def group_digest(group):
+    return hashlib.sha256(json.dumps(group, ensure_ascii=False, sort_keys=True).encode()).hexdigest()
+
+
+def replay_layer(layer):
+    """Exclude only measured wall times; retain all numerical and layout checks."""
+    timing = {"selection_host_seconds", "fit_host_seconds", "target_host_seconds"}
+    return {k: v for k, v in layer.items() if k not in timing}

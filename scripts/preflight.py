@@ -27,8 +27,8 @@ def main():
     os.environ["TRITON_CACHE_DIR"] = str(cache.resolve())
     import torch
 
-    from experiments.critical_adakv_history_ruler.common import write
     from grkv.backend import HistoricalExecutableBackend
+    from grkv.io import write
     from grkv.qualification import qualify
     from grkv.runtime import runtime
 

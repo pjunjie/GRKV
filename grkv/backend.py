@@ -10,23 +10,26 @@ before CUDA creates handles. The public binary has separate, mandatory hashes.
 
 import hashlib
 import os
+from contextlib import contextmanager
 from pathlib import Path
 
 import torch
 
-from experiments.critical_adakv_direct_grkv.wide_query_optimized_backend import prime_wide_compiler
-from experiments.critical_adakv_direct_grkv.wide_query_split_backend import TILES, VARIANT, SplitBackend
-from experiments.critical_adakv_history_ruler.common import read, sha
+from grkv import kernel_runtime, kernels
 from grkv.elf import executable_identity
+from grkv.io import read, sha
+from grkv.kernels import TILES, prime_compiler
 
 
-class HistoricalExecutableBackend(SplitBackend):
+class HistoricalExecutableBackend:
     def __init__(self, manifest_path, cache_root):
         self.manifest_path = Path(manifest_path)
         self.manifest_sha256 = sha(manifest_path)
         self.manifest = read(manifest_path)
-        if self.manifest["status"] != "complete" or self.manifest["variant"] != VARIANT:
-            raise ValueError("Kernel manifest/variant mismatch")
+        if self.manifest["status"] != "complete" or self.manifest["tiles"] != {
+            kind: list(tiles) for kind, tiles in TILES.items()
+        }:
+            raise ValueError("Kernel manifest/launch geometry mismatch")
         if self.manifest["target"] != dict(backend="cuda", arch=86, warp_size=32):
             raise ValueError("Kernel target must be CUDA SM86")
         self.cache_root = Path(cache_root).resolve()
@@ -39,7 +42,9 @@ class HistoricalExecutableBackend(SplitBackend):
                 raise ValueError("Published cubin hash mismatch")
             if executable_identity(path.read_bytes()) != entry["executable_sections"]:
                 raise ValueError("Published executable-section identity mismatch")
-            self.expected[(entry["query"] * 4, entry["kind"])] = entry
+            self.expected[(entry["query_count"] * 4, entry["kind"])] = entry
+        if set(self.expected) != {(128, "jvp"), (128, "vjp")}:
+            raise ValueError("GRKV Default requires exactly its two historical derivative kernels")
         self.verified = {}
         self.launch_records = []
 
@@ -56,7 +61,7 @@ class HistoricalExecutableBackend(SplitBackend):
             key = (kwargs["R"], kind)
             expected = self.expected[key]
             if key not in self.verified:
-                prime_wide_compiler()
+                prime_compiler()
                 compiled = previous(*args, **dict(kwargs, warmup=True))
                 if compiled.module is not None:
                     raise ValueError("CUDA handles created before public cubin verification")
@@ -93,3 +98,19 @@ class HistoricalExecutableBackend(SplitBackend):
             return compiled
 
         return run
+
+    @contextmanager
+    def __call__(self, capture=None):
+        if Path(os.environ["TRITON_CACHE_DIR"]).resolve() != self.cache_root:
+            raise ValueError("Worker cache path changed")
+        patches = []
+        try:
+            for kind in ("jvp", "vjp"):
+                kernel = getattr(kernels, "_wide_" + kind)
+                patches.append((kernel, kernel.run))
+                kernel.run = self._guard(kind, kernel.run)
+            with kernel_runtime.key_backend(capture=capture):
+                yield
+        finally:
+            for kernel, previous in reversed(patches):
+                kernel.run = previous

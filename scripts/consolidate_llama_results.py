@@ -11,7 +11,7 @@ import sqlite3
 import tempfile
 from pathlib import Path
 
-from experiments.critical_adakv_history_ruler.common import read, sha, write
+from grkv.io import read, sha, write
 from grkv.qualification import compare
 from grkv.run import unit_key
 from grkv.score import read_records, rescore
@@ -218,7 +218,7 @@ def main():
     parser.add_argument("--prior-proofs", type=Path, required=True)
     parser.add_argument("--kernel-root", type=Path, default=Path("artifacts/kernels"))
     parser.add_argument("--destination", type=Path, default=Path("artifacts/validated"))
-    parser.add_argument("--release-tag", default="v0.2.0")
+    parser.add_argument("--release-tag", default="v0.3.0")
     args = parser.parse_args()
     consolidate(
         args.current,

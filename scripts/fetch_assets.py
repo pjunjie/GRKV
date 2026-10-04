@@ -12,7 +12,7 @@ from time import perf_counter
 import httpx
 from huggingface_hub import hf_hub_download, snapshot_download
 
-from experiments.critical_adakv_history_ruler.common import read, sha, timestamp, write
+from grkv.io import read, sha, timestamp, write
 from grkv.settings import ROOT, asset_root
 
 
@@ -120,7 +120,7 @@ def fetch_datasets():
             if expected and sha(path) != expected:
                 raise ValueError(f"Dataset file mismatch: {record['name']}/{filename}")
         print(f"Fetched dataset {record['name']}: {record['revision']}", flush=True)
-    from experiments.critical_adakv_direct_grkv.tune50_worker import load_group
+    from grkv.data import load_group
 
     cache = {}
     units = [json.loads(line) for line in (ROOT / "manifests/units.jsonl").read_text().splitlines()]

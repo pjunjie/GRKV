@@ -20,9 +20,20 @@ available and the corresponding genuine earlier experiment outputs otherwise.
 Every selected earlier raw checkpoint, frozen sample and actual historical
 pre-launch cubin proof was checked. Every accepted record was compared against
 the frozen result, followed by independent full rescoring with strict coverage.
-The numerical source, configuration, model/data revisions, historical Triton
-package and kernel instruction identity remain frozen. The measured scores and
+GRKV Default preserves the numerical behavior, model/data revisions, historical
+Triton package and required kernel instruction identity of these accepted runs. The measured scores and
 algorithm parameters are unchanged.
+
+The default-only source consolidation passed installation in a new locked CPU
+environment, 30 targeted tests and source/type/SPDX checks. Twelve default
+cases and twelve baseline cases match the preceding source snapshot exactly
+in cache tensors, retained layout and non-timing fit records. Independent
+rescoring and strict per-question comparison of both complete accepted
+archives checked 41,000 answers with zero differences. The retained historical
+JVP/VJP kernel bodies and public cubin bytes are unchanged. These are checks of
+the consolidated code and existing inference evidence; this source cleanup did
+not perform new GPU inference or container acceptance. See the
+[consolidation report](../results/validation/default_consolidation.json).
 
 Each Llama record retains its generation origin, source archive SHA, original
 checkpoint SHA and actual pre-launch binary checks. Consolidation is not a new
@@ -31,10 +42,10 @@ checkout. The primary full-result manifest and verification are under
 `results/validated/`; the assembly entry point is
 `scripts/consolidate_llama_results.py`. The source-run archives and earlier
 audit receipts remain available with their original identities. The existing
-Git tags and history are preserved. All eight evidence and kernel archives
-are now published together in the [unified release](release.md), with unchanged
-contents and SHA-256 hashes. Operational download manifests use that release;
-earlier audit receipts retain their actual historical URLs and checkout scope.
+Git tags and history are preserved. The seven prediction archives preserve their original bytes and SHA-256 hashes.
+The [unified release](release.md) also supplies the two unchanged cubins required
+by GRKV Default in a smaller kernel archive with a new manifest and archive SHA. Operational download manifests use that release;
+historical audit summaries link to their original source snapshot and content hashes.
 
 Historical Critical-AdaKV columns are separately rescored historical baselines.
 Baseline constructors passed CPU checks; a new baseline GPU-entry smoke and a
@@ -65,7 +76,7 @@ fallback differences. Mistral measured two exact-mask fallback calls in that
 subset; Llama measured zero. These subset macro scores are not full targets.
 Both models passed actual GPU short-context preservation and A/B/A shared-cache
 restoration checks at both budgets. The separate real derivative qualification
-matched both historical Q32 JVP/VJP tensor hashes. Machine-readable reports are
+matched both historical GRKV Default JVP/VJP tensor hashes. Machine-readable reports are
 under `results/validation/`.
 
 The source/type/SPDX checks and 17 targeted tests passed. An independent CPU
@@ -98,7 +109,7 @@ model/data assets were reused and are disclosed in
 `results/validation/remote_checkout/summary.json`.
 
 The historical Critical-AdaKV baseline columns are independently rescored
-historical results, not new baseline generation. The older Mistral K1 control
+historical results, not new baseline generation. The earlier Mistral GRKV control
 uses another compiler/protocol and is not substituted for that baseline.
 Mistral's final reference is assembled from 10,191 answers from prior stages
 of the final candidate run and 10,309 continuation answers with verified source

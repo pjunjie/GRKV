@@ -4,15 +4,15 @@
 [![CPU validation](https://github.com/pjunjie/GRKV/actions/workflows/ci.yml/badge.svg)](https://github.com/pjunjie/GRKV/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
 
-This repository contains the implementation of **GRKV**, a training-free method for KV cache compression introduced in our [paper](https://arxiv.org/abs/2605.31105). It is built on [NVIDIA's kvpress](https://github.com/NVIDIA/kvpress) and provides the code, default configurations, fixed environment and evaluation tools needed to reproduce GRKV on **Llama-3.1-8B-Instruct** and **Mistral-7B-Instruct-v0.3**.
+This repository contains **GRKV Default**, the implementation of GRKV, a training-free method for KV cache compression introduced in our [paper](https://arxiv.org/abs/2605.31105). It is built on [NVIDIA's kvpress](https://github.com/NVIDIA/kvpress) and provides the code, default configurations, fixed environment and evaluation tools needed to reproduce GRKV on **Llama-3.1-8B-Instruct** and **Mistral-7B-Instruct-v0.3**.
 
-Full prediction evidence, sample indices and checksums are available in the [evaluation manifest](results/validated/artifacts.json) and [the unified GRKV release](https://github.com/pjunjie/GRKV/releases/tag/v0.2.0).
+Full prediction evidence, sample indices and checksums are available in the [evaluation manifest](results/validated/artifacts.json) and [the unified GRKV release](https://github.com/pjunjie/GRKV/releases/tag/v0.3.0).
 
 ## Overview
 
 Evicting KV cache entries saves memory but loses information from the removed tokens. GRKV uses global regression to update the retained keys and values so that attention with the compressed cache better matches attention with the full cache. The model weights remain frozen, and compression requires no additional training.
 
-The default implementation follows three steps:
+GRKV Default is the implementation used for the [Reproduced Results](#reproduced-results) below and follows three steps:
 
 1. **Select retained entries** using Critical-AdaKV at the requested cache budget.
 2. **Fit regularized updates** using queries sampled from the input context, distributing information across retained entries.
@@ -36,7 +36,7 @@ press = make_press("mistral", budget=10)  # Retain 10% of the KV cache.
 | Regression precision | FP32; model and KV cache: BF16 |
 | Safety guard | Mistral: 0.0; Llama: 0.1 |
 
-Complete defaults are provided in [configs/mistral.yaml](configs/mistral.yaml) and [configs/llama.yaml](configs/llama.yaml). See the [evaluation protocol](docs/protocol.md) for budget rounding, protected tokens, attention behavior and scoring details.
+The public GRKV implementation is GRKV Default. Complete defaults are provided in [configs/mistral.yaml](configs/mistral.yaml) and [configs/llama.yaml](configs/llama.yaml). See the [evaluation protocol](docs/protocol.md) for budget rounding, protected tokens, attention behavior and scoring details.
 
 ## Installation
 
@@ -129,7 +129,7 @@ Scores are on a **0–100 scale**, averaged equally across tasks. Higher is bett
 | Method | LongBench / 10% | LongBench / 20% | RULER16k / 10% | RULER16k / 20% |
 |---|---:|---:|---:|---:|
 | Historical Critical-AdaKV | 35.0089 | 38.8074 | 26.8210 | 48.2644 |
-| **GRKV** | **37.2587** | **40.0311** | **27.0987** | **51.8290** |
+| **GRKV Default** | **37.2587** | **40.0311** | **27.0987** | **51.8290** |
 | Absolute gain | +2.2498 | +1.2238 | +0.2777 | +3.5646 |
 
 **Llama-3.1-8B-Instruct**
@@ -137,7 +137,7 @@ Scores are on a **0–100 scale**, averaged equally across tasks. Higher is bett
 | Method | LongBench / 10% | LongBench / 20% | RULER16k / 10% | RULER16k / 20% |
 |---|---:|---:|---:|---:|
 | Historical Critical-AdaKV | 37.6718 | 43.1407 | 44.8662 | 66.3128 |
-| **GRKV** | **38.7237** | **43.3293** | **45.4649** | **66.6577** |
+| **GRKV Default** | **38.7237** | **43.3293** | **45.4649** | **66.6577** |
 | Absolute gain | +1.0519 | +0.1885 | +0.5987 | +0.3449 |
 
 Both complete GRKV result sets passed independent rescoring, matching all eight full-precision targets within `1e-8`. Per-answer text, scores, regression records and cache layouts have zero strict differences against the frozen reference. Mistral uses the complete clean-checkout run; Llama consolidates corresponding verified outputs from the current run and an earlier experiment under the fixed Triton 3.2.0 and kernel protocol. Every Llama record retains its generation origin and source hashes. See the [full acceptance report](results/validated/summary.json).

@@ -1,8 +1,7 @@
 {
   "checked_at": "2026-10-03T09:38:02.327162+00:00",
   "repository": "https://github.com/pjunjie/GRKV",
-  "release": "https://github.com/pjunjie/GRKV/releases/tag/v0.1.1-k1",
-  "tag": "v0.1.1-k1",
+  "release": "https://github.com/pjunjie/GRKV/tree/c4afa324db00d28db1077d28195e4a4bdb4ba355",
   "tag_commit": "bde4a624a91a8f7b0ba2736727def0125e070ae0",
   "remote_clone_verified": true,
   "locked_cpu_install_passed": true,
@@ -16,7 +15,7 @@
     "bytes": 261937475,
     "sha256": "aa0a3509293089d2ea66ad0443f9c835215233aa0a3febcb53f566d3b594aa99",
     "decompressed_stream_sha256": "b770fa9ef9d35be02acd634317eee5ead8bdc76f98f1f09b5806b54b6ee0e27a",
-    "url": "https://github.com/pjunjie/GRKV/releases/download/v0.1.1-k1/validated_llama_candidate.jsonl.gz",
+    "url": "https://github.com/pjunjie/GRKV/tree/c4afa324db00d28db1077d28195e4a4bdb4ba355",
     "prediction_source": "verified_consolidated_generation",
     "answers": 20500,
     "context_budget_units": 19630,
@@ -32,7 +31,7 @@
     }
   },
   "actual_public_sha256sums_download": {
-    "url": "https://github.com/pjunjie/GRKV/releases/download/v0.1.1-k1/SHA256SUMS",
+    "url": "https://github.com/pjunjie/GRKV/tree/c4afa324db00d28db1077d28195e4a4bdb4ba355",
     "bytes": 765,
     "sha256": "afd5d00952f99a818e15b515d032335cd796c5378ab0bccf506b9cfac9a1bd71"
   },
@@ -57,15 +56,18 @@
     "name": "llama_candidate.jsonl.gz",
     "bytes": 234571101,
     "sha256": "64a6ce9c4411cb09f62f03aca9844592012dea5a84009bc8b68365d910d15408",
-    "url": "https://github.com/pjunjie/GRKV/releases/download/v0.1.0-k1/llama_candidate.jsonl.gz"
+    "url": "https://github.com/pjunjie/GRKV/tree/c4afa324db00d28db1077d28195e4a4bdb4ba355"
   },
   "historical_publication_record": true,
   "original_release_urls_are_historical": true,
-  "current_release": "https://github.com/pjunjie/GRKV/releases/tag/v0.2.0",
+  "current_release": "https://github.com/pjunjie/GRKV/releases/tag/v0.3.0",
   "current_download_manifests": [
     "manifests/kernels.json",
     "results/reference/artifacts.json",
     "results/fresh/artifacts.json",
     "results/validated/artifacts.json"
-  ]
+  ],
+  "published_representation": "Historical evidence summary with normalized display labels; complete original records remain at the source snapshot. Original content hashes and measured values are retained.",
+  "original_record_sha256": "fdd947eb029ad8c2371b4ac2670e6afc6486eceb5d14b95c29e1e177604c20a0",
+  "source_snapshot": "https://github.com/pjunjie/GRKV/blob/c4afa324db00d28db1077d28195e4a4bdb4ba355/results/validated/remote_checkout/summary.json"
 }

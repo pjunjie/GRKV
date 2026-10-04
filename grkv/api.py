@@ -1,28 +1,24 @@
 # SPDX-FileCopyrightText: Copyright (c) 1993-2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0
 
-"""Explicit frozen K1 constructors, separate from other GRKV variants."""
+"""Public constructors for GRKV Default and the historical baseline."""
 
-from experiments.critical_adakv_direct_grkv.tune50_protocol import make_press as llama_press
-from experiments.critical_adakv_direct_grkv.wide_query_policy import WideQueryPress as LlamaK1Press
-from experiments.mistral_k1_tuning.policy import MistralS1Press as MistralK1Press
+from grkv.press import CriticalAdaKVBaselinePress, GRKVDefaultPress, MistralGRKVDefaultPress
 
-__all__ = ["LlamaK1Press", "MistralK1Press", "make_press"]
+__all__ = ["GRKVDefaultPress", "MistralGRKVDefaultPress", "make_press"]
 
 
-def make_press(model, budget, method="candidate"):
-    guard = {"llama": 0.1, "mistral": 0.0}[model]
-    config = dict(ridge=0.01, key_relative_cap=0.025, relative_cap=0.1, grkv_guard=guard)
-    base = llama_press("critical" if method == "baseline" else "K1", config, budget)
-    if model == "llama" or method == "baseline":
-        return base
-    return MistralK1Press(
-        compression_ratio=base.compression_ratio,
-        window_size=base.window_size,
-        kernel_size=base.kernel_size,
-        grkv_guard=base.grkv_guard,
-        critical_alpha_safeguard=base.critical_alpha_safeguard,
-        critical_first_stage_ratio=base.critical_first_stage_ratio,
-        critical_epsilon=base.critical_epsilon,
-        fit_config=base.fit_config,
+def make_press(model, budget, method="default"):
+    if model not in ("llama", "mistral"):
+        raise ValueError("GRKV Default supports llama and mistral")
+    if budget not in (10, 20):
+        raise ValueError("KV retention must be 10 or 20 percent")
+    if method not in ("default", "baseline"):
+        raise ValueError("Method must be default or baseline")
+    guard = 0.1 if method == "baseline" or model == "llama" else 0.0
+    cls = (
+        CriticalAdaKVBaselinePress
+        if method == "baseline"
+        else (GRKVDefaultPress if model == "llama" else MistralGRKVDefaultPress)
     )
+    return cls(compression_ratio=0.9 if budget == 10 else 0.8, grkv_guard=guard)

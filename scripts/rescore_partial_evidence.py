@@ -7,7 +7,7 @@ import argparse
 import json
 from pathlib import Path
 
-from experiments.critical_adakv_history_ruler.common import read, write
+from grkv.io import read, write
 from grkv.run import unit_key
 from grkv.score import rescore
 from grkv.settings import ROOT

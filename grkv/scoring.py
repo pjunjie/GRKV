@@ -1,9 +1,12 @@
 # SPDX-FileCopyrightText: Copyright (c) 1993-2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0
 
+from typing import Any
+
 import numpy as np
 
 from evaluation.benchmarks.longbench.calculate_metrics import dataset2metric
+from grkv.io import sample_score
 
 TASK_FAMILIES = {
     "narrativeqa": "single_document_qa",
@@ -47,3 +50,25 @@ def score_prediction(task: str, prediction: str, answers: list, all_classes: lis
             float(dataset2metric[task](prediction.lstrip(), answer, all_classes=all_classes)),
         )
     return 100.0 * score
+
+
+NONCLASSIFICATION_TASKS = frozenset(TASK_FAMILIES) - {"trec"}
+
+
+def classes_for_scoring(task: str, value: Any) -> list[str]:
+    if task not in TASK_FAMILIES:
+        raise RuntimeError(f"unknown frozen LongBench task: {task}")
+    if value is None and task in NONCLASSIFICATION_TASKS:
+        return []
+    result = _as_string_list(value, "all_classes")
+    if task == "trec" and not result:
+        raise RuntimeError("TREC requires its nonempty source class list")
+    return result
+
+
+def score(item, row, prediction):
+    if item["benchmark"] == "longbench":
+        return score_prediction(
+            item["task"], prediction, row["answers"], classes_for_scoring(item["task"], row["all_classes"])
+        )
+    return sample_score(item["task"], prediction, row["answer"])

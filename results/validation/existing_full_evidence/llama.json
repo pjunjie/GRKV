@@ -7,7 +7,7 @@
   "self_contained_archive_matches_raw_sources": true,
   "independently_rescored_against_fresh_frozen_data": true,
   "independent_score_receipt": "results/reference/llama_candidate.json",
-  "comparison_scope": "Restored Triton 3.2.0 outputs versus original K1 checkpoints",
+  "comparison_scope": "Restored Triton 3.2.0 outputs versus original GRKV Default checkpoints",
   "prediction_mismatches": 0,
   "score_mismatches": 0,
   "fit_mismatch_layers": 0,
@@ -28,5 +28,8 @@
     "longbench_20": 0.18854370432602963,
     "ruler16k_10": 0.5987179487179475,
     "ruler16k_20": 0.34487179487180697
-  }
+  },
+  "published_representation": "Historical evidence summary with normalized display labels; complete original records remain at the source snapshot. Original content hashes and measured values are retained.",
+  "original_record_sha256": "08e098ebf5d7785116a5ca61ed6a62e9c5388df27c5bc02a051a3f2b69dfab82",
+  "source_snapshot": "https://github.com/pjunjie/GRKV/blob/c4afa324db00d28db1077d28195e4a4bdb4ba355/results/validation/existing_full_evidence/llama.json"
 }

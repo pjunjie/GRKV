@@ -7,7 +7,7 @@ from importlib import import_module
 
 import pytest
 
-from experiments.critical_adakv_history_ruler.common import sha, write
+from grkv.io import sha, write
 
 consolidate_llama_results = import_module("scripts.consolidate_llama_results")
 export_fresh_evidence = import_module("scripts.export_fresh_evidence")
@@ -21,7 +21,7 @@ def test_export_checks_worker_completion_without_requiring_baseline_improvement(
         dict(
             source="fresh_public_checkout",
             stage="full",
-            config=dict(model="llama", method="candidate"),
+            config=dict(model="llama", method="default"),
             code_hashes={},
             reference_predictions_required=False,
         ),

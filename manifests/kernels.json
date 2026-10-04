@@ -1,15 +1,17 @@
 {
   "published": true,
-  "release_tag": "v0.2.0",
+  "release_tag": "v0.3.0",
   "artifact": {
-    "name": "grkv-k1-sm86-kernels.tar.gz",
-    "bytes": 805245,
-    "sha256": "d4536018fef59495df40da9d44f730637bf7e874b2b8503f5cb5c46cc7ad334d",
-    "url": "https://github.com/pjunjie/GRKV/releases/download/v0.2.0/grkv-k1-sm86-kernels.tar.gz",
+    "name": "grkv-default-sm86-kernels.tar.gz",
+    "bytes": 90567,
+    "sha256": "bf9a8b92acedb615a252a7a498f3f196bc40e74e7b5637e79310998824763ca4",
+    "url": "https://github.com/pjunjie/GRKV/releases/download/v0.3.0/grkv-default-sm86-kernels.tar.gz",
     "profile": "historical-executable-sm86",
     "original_cubin_bytes_identical": false,
     "executable_sections_identical": true,
     "archive_layout": "kernel manifest and cubins at archive root",
-    "manifest_sha256": "9283f22948d79196b431199867911567d844a668d835191fb627edc0ca138f6e"
+    "manifest_sha256": "fe63388d5e1a8a9bad33e276c7d94d62a8e2a76bb889cab3e0515818cec5b2f2",
+    "method": "GRKV Default",
+    "kernel_count": 2
   }
 }

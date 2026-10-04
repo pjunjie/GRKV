@@ -21,9 +21,9 @@ def main():
     from transformers import DynamicCache, pipeline
 
     import kvpress  # noqa: F401
-    from experiments.critical_adakv_cross_model.mask_fallback import install
-    from experiments.critical_adakv_history_ruler.common import write
     from grkv.api import make_press
+    from grkv.io import write
+    from grkv.mask_fallback import install
     from grkv.runtime import runtime
 
     identity = runtime()

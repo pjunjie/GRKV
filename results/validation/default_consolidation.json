@@ -1,0 +1,137 @@
+{
+  "method": "GRKV Default",
+  "source_snapshot_commit": "c4afa324db00d28db1077d28195e4a4bdb4ba355",
+  "scope": "Default-only source consolidation and independent verification of existing accepted inference evidence",
+  "new_inference_performed": false,
+  "clean_locked_cpu_install": {
+    "passed": true,
+    "python": "3.12.7",
+    "frozen_lock": true,
+    "flashattention_installed": false,
+    "verified_package_cache_reused": true,
+    "gpu_visible": false,
+    "targeted_tests_passed": 30
+  },
+  "source_type_spdx_checks_passed": true,
+  "source_parity": {
+    "kernel_function_asts_identical": true,
+    "kernel_function_ast_sha256": {
+      "_wide_jvp": "338cb8fa84bd1b2d2a4d4ad3c7dcab7c7604cc79191eb868f64658fb626cbc8b",
+      "_wide_vjp": "7ccbd391c4066a55ac35e1dc3774846d010966a8128236bd566ef195edc2c0af"
+    },
+    "dependency_versions_and_hashes_unchanged": true,
+    "reproduced_result_values_unchanged": true,
+    "fit_configuration_and_model_specific_guard_unchanged": true
+  },
+  "default_cpu_parity": {
+    "cases": 12,
+    "models": [
+      "llama",
+      "mistral"
+    ],
+    "budgets": [
+      10,
+      20
+    ],
+    "context_lengths": [
+      32,
+      64,
+      512
+    ],
+    "cache_tensors_identical": true,
+    "retained_layout_identical": true,
+    "non_timing_fit_records_identical": true
+  },
+  "baseline_cpu_parity": {
+    "cases": 12,
+    "cache_tensors_identical": true,
+    "retained_layout_identical": true,
+    "non_timing_records_identical": true
+  },
+  "frozen_config_constructor_checks": {
+    "configurations": 4,
+    "budget_combinations": 8,
+    "passed": true
+  },
+  "complete_accepted_evidence": {
+    "mistral": {
+      "method": "GRKV Default",
+      "answers": 20500,
+      "units": 19630,
+      "independent_rescoring": true,
+      "targets_reproduced": true,
+      "saved_score_mismatches": 0,
+      "strict_output_comparison": true,
+      "strict_difference_units": 0,
+      "cells": {
+        "longbench_10": 37.25866730842248,
+        "longbench_20": 40.03113888818442,
+        "ruler16k_10": 27.098717948717947,
+        "ruler16k_20": 51.82897435897436
+      },
+      "accepted_archive_sha256": "d5cb276c995da79c47345e17f6bb9c9d3df4845a41c60df83e5a0bc7f43f5494",
+      "reference_archive_sha256": "e652654ebce3186e680175c2dcd9040e6011f0129c04824d665734b3ae3ff13c",
+      "new_inference_performed": false
+    },
+    "llama": {
+      "method": "GRKV Default",
+      "answers": 20500,
+      "units": 19630,
+      "independent_rescoring": true,
+      "targets_reproduced": true,
+      "saved_score_mismatches": 0,
+      "strict_output_comparison": true,
+      "strict_difference_units": 0,
+      "cells": {
+        "longbench_10": 38.72373303962639,
+        "longbench_20": 43.32925730367326,
+        "ruler16k_10": 45.46487179487179,
+        "ruler16k_20": 66.65769230769232
+      },
+      "accepted_archive_sha256": "aa0a3509293089d2ea66ad0443f9c835215233aa0a3febcb53f566d3b594aa99",
+      "reference_archive_sha256": "64a6ce9c4411cb09f62f03aca9844592012dea5a84009bc8b68365d910d15408",
+      "new_inference_performed": false
+    }
+  },
+  "prediction_archives": {
+    "count": 7,
+    "bytes_and_sha256_unchanged": true
+  },
+  "historical_kernels": {
+    "kernel_count": 2,
+    "public_cubin_bytes_unchanged": true,
+    "public_cubin_sha256": {
+      "jvp": "a95bc3cf598ae2b83b82d78b53a67e5e9b184e6ef3433984c0d93f91774ba5c1",
+      "vjp": "09e970025e87d60198db2e4d9545c64cb7e9035d6ef69de389c34e76a524a890"
+    },
+    "original_cubin_bytes_identical": false,
+    "unused_kernels_removed": 16,
+    "archive": {
+      "name": "grkv-default-sm86-kernels.tar.gz",
+      "bytes": 90567,
+      "sha256": "bf9a8b92acedb615a252a7a498f3f196bc40e74e7b5637e79310998824763ca4",
+      "url": "https://github.com/pjunjie/GRKV/releases/download/v0.3.0/grkv-default-sm86-kernels.tar.gz",
+      "profile": "historical-executable-sm86",
+      "original_cubin_bytes_identical": false,
+      "executable_sections_identical": true,
+      "archive_layout": "kernel manifest and cubins at archive root",
+      "manifest_sha256": "fe63388d5e1a8a9bad33e276c7d94d62a8e2a76bb889cab3e0515818cec5b2f2",
+      "method": "GRKV Default",
+      "kernel_count": 2
+    }
+  },
+  "historical_backend_manifest_and_elf_checks_passed": true,
+  "retired_method_names_in_current_tree": 0,
+  "historical_gpu_numerical_qualification": {
+    "new_execution_performed": false,
+    "prior_receipts_preserved": true,
+    "report": "results/validation/derivative_qualification.json"
+  },
+  "docker_acceptance_completed": false,
+  "original_experiment_workspace_unchanged": true,
+  "privacy_and_secrets_checks": {
+    "current_source_and_kernel_archive_findings": 0,
+    "current_source_gitleaks_findings": 0,
+    "reachable_history_gitleaks_findings": 0
+  }
+}

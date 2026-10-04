@@ -7,7 +7,7 @@ import argparse
 import json
 from pathlib import Path
 
-from experiments.critical_adakv_history_ruler.common import read, sha, write
+from grkv.io import read, sha, write
 from grkv.qualification import compare
 from grkv.run import unit_key
 from grkv.score import read_records, rescore
@@ -36,8 +36,8 @@ def main():
     manifest = read(manifest_path)
     if sha(manifest_path) != registration["kernel_manifest_sha256"]:
         raise ValueError("Kernel manifest differs from run registration")
-    expected = {(x["query"] * 4, x["kind"]): x["cubin"]["sha256"] for x in manifest["kernels"]}
-    if registration["source"] != "fresh_public_checkout" or registration["config"]["method"] != "candidate":
+    expected = {(x["query_count"] * 4, x["kind"]): x["cubin"]["sha256"] for x in manifest["kernels"]}
+    if registration["source"] != "fresh_public_checkout" or registration["config"]["method"] != "default":
         raise ValueError("Verification requires a fresh candidate registration")
     summary = rescore(args.run, units)
     differences = []

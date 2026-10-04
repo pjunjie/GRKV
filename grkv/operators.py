@@ -1,8 +1,7 @@
 # SPDX-FileCopyrightText: Copyright (c) 1993-2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0
 
-
-"""Joint GQA attention residuals and analytic derivatives; no model autograd."""
+"""Attention outputs and analytic derivatives used by GRKV Default."""
 
 from dataclasses import dataclass
 from math import sqrt
@@ -31,15 +30,6 @@ class Observations:
 
     def to(self, device):
         return Observations(*(getattr(self, name).to(device) for name in self.__dataclass_fields__))
-
-
-def suffix_statistics(queries, keys, values, visible):
-    """Fixed native suffix sufficient statistics, with explicit causal visibility."""
-    logits = torch.einsum("hgqd,hsd->hgqs", queries, keys) / sqrt(keys.shape[-1])
-    logits = logits.masked_fill(~visible[:, None], -torch.inf)
-    lse = logits.logsumexp(-1)
-    weights = (logits - lse[..., None]).exp().nan_to_num(0)
-    return lse, torch.einsum("hgqs,hsd->hgqd", weights, values)
 
 
 class AttentionMap:
@@ -85,30 +75,6 @@ class AttentionMap:
         if kind not in ("key", "value"):
             raise ValueError(kind)
         return forward, adjoint
-
-
-class ResidualMetric:
-    """A rectangular square root L with L^T L = .5 I + .5 W_o^T W_o / g^2."""
-
-    def __init__(self, projection, weights, post):
-        self.projection = projection
-        self.root_weight = weights.sqrt()[:, None]
-        self.post = post
-        self.gain = (projection.square().sum() / projection.shape[1]).sqrt()
-        if not bool(self.gain > 0):
-            raise ValueError("zero projection gain")
-
-    def forward(self, residual):
-        e = residual * self.root_weight
-        if not self.post:
-            return e
-        return torch.cat((e, (e @ self.projection.T) / self.gain), -1) / sqrt(2)
-
-    def adjoint(self, residual):
-        if not self.post:
-            return residual * self.root_weight
-        pre, post = residual.split((self.projection.shape[1], self.projection.shape[0]), -1)
-        return (pre + (post @ self.projection) / self.gain) * self.root_weight / sqrt(2)
 
 
 def conjugate_gradient(operator, rhs, max_iterations=16, relative_tolerance=1e-6):
@@ -166,3 +132,11 @@ def ridge_update(forward, adjoint, metric, residual, ridge, max_iterations=16, t
         torch.linalg.vector_norm(normal_residual) / torch.linalg.vector_norm(at(rhs)).clamp_min(1e-30)
     )
     return delta, record
+
+
+def promote_observations(observations, device, dtype):
+    values = []
+    for name in observations.__dataclass_fields__:
+        value = getattr(observations, name)
+        values.append(value.to(device=device, dtype=dtype if value.is_floating_point() else value.dtype))
+    return Observations(*values)

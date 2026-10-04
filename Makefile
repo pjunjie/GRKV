@@ -1,5 +1,5 @@
 PYTHON := .venv/bin/python
-SOURCES := grkv kvpress experiments evaluation scripts tests
+SOURCES := grkv kvpress evaluation scripts tests
 
 .PHONY: format style test
 format:

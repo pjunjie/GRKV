@@ -7,7 +7,7 @@
   "self_contained_archive_matches_raw_sources": true,
   "independently_rescored_against_fresh_frozen_data": true,
   "independent_score_receipt": "results/reference/mistral_candidate.json",
-  "comparison_scope": "Final guard=0.0 outputs versus their self-contained frozen archive; older K1 is a different control",
+  "comparison_scope": "Final guard=0.0 outputs versus their self-contained frozen archive; earlier GRKV control is a different control",
   "prediction_mismatches": null,
   "score_mismatches": null,
   "fit_mismatch_layers": null,
@@ -28,5 +28,8 @@
     "longbench_20": 1.2237613633995892,
     "ruler16k_10": 0.27769230769230546,
     "ruler16k_20": 3.5646153846153865
-  }
+  },
+  "published_representation": "Historical evidence summary with normalized display labels; complete original records remain at the source snapshot. Original content hashes and measured values are retained.",
+  "original_record_sha256": "8a176f75a6332d3e637af9a97b36f7f55f30fdf8bc1ace3ee3633d8ecfd0efd1",
+  "source_snapshot": "https://github.com/pjunjie/GRKV/blob/c4afa324db00d28db1077d28195e4a4bdb4ba355/results/validation/existing_full_evidence/mistral.json"
 }

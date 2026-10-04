@@ -8,10 +8,10 @@ import gzip
 import json
 from pathlib import Path
 
-from experiments.critical_adakv_direct_grkv.tune50_worker import load_group
-from experiments.critical_adakv_direct_grkv.wide_query_worker_base import score
-from experiments.critical_adakv_history_ruler.common import read, write
 from grkv.coverage import summarize
+from grkv.data import load_group
+from grkv.io import read, write
+from grkv.scoring import score
 from grkv.settings import ROOT
 
 

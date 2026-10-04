@@ -11,7 +11,7 @@ import re
 import subprocess
 from pathlib import Path
 
-from experiments.critical_adakv_history_ruler.common import read, sha, write
+from grkv.io import read, sha, write
 from grkv.run import code_identity, unit_key
 from grkv.score import rescore
 from grkv.settings import ROOT
@@ -75,7 +75,7 @@ def export(run, verification, source_commit, destination):
         bytes=archive.stat().st_size,
         sha256=sha(archive),
         decompressed_stream_sha256=stream_hash.hexdigest(),
-        url=f"https://github.com/pjunjie/GRKV/releases/download/v0.2.0/{archive.name}",
+        url=f"https://github.com/pjunjie/GRKV/releases/download/v0.3.0/{archive.name}",
         prediction_source="fresh_public_checkout",
         generation_checkout_commit=source_commit,
         registration_sha256=report["registration_sha256"],

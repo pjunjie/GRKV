@@ -12,7 +12,7 @@ import subprocess
 from datetime import datetime
 from pathlib import Path
 
-from experiments.critical_adakv_history_ruler.common import read, sha, write
+from grkv.io import read, sha, write
 from grkv.run import code_identity, unit_key
 from grkv.score import rescore
 from grkv.settings import ROOT
@@ -26,7 +26,7 @@ def export(run, model, source_commit, destination):
         registration["source"] != "fresh_public_checkout"
         or registration["stage"] != "full"
         or registration["config"]["model"] != model
-        or registration["config"]["method"] != "candidate"
+        or registration["config"]["method"] != "default"
         or registration["code_hashes"] != code_identity()
         or registration["reference_predictions_required"]
     ):
@@ -162,7 +162,7 @@ def export(run, model, source_commit, destination):
         peak_scope="Maximum of measured per-unit CUDA allocator peaks; excludes non-PyTorch device allocations",
         runtimes=[p["runtime"] for p in jobs],
         derivative_qualifications=[p["qualification"] for p in jobs],
-        qualified_and_inference_loaded_kernel_variants=[kernel_checks[k] for k in sorted(kernel_checks)],
+        qualified_and_inference_loaded_kernels=[kernel_checks[k] for k in sorted(kernel_checks)],
         kernel_record_scope="Cumulative first-load checks include derivative qualification; not a CUDA call count",
         original_cubin_bytes_identical=False,
     )
@@ -178,7 +178,7 @@ def export(run, model, source_commit, destination):
         bytes=archive.stat().st_size,
         sha256=sha(archive),
         decompressed_stream_sha256=stream_hash.hexdigest(),
-        url=f"https://github.com/pjunjie/GRKV/releases/download/v0.2.0/{archive.name}",
+        url=f"https://github.com/pjunjie/GRKV/releases/download/v0.3.0/{archive.name}",
         prediction_source="fresh_public_checkout",
         generation_checkout_commit=source_commit,
         registration_sha256=registration_sha,

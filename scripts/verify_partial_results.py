@@ -7,7 +7,7 @@ import argparse
 import json
 from pathlib import Path
 
-from experiments.critical_adakv_history_ruler.common import read, sha, write
+from grkv.io import read, sha, write
 from grkv.qualification import compare
 from grkv.run import code_identity, unit_key
 from grkv.score import read_records, rescore
@@ -26,7 +26,7 @@ def verify(run, reference, model, kernel_root):
         registration["source"] != "fresh_public_checkout"
         or registration["stage"] != "full"
         or registration["config"]["model"] != model
-        or registration["config"]["method"] != "candidate"
+        or registration["config"]["method"] != "default"
         or registration["code_hashes"] != code_identity()
         or registration["reference_predictions_required"]
     ):
@@ -35,7 +35,7 @@ def verify(run, reference, model, kernel_root):
     if sha(manifest_path) != registration["kernel_manifest_sha256"]:
         raise ValueError("Kernel manifest differs from registration")
     kernels = {
-        (entry["query"] * 4, entry["kind"]): entry["cubin"]["sha256"] for entry in read(manifest_path)["kernels"]
+        (entry["query_count"] * 4, entry["kind"]): entry["cubin"]["sha256"] for entry in read(manifest_path)["kernels"]
     }
     observed = [work for work in units if unit_key(work) in files]
     scored = rescore(run, observed)

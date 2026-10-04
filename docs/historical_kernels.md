@@ -7,7 +7,7 @@ are retained. Every first kernel load checks architecture, shared memory, signat
 alignment and public cubin SHA before CUDA creates handles; subsequent calls
 must reuse that verified compiled object.
 
-The original 18 cubins contain private build paths in nonallocated debug
+The two required historical cubins contain private build paths in nonallocated debug
 sections. The public kernel package
 redacts those strings with equal-length anonymous strings and verifies every
 nondebug section is byte-identical, including GPU instructions, constants,
@@ -16,14 +16,14 @@ Original and public hashes are separate manifest fields. Redacting debug
 strings produces a new complete-file hash while preserving every nondebug
 section; `original_cubin_bytes_identical=false` records this distinction.
 
-For Q32 the original JVP SHA is
+For GRKV Default the original JVP SHA is
 `df2ff825ab436b57318c50bb266593d3625aac93b870f60011a90d57bb8acae1` and original
 VJP SHA is `fc7d86adf5b41b7903c70c31a360c1960dd1b643af47a41255300179c1fc8a04`.
-The public Q32 JVP SHA is
+The public GRKV Default JVP SHA is
 `a95bc3cf598ae2b83b82d78b53a67e5e9b184e6ef3433984c0d93f91774ba5c1`;
-the public Q32 VJP SHA is
+the public GRKV Default VJP SHA is
 `09e970025e87d60198db2e4d9545c64cb7e9035d6ef69de389c34e76a524a890`.
-All 18 original/public identities are recorded in the downloaded manifest,
+Both original/public identities are recorded in the downloaded manifest,
 with package size/SHA and its Release link in [kernels.json](../manifests/kernels.json).
 It compiles the unchanged numerical kernel in Triton 3.2.0, requires the compiled
 nondebug sections to equal the historical sections, then installs the redacted

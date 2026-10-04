@@ -340,7 +340,7 @@ wheels = [
 ]
 
 [[package]]
-name = "grkv-k1"
+name = "grkv-default"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [

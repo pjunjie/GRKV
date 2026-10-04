@@ -14,7 +14,7 @@ from time import perf_counter
 
 import yaml
 
-from experiments.critical_adakv_history_ruler.common import read, sha, timestamp, write
+from grkv.io import read, sha, timestamp, write
 from grkv.settings import ROOT, asset_root, load_environment
 
 
@@ -26,7 +26,7 @@ def unit_key(work):
 def code_identity():
     return {
         str(p.relative_to(ROOT)): sha(p)
-        for directory in ("grkv", "kvpress", "experiments", "evaluation")
+        for directory in ("grkv", "kvpress", "evaluation")
         for p in sorted((ROOT / directory).rglob("*.py"))
     }
 
@@ -61,11 +61,11 @@ def worker(root, job_path):
     from transformers import pipeline
 
     import kvpress  # noqa: F401 - registers the frozen pipeline and attention patch
-    from experiments.critical_adakv_cross_model.mask_fallback import FALLBACK_CALLS, install
-    from experiments.critical_adakv_direct_grkv.independent_query_worker import generate
-    from experiments.critical_adakv_direct_grkv.tune50_worker import load_group
     from grkv.api import make_press
     from grkv.backend import HistoricalExecutableBackend
+    from grkv.data import load_group
+    from grkv.generation import generate
+    from grkv.mask_fallback import FALLBACK_CALLS, install
     from grkv.qualification import qualify
     from grkv.runtime import runtime
 
@@ -82,7 +82,7 @@ def worker(root, job_path):
         torch.backends.cuda.matmul.allow_tf32 = False
         torch.manual_seed(42)
         backend = None
-        if registration["config"]["method"] == "candidate":
+        if registration["config"]["method"] == "default":
             backend = HistoricalExecutableBackend(os.environ["GRKV_KERNEL_MANIFEST"], os.environ["TRITON_CACHE_DIR"])
             state["qualification"] = qualify(backend)
         config = registration["config"]

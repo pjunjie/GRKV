@@ -3,13 +3,12 @@
 
 import torch
 
-from experiments.critical_adakv_direct_grkv.tune50_protocol import replay_layer
-from experiments.critical_adakv_grkv.press import tensor_sha
+from grkv.io import replay_layer, tensor_sha
 
 
 def qualify(backend):
     """Run real JVP/VJP through unchanged pre-launch guards."""
-    from experiments.critical_adakv_direct_grkv import wide_query_backend
+    from grkv import kernels
 
     h, r, s, d = 8, 128, 256, 128
     q = torch.randn(h, r, d, device="cuda", dtype=torch.float32)
@@ -22,10 +21,10 @@ def qualify(backend):
     partial_j = torch.empty(h, 4, r, d, device="cuda", dtype=torch.float32)
     partial_v = torch.empty(h, 2, s, d, device="cuda", dtype=torch.float32)
     with backend():
-        wide_query_backend._wide_jvp[(h, 4, 4)](
+        kernels._wide_jvp[(h, 4, 4)](
             q, v, w, o, delta, mutable, partial_j, R=r, S=s, D=d, TILES=4, BR=32, BS=64, BD=d, num_warps=4, num_stages=1
         )
-        wide_query_backend._wide_vjp[(h, 8, 2)](
+        kernels._wide_vjp[(h, 8, 2)](
             q, v, w, o, u, mutable, partial_v, R=r, S=s, D=d, TR=2, BR=64, BS=32, BD=d, num_warps=8, num_stages=1
         )
     torch.cuda.synchronize()

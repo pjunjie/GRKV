@@ -44,7 +44,7 @@
     "frozenlist": "1.8.0",
     "fsspec": "2026.6.0",
     "fuzzywuzzy": "0.18.0",
-    "grkv-k1": "0.1.0",
+    "grkv-default": "0.1.0",
     "h11": "0.16.0",
     "hf-xet": "1.6.0",
     "httpcore": "1.0.9",

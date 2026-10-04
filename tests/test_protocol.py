@@ -90,9 +90,8 @@ def test_same_scores_do_not_prove_text_or_layer_identity():
 
 
 def test_frozen_input_hash_rejects_changed_question():
-    from experiments.critical_adakv_direct_grkv.run_wide_query_compatibility import group_digest
-    from experiments.critical_adakv_direct_grkv.tune50_worker import load_group
-    from experiments.critical_adakv_history_ruler.common import text_sha
+    from grkv.data import load_group
+    from grkv.io import group_digest, text_sha
 
     group = [dict(context="context", question="original", _id="id")]
     item = dict(
@@ -109,9 +108,9 @@ def test_frozen_input_hash_rejects_changed_question():
 
 
 def test_tampered_kernel_is_rejected_before_cuda_launch(tmp_path, monkeypatch):
-    from experiments.critical_adakv_direct_grkv.wide_query_split_backend import VARIANT
-    from experiments.critical_adakv_history_ruler.common import write
     from grkv.backend import HistoricalExecutableBackend
+    from grkv.io import write
+    from grkv.kernels import TILES
 
     monkeypatch.setenv("TRITON_CACHE_DIR", str(tmp_path))
     (tmp_path / "kernel.cubin").write_bytes(b"changed")
@@ -119,9 +118,9 @@ def test_tampered_kernel_is_rejected_before_cuda_launch(tmp_path, monkeypatch):
         tmp_path / "manifest.json",
         dict(
             status="complete",
-            variant=VARIANT,
+            tiles={kind: list(tiles) for kind, tiles in TILES.items()},
             target=dict(backend="cuda", arch=86, warp_size=32),
-            kernels=[dict(query=32, kind="jvp", cubin=dict(path="kernel.cubin", sha256="0" * 64))],
+            kernels=[dict(query_count=32, kind="jvp", cubin=dict(path="kernel.cubin", sha256="0" * 64))],
         ),
     )
     with pytest.raises(ValueError, match="Published cubin hash mismatch"):
@@ -131,8 +130,8 @@ def test_tampered_kernel_is_rejected_before_cuda_launch(tmp_path, monkeypatch):
 def test_resume_rejects_changed_asset_identity(tmp_path, monkeypatch):
     import json
 
-    from experiments.critical_adakv_history_ruler.common import sha, write
     from grkv import run
+    from grkv.io import sha, write
 
     monkeypatch.setattr(run, "ROOT", tmp_path)
     monkeypatch.setattr(run, "code_identity", lambda: {})

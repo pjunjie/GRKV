@@ -4,7 +4,7 @@ This implementation vendors a required subset of [NVIDIA/kvpress](https://github
 and retains its Apache-2.0 license and NVIDIA copyright headers. The source
 commit, source file hashes and export transformations are recorded in
 `manifests/source_provenance.json`. Numerical experiment adapters retain the
-same SPDX notices as the source project. The exported K1 dependency subset
+same SPDX notices as the source project. The GRKV Default dependency subset
 includes the exact Critical-AdaKV selector, cache representation, solver,
 pipeline, attention patch and LongBench metrics used by the frozen protocol.
 

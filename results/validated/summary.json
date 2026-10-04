@@ -1,5 +1,5 @@
 {
-  "release_tag": "v0.2.0",
+  "release_tag": "v0.3.0",
   "status": "two_model_complete_native_acceptance",
   "accepted_candidate_answers_total": 41000,
   "two_model_full_acceptance_passed": true,

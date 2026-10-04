@@ -223,7 +223,7 @@
       "vjp_norm": 36.13179016113281
     }
   ],
-  "qualified_and_inference_loaded_kernel_variants": [
+  "qualified_and_inference_loaded_kernels": [
     {
       "rows": 128,
       "kind": "jvp",

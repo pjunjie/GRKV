@@ -30,7 +30,7 @@ Generation uses the vendored `KVPressTextGenerationPipeline` and the historical
 original chat-template preprocessing. Multiple questions in one context share
 the compressed context cache. Candidate context truncation is
 `min(tokenizer.model_max_length, int(1e10))`. Mistral candidates do not inherit
-the older K1 control's explicit 32,768-token limit.
+the earlier GRKV control's explicit 32,768-token limit.
 
 Each model has 19,630 context/budget units and 20,500 answers across two budgets.
 Per budget, LongBench contains 16 tasks and 3,750 answers: `multifieldqa_en` has
@@ -48,7 +48,7 @@ Duplicate, unexpected, missing or nonfinite answers fail validation. Scoring
 reloads the pinned public answers and computes scores from prediction text.
 
 Historical Critical-AdaKV is a separately identified baseline. The earlier
-Mistral K1 control used recompiled Triton 3.7.1 kernels and an explicit context
+earlier Mistral GRKV control used recompiled Triton 3.7.1 kernels and an explicit context
 limit; it is not the Critical-AdaKV column. Historical baseline references are
 not labeled newly generated baselines. Baseline inference has separate configs
 and outputs; a fresh baseline result never overwrites the historical column.

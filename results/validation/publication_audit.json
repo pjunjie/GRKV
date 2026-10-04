@@ -5,7 +5,7 @@
   "custom_privacy_findings": 0,
   "artifacts": [
     {
-      "name": "grkv-k1-sm86-kernels.tar.gz",
+      "name": "historical_kernel_archive",
       "sha256": "d4536018fef59495df40da9d44f730637bf7e874b2b8503f5cb5c46cc7ad334d",
       "bytes": 805245
     },
@@ -41,5 +41,8 @@
     }
   ],
   "container_layers_scanned": false,
-  "container_limitation": "Container build and GPU execution remain uncompleted; no image layers were produced"
+  "container_limitation": "Container build and GPU execution remain uncompleted; no image layers were produced",
+  "published_representation": "Historical evidence summary with normalized display labels; complete original records remain at the source snapshot. Original content hashes and measured values are retained.",
+  "original_record_sha256": "16dcd909838059840eda058f8d0382c0b6f799321624b52751f3712d25892715",
+  "source_snapshot": "https://github.com/pjunjie/GRKV/blob/c4afa324db00d28db1077d28195e4a4bdb4ba355/results/validation/publication_audit.json"
 }

@@ -31,7 +31,7 @@
     "original_paths_removed": true,
     "score_validation": "Independently rescored using freshly downloaded frozen data; zero saved-score differences",
     "generated_in_this_release_run": false,
-    "identity": "B0_CRITICAL from historical full analysis, not the older K1 control"
+    "identity": "B0_CRITICAL from historical full analysis, not the earlier GRKV control"
   },
   "evidence_summary_documents": [
     {
@@ -54,5 +54,8 @@
       "source_sha256": "62213eb77d9a2488d7889efe70ae45680e0a5677a6ceac5945b32d5cbbe43969",
       "published_representation": "full-precision target scores, reference records and historical statistical disclosures"
     }
-  ]
+  ],
+  "published_representation": "Historical evidence summary with normalized display labels; complete original records remain at the source snapshot. Original content hashes and measured values are retained.",
+  "original_record_sha256": "1453dd48c2e69e7f3d1e91ca490cb0b13819bfaa2dff29c15a55e8d18c4132db",
+  "source_snapshot": "https://github.com/pjunjie/GRKV/blob/c4afa324db00d28db1077d28195e4a4bdb4ba355/results/reference/provenance.json"
 }

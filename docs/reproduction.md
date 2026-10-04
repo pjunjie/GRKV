@@ -1,4 +1,4 @@
-# Reproducing the frozen K1 candidates
+# Reproducing GRKV Default
 
 Use the native reference profile in `environment/reference.json`: Linux x86_64,
 Python 3.12.7, CUDA toolkit 12.4.131, NVIDIA RTX A6000 (SM86), driver 555.52.04.
@@ -52,8 +52,8 @@ groups and a known Mistral fallback case. GPU short-context/cache checks are
 separate commands.
 
 ```bash
-uv run --no-sync python -m grkv.run --config configs/mistral_k1_g000.yaml --stage smoke --gpus 0,1,2,3
-uv run --no-sync python -m grkv.run --config configs/llama_k1_g010.yaml --stage smoke --gpus 0,1,2,3
+uv run --no-sync python -m grkv.run --config configs/mistral.yaml --stage smoke --gpus 0,1,2,3
+uv run --no-sync python -m grkv.run --config configs/llama.yaml --stage smoke --gpus 0,1,2,3
 uv run --no-sync python scripts/run_boundary_smoke.py --model mistral --gpu 0 --output outputs/boundary/mistral.json
 uv run --no-sync python scripts/run_boundary_smoke.py --model llama --gpu 0 --output outputs/boundary/llama.json
 ```
@@ -66,8 +66,8 @@ labeled estimates in `environment/reference.json`; they are not timings of a
 completed current Llama full run or minimum hardware guarantees.
 
 ```bash
-uv run --no-sync python -m grkv.run --config configs/mistral_k1_g000.yaml --stage full --fresh --gpus 0,1,2,3
-uv run --no-sync python -m grkv.run --config configs/llama_k1_g010.yaml --stage full --fresh --gpus 0,1,2,3
+uv run --no-sync python -m grkv.run --config configs/mistral.yaml --stage full --fresh --gpus 0,1,2,3
+uv run --no-sync python -m grkv.run --config configs/llama.yaml --stage full --fresh --gpus 0,1,2,3
 ```
 
 Default outputs are `outputs/<model>/<stage>`. A fresh run rejects an existing
@@ -79,7 +79,7 @@ answers. To stop after the current unit, create `STOP` inside the run directory;
 remove that file before resuming.
 
 ```bash
-uv run --no-sync python -m grkv.run --config configs/mistral_k1_g000.yaml --stage full --resume --gpus 0,1,2,3
+uv run --no-sync python -m grkv.run --config configs/mistral.yaml --stage full --resume --gpus 0,1,2,3
 ```
 
 Each output unit contains newly generated text, row identities, numeric/layer
@@ -113,7 +113,7 @@ a separate false field, rather than being hidden inside this output test.
 model-specific protocol. Give new baseline runs distinct `--output` directories.
 The published baseline scores come from historical Critical-AdaKV inference
 and have been independently rescored with the pinned data and public scorer.
-The older Mistral K1 control is not a Critical-AdaKV baseline.
+The earlier Mistral GRKV control is not a Critical-AdaKV baseline.
 
 Download the accepted complete evidence for both models and independently
 rescore it with the ordinary full scorer:
@@ -127,9 +127,11 @@ uv run --no-sync python -m grkv.score --input artifacts/validated/validated_llam
 Both archives have full frozen coverage: 20,500 answers in 19,630 context/budget
 units each. The download manifest lists exact asset URLs, sizes and hashes;
 all eight evidence and kernel archives are available together in the unified
-[GRKV release](https://github.com/pjunjie/GRKV/releases/tag/v0.2.0). Its
-`SHA256SUMS` covers every archive. Archive contents, sizes and hashes are
-unchanged by this consolidation. See the [asset guide](release.md).
+[GRKV release](https://github.com/pjunjie/GRKV/releases/tag/v0.3.0). Its
+`SHA256SUMS` covers every archive. The seven prediction archives retain their
+original contents, sizes and hashes. The smaller kernel archive contains only
+the two required, unchanged public cubins and an updated manifest, with new
+archive and manifest hashes. See the [asset guide](release.md).
 
 Downloading this evidence does not perform new inference on your machine.
 Llama's full accepted result consolidates current generated records with the

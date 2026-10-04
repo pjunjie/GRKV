@@ -5,7 +5,7 @@ from types import SimpleNamespace
 
 import torch
 
-from experiments.critical_adakv_cross_model.mask_fallback import FAILURE, with_fallback
+from grkv.mask_fallback import FAILURE, with_fallback
 
 
 def test_exact_fallback_masks_heads_and_preserves_query_causality():

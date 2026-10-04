@@ -1,20 +1,33 @@
 # SPDX-FileCopyrightText: Copyright (c) 1993-2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0
 
+"""Frozen prefill, shared-context generation and installed-mask verification."""
+
 from contextlib import nullcontext
 from time import perf_counter
 
 import torch
 from transformers import DynamicCache
 
-from experiments.critical_adakv_direct_grkv.run_wide_query_compatibility import group_digest
-from experiments.critical_adakv_direct_grkv.wide_query_worker_base import score, verify_prefill_layout
-from experiments.critical_adakv_grkv.press import tensor_sha
+from grkv.io import group_digest, tensor_sha
+from grkv.scoring import score
 
 
-def check_sinks(press):
-    # Frozen K1 has no IndependentSinkPress: the historical context manager is a no-op.
-    return nullcontext()
+def verify_prefill_layout(model, cache, layers):
+    """Bind actual installed decode masks, including explicit all-kept short inputs."""
+    assert len(cache.layers) == len(layers) == len(model.model.layers)
+    for module, cached, record in zip(model.model.layers, cache.layers, layers):
+        keep = torch.ones(cached.keys.shape[:3], device=cached.keys.device, dtype=torch.bool)
+        keep[module.self_attn.masked_key_indices] = False
+        digest = tensor_sha(keep)
+        if "keep_sha256" not in record:
+            assert record["context_tokens"] <= 32 and record["compression_applied"] is False
+            assert bool(keep.all())
+            record["keep_sha256"] = digest
+        assert record["keep_sha256"] == digest
+        assert record["kept_per_head"] == keep.sum(-1).flatten().tolist()
+        assert record["kept"] == int(keep.sum())
+        record["installed_decode_mask_verified"] = True
 
 
 @torch.inference_mode()
@@ -25,7 +38,7 @@ def generate(pipeline, press, backend, item, group, tensors):
     torch.cuda.synchronize()
     begin = perf_counter()
     with backend() if backend is not None else nullcontext():
-        with check_sinks(press), press(pipeline.model):
+        with press(pipeline.model):
             pipeline.model.model(ids, past_key_values=cache)
     torch.cuda.synchronize()
     prefill_seconds = perf_counter() - begin

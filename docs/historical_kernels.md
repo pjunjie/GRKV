@@ -12,8 +12,9 @@ sections. The public kernel package
 redacts those strings with equal-length anonymous strings and verifies every
 nondebug section is byte-identical, including GPU instructions, constants,
 symbol tables and allocation metadata. This changes the complete file SHA.
-Original and public hashes are separate manifest fields. No claim is made that
-redacted binaries have the original complete-file hashes.
+Original and public hashes are separate manifest fields. Redacting debug
+strings produces a new complete-file hash while preserving every nondebug
+section; `original_cubin_bytes_identical=false` records this distinction.
 
 For Q32 the original JVP SHA is
 `df2ff825ab436b57318c50bb266593d3625aac93b870f60011a90d57bb8acae1` and original

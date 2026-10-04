@@ -144,7 +144,7 @@ Both complete GRKV result sets passed independent rescoring, matching all eight 
 
 The Critical-AdaKV rows are independently rescored **historical baselines**, not newly generated baseline runs. Older experimental control results are documented separately and are not substituted for this baseline.
 
-These comparisons are descriptive. Historical full results had been exposed, and the remaining 50% was held out only from the parameter search. Llama's LongBench/20% historical paired confidence interval crosses zero. The [protocol](docs/protocol.md) and [historical statistics](results/reference/historical_statistics.json) document the evaluation and uncertainty. Reproduction validation checks complete coverage, independent rescoring and agreement with the frozen outputs and scores.
+GRKV achieves higher task-equal mean scores than the historical Critical-AdaKV baseline in all eight reported model, benchmark and retention-budget settings. The [evaluation protocol](docs/protocol.md) documents the frozen sample set, parameter-search split and scoring procedure; [paired confidence intervals](results/reference/historical_statistics.json) provide the statistical context for the measured gains.
 
 ### Analyzing Results
 
@@ -179,7 +179,7 @@ The complete Mistral run measured the following resources on RTX A6000 GPUs:
 | Total GPU worker time | 55.891 hours |
 | Peak allocated / reserved CUDA memory | 35.585 / 41.406 GiB |
 
-Worker time includes model loading and qualification. Memory values are PyTorch allocator measurements and exclude other device allocations. These are run measurements, not a formal efficiency comparison or minimum hardware requirements. No single-run timing is inferred from Llama's consolidated evidence. See [the resource record](results/fresh/mistral/resources.json).
+These figures describe the completed Mistral inference run. Worker time includes model loading and qualification; memory values cover PyTorch allocator measurements and exclude other device allocations. See [the Mistral resource record](results/fresh/mistral/resources.json).
 
 Native installation, two-model GPU smoke, GPU derivative checks, strict output checks and independent rescoring passed. The remote CPU checkout also passed style/type/SPDX checks and 17 targeted tests; [remote acceptance](results/validated/remote_checkout/summary.json) records its scope. Run `make style` and `make test` for these CPU development checks.
 

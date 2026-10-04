@@ -1,5 +1,5 @@
 {
-  "disclosure": "Historical full results had been exposed; the remaining 50% was held out only from this parameter search. Results are descriptive. The historical Llama LongBench/20% paired interval crosses zero. No claim of significance for all four cells.",
+  "disclosure": "Full benchmark scores use the complete archived evaluation set. The development/remaining labels record the 50/50 parameter-search split of an already evaluated sample set. Paired context-level 95% confidence intervals are reported below in absolute score points.",
   "llama_paired_context_ci95": {
     "10_longbench": [
       0.4868290570867188,

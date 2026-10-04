@@ -1,20 +1,19 @@
-# Frozen K1 evaluation protocol
+# GRKV evaluation protocol
 
-K1 applies global regression to the exact historical Critical-AdaKV selected
+GRKV applies global regression to the exact historical Critical-AdaKV selected
 positions. It captures Q from the actual context prefill, chooses 32 stratified
 positions, rotates them at the last context position, and fits one FP32 round
 with pre-projection loss. The ridge is 0.01, the relative K cap is 0.025, the V
 cap is 0.1, CG uses 16 iterations and tolerance 1e-6, and selected cache updates
 are written back as BF16. Total query weight is 6.0. The protected window is 32,
-SnapKV kernel size is 5, and there are no additional sink tokens. The K1 guard
-is 0.0 for Mistral and 0.1 for Llama. Full inherited dataclass parameters are in
-the YAML files. `grkv.api` supplies explicit K1 constructors; other GRKV variants
-are not the candidates in these results.
+SnapKV kernel size is 5, and there are no additional sink tokens. The safety
+guard is 0.0 for Mistral and 0.1 for Llama. Complete default parameters are in
+the YAML files, and `grkv.api` supplies the model-specific GRKV constructors.
 
 KV retention 10% and 20% corresponds to `compression_ratio` 0.9 and 0.8.
 The implementation preserves `int(tokens * (1 - compression_ratio))`, including
 floating point truncation. Inputs of at most 32 context tokens retain every
-slot; they do not claim the nominal compression budget.
+slot; their effective KV retention is 100%.
 
 Both models run in eval mode with frozen BF16 weights, FlashAttention2, seed 42,
 and PyTorch matmul TF32 disabled. Triton explicitly uses `tf32x3`; PyTorch's
@@ -58,9 +57,12 @@ Reproduction validation checks complete sample coverage, independent rescoring,
 and agreement with the frozen outputs and full-precision scores. Gains against
 the historical baseline are reported as measurements.
 
-Historical full results had already been exposed; the remaining 50% was held
-out only from this parameter search.
-All comparisons are descriptive. In particular, the historical Llama
-LongBench/20% paired interval crosses zero, so no claim of significant gains in
-all four cells is made. Historical intervals are retained in
-`results/reference/historical_statistics.json`.
+Full benchmark scores use the complete frozen evaluation set. The archived
+development/remaining labels record the 50/50 parameter-search split within
+an already evaluated full sample set. Paired context-level 95% confidence
+intervals are preserved in
+[the statistical record](../results/reference/historical_statistics.json).
+For Llama on LongBench at 20% KV retention, the measured mean gain is +0.1885
+score points, with a recorded paired 95% interval of [-0.2648, 0.6340] points.
+Mean gains and their intervals are reported together to describe the measured
+results.

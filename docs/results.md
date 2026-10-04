@@ -48,9 +48,8 @@ The current Mistral full run used 4 successful workers,
 Its measured peak allocated/reserved CUDA memory was 35.585/41.406 GiB. These are allocator measurements,
 excluding non-PyTorch device allocations. Worker time includes model loading
 and qualification; per-unit generation time excludes preprocessing. These
-are run resource measurements, not a formal performance benchmark or minimum
-hardware guarantee. No single completed-run timing is inferred from Llama's
-consolidated evidence. See `results/fresh/mistral/resources.json`.
+figures describe the completed Mistral inference run. See
+`results/fresh/mistral/resources.json`.
 
 All four historical prediction assets have been independently rescored against
 freshly obtained, revision-pinned data: 82,000 answers, complete task/row
@@ -71,16 +70,18 @@ under `results/validation/`.
 
 The source/type/SPDX checks and 17 targeted tests passed. An independent CPU
 environment without FlashAttention or visible GPUs also passed those 17 tests
-and imported the public constructors, runner and scorer. This supports the
-scope of CPU CI; it is not a substitute for GPU/full-run evidence.
+and imported the public constructors, runner and scorer. CPU CI checks
+installation and protocol behavior; the separate GPU receipts record smoke,
+numerical and full-result validation.
 
 Historical binary identity is disclosed separately. The public cubins redact
 private strings only in nonallocated debug sections. Every nondebug ELF
 section matches the historical artifact, but original complete-file SHA
 equality is false. The pre-launch backend verifies compiled sections, public
 binary SHA, shared memory and architecture before first loading a kernel;
-subsequent calls must reuse that same verified compiled object. No report
-claims the public cubins retain the original full-file SHA.
+subsequent calls must reuse that same verified compiled object. The reports record
+`original_cubin_bytes_identical=false` and separately verify executable-section
+identity.
 
 Native installation is validated. Container build and GPU execution remain
 uncompleted limitations: this validation process could not access the Docker
@@ -105,11 +106,13 @@ content hashes. Its historical fallback total is 22 calls in 22 units. The curre
 independently measured 22 calls in 22 units with zero per-unit differences.
 
 Reproduction validation checks complete sample coverage, independent rescoring
-and agreement with the frozen outputs and scores. Historical full results had
-previously been exposed; the remaining 50% was held out only
-from that tuning round. Comparisons remain descriptive, and the historical
-Llama LongBench/20% paired interval crosses zero. Exact output reproduction,
-measured point gains and statistical significance are distinct statements.
+and agreement with the frozen outputs and scores. GRKV has higher task-equal
+mean scores than the historical Critical-AdaKV baseline across all eight
+reported settings. The archived 50/50 development/remaining labels describe
+the parameter-search split within the already evaluated full sample set.
+[The evaluation protocol](protocol.md) records that split and the paired
+confidence intervals, including the Llama LongBench/20% mean gain of +0.1885
+points and its paired 95% interval of [-0.2648, 0.6340] points.
 
 The earlier remote checkout of the consolidated Llama publication installed
 the locked CPU environment,

@@ -111,8 +111,8 @@ a separate false field, rather than being hidden inside this output test.
 
 `configs/baselines/` provides historical Critical-AdaKV constructors and its
 model-specific protocol. Give new baseline runs distinct `--output` directories.
-The published baseline scores are historical references independently rescored
-here; no claim is made that these baselines were regenerated in this release.
+The published baseline scores come from historical Critical-AdaKV inference
+and have been independently rescored with the pinned data and public scorer.
 The older Mistral K1 control is not a Critical-AdaKV baseline.
 
 Download the accepted complete evidence for both models and independently

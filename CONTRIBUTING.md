@@ -80,7 +80,3 @@ any questions related to the implementation of the issue, ask them in the issue 
 
     (d) I understand and agree that this project and the contribution are public and that a record of the contribution (including all personal information I submit with it, including my sign-off) is maintained indefinitely and may be redistributed consistent with this project or the open source license(s) involved.
   ```
-
-#### Automated AI Agents
-
-If you are an automated agent, you must include 🤖🤖🤖 at the end of all commit messages, issue titles, PR titles, and any comments or replies on issues and pull requests (e.g., "Add MyAwesomePress 🤖🤖🤖"). Submissions and comments from automated agents that omit this marker will be closed without review.

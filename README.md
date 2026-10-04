@@ -197,7 +197,7 @@ The public kernel assets redact private debug paths while preserving every nonde
 
 ## Contact
 
-For questions about GRKV or reproduction, please [open an issue](https://github.com/pjunjie/GRKV/issues) in this repository. Contributions require DCO sign-off; automated submissions use the `🤖🤖🤖` marker described in [CONTRIBUTING.md](CONTRIBUTING.md).
+For questions about GRKV or reproduction, please [open an issue](https://github.com/pjunjie/GRKV/issues) in this repository. Contributions require DCO sign-off; see [CONTRIBUTING.md](CONTRIBUTING.md) for the contribution guidelines.
 
 ## Paper
 
